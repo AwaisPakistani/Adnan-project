@@ -164,20 +164,7 @@ class AdminController extends Controller
     public function change_admin_profile(Request $request,$id){
         $adminprofile=User::with('admin_profile')->where('id',$id)->first();
         $picpath=$adminprofile->admin_profile->url;
-        // @php
-        //             $id=Auth::user()->id;
-        //             $image=User::with('admin_profile')->where('id',$id)->first();
-        //             @endphp
-                    
-        //             @if(!empty($image->admin_profile))
-        //             @php
-        //             $path=$image->admin_profile->url;
-        //             @endphp
-                     
-        //             <img src="{{url('storage/'.$path)}}" class="user-img" alt="profile">
-        //             @else
-        //             <img src="" class="user-img" alt="dp">
-        //             @endif
+       
         if($request->isMethod('post')){
           $pic=$request->all();
          
@@ -187,13 +174,12 @@ class AdminController extends Controller
             ])->first();
             if($dpImage){
                 // images paths
-           $large_img_path = 'images/admin/admin_profile/';
-  
-           // Delete large image from folder if exists
-           if (file_exists($large_img_path.$dpImage->url)) {
-               //dd('ghgjgh');
-               unlink($large_img_path.$dpImage->url);
-           }
+                $img_path = User::with('admin_profile')->where('id',$id)->first();
+                // Delete large image from folder if exists
+                $path=$img_path->admin_profile->url;
+                if(file_exists('storage/'.$path)){
+                    unlink('storage/'.$path);
+                }
 
           $image_path = $request->file('profile_image')->store('images/admin/admin_profile', 'public');
            $image=Picture::where([
@@ -234,10 +220,19 @@ class AdminController extends Controller
     }
 
     public function delete($id){
+        $imagepath=User::with('admin_profile')->where('id',$id)->first();
+        $path=$imagepath->admin_profile->url;
+        if(file_exists('storage/'.$path)){
+            unlink('storage/'.$path);
+        }
+        $image=Image::where([
+            'imageable_type'=>'App\Models\User',
+            'imageable_id'=>$id
+        ])->delete();
+
         User::where('id',$id)->delete();
         Session::flash('success_message','Admin user has been deleted successfully');
         return redirect()->back();
-
     }
 
     public function logout(Request $request){

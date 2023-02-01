@@ -86,7 +86,7 @@
                             label">Enter New Password</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-lock-fill"></i></div>
-                              <input type="password" class="form-control radius-30 ps-5" id="inputName" name="newpassword" placeholder="Enter New Password">
+                              <input type="password" class="form-control radius-30 ps-5" id="inputName" name="newpassword" placeholder="Enter New Password" required>
                             </div>
                           </div>
                           <div class="col-12 ">
@@ -94,7 +94,7 @@
                             label">Retype Password</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-lock-fill"></i></div>
-                              <input type="password" class="form-control radius-30 ps-5" id="inputName" name="retypepassword" placeholder="Retype Password">
+                              <input type="password" class="form-control radius-30 ps-5" id="inputName" name="retypepassword" placeholder="Retype Password" required>
                             </div>
                           </div>
                         

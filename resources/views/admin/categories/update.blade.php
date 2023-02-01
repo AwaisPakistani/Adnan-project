@@ -5,22 +5,22 @@
 <main class="page-content">
         <!--breadcrumb-->
 				<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-					<div class="breadcrumb-title pe-3">Roles and Permissions</div>
+					<div class="breadcrumb-title pe-3">Site Portal</div>
 					<div class="ps-3">
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">Roles</li>
+								<li class="breadcrumb-item active" aria-current="page">Categories</li>
 							</ol>
 						</nav>
 					</div>
 					<div class="ms-auto">
+
 						<div class="btn-group">
-              @role('superadmin|admin')
-							<a href="{{route('admin.roles')}}" class="btn btn-primary">View Roles</a>
-							@endrole
-						
+                            @can('view')
+							<a href="{{route('admin.view_categories')}}" type="button" class="btn btn-primary">Add New</a>
+                            @endcan
 						</div>
 					</div>
 				</div>
@@ -62,30 +62,54 @@
                   <div class="card-body p-4 p-sm-5">
                    
                      <form method="post"
-                     @if(!empty($show_role))
-                     action="{{route('add-edit-role',$show_role->id)}}"
-                     @else
-                      action="{{route('add-edit-role')}}"
-                    @endif
-                    class="form-body">@csrf
+                      action="{{route('admin.edit_category',$categories_edit->id)}}"
+                      enctype="multipart/form-data"
+                      class="form-body">@csrf
                       
                         <div class="row g-3">
                           <div class="col-12 ">
-                            <label for="inputName" class="form- 
-                            label">Role Name</label>
                             <div class="ms-auto position-relative">
-                              <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-person-circle"></i></div>
-                              <input type="text" class="form-control radius-30 ps-5" id="inputName" name="role" 
-                              @if(!empty($show_role))
-                              value="{{$show_role->name}}"
-                              @endif
-                              placeholder="Enter Role" required>
+                              <div class="input-group mb-3"> <span class="input-group-text" id="inputGroup-sizing-default">Category Name</span>
+									<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                                    name="category_name"
+                                    value="{{$categories_edit->category_name}}"
+                                    placeholder="Enter Category Name" required>
+								</div>
                             </div>
                           </div>
-                        
+                          <div class="col-12 ">
+                          <div class="mb-3" data-select2-id="21">
+										<label class="form-label">Category Status</label>
+										<select class="single-select select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true" name="category_status">
+										<option value="show" 
+                                        data-select2-id="3"
+                                        @if($categories_edit->category_status=='show')
+                                        selected
+                                        @endif> 
+                                        Show
+                                        </option>
+											<option value="hide" data-select2-id="31"
+                                            @if($categories_edit->category_status=='hide')
+                                            selected
+                                            @endif
+                                            >hide</option>
+											
+											
+										</select>
+                                     
+									</div>
+                          </div>
+
+                          
+                        <div class="col-12">
+                                <!-- <div class="mb-3">
+									<label for="formFile" class="form-label"> Image</label>
+									<input class="form-control" type="file" id="formFile" name="category_image" required>
+								</div> -->
+                        </div>
                           <div class="col-12">
                             <div class="d-grid">
-                              <button type="submit" class="btn btn-primary radius-30">{{$title}}</button>
+                              <button type="submit" class="btn btn-primary px-5">{{$title}}</button>
                             </div>
                           </div>
                          

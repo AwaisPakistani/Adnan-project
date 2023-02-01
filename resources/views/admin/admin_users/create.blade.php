@@ -86,7 +86,7 @@
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-user-fill"></i></div>
                               <input type="file" class="form-control" aria-label="file example"
                               name="admin_profile" 
-                              required="">
+                              required>
                             </div>
                           </div>
                           <div class="col-12 ">
@@ -94,7 +94,7 @@
                             label">Name</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-person-circle"></i></div>
-                              <input type="text" class="form-control radius-30 ps-5" id="inputName" name="name" placeholder="Enter Name">
+                              <input type="text" class="form-control radius-30 ps-5" id="inputName" name="name" placeholder="Enter Name" required>
                             </div>
                           </div>
                         
@@ -102,7 +102,7 @@
                             <label for="inputEmailAddress" class="form-label">Email Address</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-envelope-fill"></i></div>
-                              <input type="email" class="form-control radius-30 ps-5" id="inputEmailAddress" name="email" placeholder="Email">
+                              <input type="email" class="form-control radius-30 ps-5" id="inputEmailAddress" name="email" placeholder="Email" required>
                             </div>
                           </div>
                           <div class="col-12 ">
@@ -110,7 +110,7 @@
                             label">Role</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-person-circle"></i></div>
-                              <select class="single-select" name="role">
+                              <select class="single-select" name="role" >
 									<option value="notselected">Select Role</option>
                                     @foreach($roles as $role)
 									<option value="{{$role->name}}"> 
@@ -124,14 +124,14 @@
                             <label for="inputChoosePassword" class="form-label">Enter Password</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-lock-fill"></i></div>
-                              <input type="password" class="form-control radius-30 ps-5" id="inputChoosePassword" name="password" placeholder="Password">
+                              <input type="password" class="form-control radius-30 ps-5" id="inputChoosePassword" name="password" placeholder="Password" required>
                             </div>
                           </div>
                           <div class="col-12">
                             <label for="inputChoosePassword" class="form-label">Confirm Password</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-lock-fill"></i></div>
-                              <input type="password" class="form-control radius-30 ps-5" id="inputChoosePassword" name="confirmpassword" placeholder="Password">
+                              <input type="password" class="form-control radius-30 ps-5" id="inputChoosePassword" name="confirmpassword" placeholder="Confirm Password" required>
                             </div>
                           </div>
                           <div class="col-12">

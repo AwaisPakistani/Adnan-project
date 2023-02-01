@@ -11,20 +11,15 @@
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">Permissions</li>
+								<li class="breadcrumb-item active" aria-current="page">Admin Permissions</li>
 							</ol>
 						</nav>
 					</div>
 					<div class="ms-auto">
 						<div class="btn-group">
-							<button type="button" class="btn btn-primary">Settings</button>
-							<button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">	<span class="visually-hidden">Toggle Dropdown</span>
-							</button>
-							<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">	<a class="dropdown-item" href="javascript:;">Action</a>
-								<a class="dropdown-item" href="javascript:;">Another action</a>
-								<a class="dropdown-item" href="javascript:;">Something else here</a>
-								<div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
-							</div>
+              @role('superadmin|admin')
+							<a  href="{{route('admin.permissions')}}" class="btn btn-primary">View Permissions</a>
+							@endrole
 						</div>
 					</div>
 				</div>
@@ -70,7 +65,7 @@
                      action="{{route('add-edit-permission',$show_permission->id)}}"
                      @else
                       action="{{route('add-edit-permission')}}"
-                     @endif
+                     @endif 
                      class="form-body">@csrf
                       
                         <div class="row g-3">
@@ -83,7 +78,7 @@
                               @if(!empty($show_permission))
                               value="{{$show_permission->name}}"
                               @endif
-                              placeholder="Enter Permission">
+                              placeholder="Enter Permission" required>
                             </div>
                           </div>
                         

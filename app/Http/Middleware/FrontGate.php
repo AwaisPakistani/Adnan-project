@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Session;
 
-class AdminGate
+class FrontGate
 {
     /**
      * Handle an incoming request.
@@ -18,9 +18,9 @@ class AdminGate
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::guard('web')->check()) {
+        if (!Auth::guard('frontuser')->check()) {
             Session::flash('error_message','Sorry, you have to login first!');
-            return redirect('admin/login');
+            return redirect('front/login');
         }
         return $next($request);
     }

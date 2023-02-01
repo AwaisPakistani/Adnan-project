@@ -5,22 +5,21 @@
 <main class="page-content">
         <!--breadcrumb-->
 				<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-					<div class="breadcrumb-title pe-3">Roles and Permissions</div>
+					<div class="breadcrumb-title pe-3">Front</div>
 					<div class="ps-3">
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">Roles</li>
+								<li class="breadcrumb-item active" aria-current="page">Roles and Permissions</li>
 							</ol>
 						</nav>
 					</div>
 					<div class="ms-auto">
 						<div class="btn-group">
-              @role('superadmin|admin')
-							<a href="{{route('admin.roles')}}" class="btn btn-primary">View Roles</a>
-							@endrole
-						
+              @can('view')
+							<a href="{{route('front.view_roles')}}" class="btn btn-primary">View Front Roles</a>
+              @endcan
 						</div>
 					</div>
 				</div>
@@ -62,13 +61,7 @@
                   <div class="card-body p-4 p-sm-5">
                    
                      <form method="post"
-                     @if(!empty($show_role))
-                     action="{{route('add-edit-role',$show_role->id)}}"
-                     @else
-                      action="{{route('add-edit-role')}}"
-                    @endif
-                    class="form-body">@csrf
-                      
+                     action="{{route('front.add_role')}}" class="form-body">@csrf 
                         <div class="row g-3">
                           <div class="col-12 ">
                             <label for="inputName" class="form- 
@@ -76,9 +69,6 @@
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-person-circle"></i></div>
                               <input type="text" class="form-control radius-30 ps-5" id="inputName" name="role" 
-                              @if(!empty($show_role))
-                              value="{{$show_role->name}}"
-                              @endif
                               placeholder="Enter Role" required>
                             </div>
                           </div>

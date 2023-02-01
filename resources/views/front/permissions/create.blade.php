@@ -11,16 +11,15 @@
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">Roles</li>
+								<li class="breadcrumb-item active" aria-current="page">Front Permissions</li>
 							</ol>
 						</nav>
 					</div>
 					<div class="ms-auto">
 						<div class="btn-group">
-              @role('superadmin|admin')
-							<a href="{{route('admin.roles')}}" class="btn btn-primary">View Roles</a>
-							@endrole
-						
+                            @can('view')
+							<a  href="{{route('front.view_permissions')}}" class="btn btn-primary">View Permissions</a>
+							@endcan
 						</div>
 					</div>
 				</div>
@@ -61,25 +60,17 @@
                 <div class="col-12 col-xl-8 order-xl-3">
                   <div class="card-body p-4 p-sm-5">
                    
-                     <form method="post"
-                     @if(!empty($show_role))
-                     action="{{route('add-edit-role',$show_role->id)}}"
-                     @else
-                      action="{{route('add-edit-role')}}"
-                    @endif
-                    class="form-body">@csrf
-                      
+                     <form method="post" 
+                      action="{{route('front.add_permission')}}"
+                     class="form-body">@csrf
                         <div class="row g-3">
                           <div class="col-12 ">
                             <label for="inputName" class="form- 
-                            label">Role Name</label>
+                            label">Permission Name</label>
                             <div class="ms-auto position-relative">
-                              <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-person-circle"></i></div>
-                              <input type="text" class="form-control radius-30 ps-5" id="inputName" name="role" 
-                              @if(!empty($show_role))
-                              value="{{$show_role->name}}"
-                              @endif
-                              placeholder="Enter Role" required>
+                              <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-mail-circle"></i></div>
+                              <input type="text" class="form-control radius-30 ps-5" id="inputName" name="permission"
+                              placeholder="Enter Permission" required>
                             </div>
                           </div>
                         

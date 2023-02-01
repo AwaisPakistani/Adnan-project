@@ -81,7 +81,7 @@
                             label">Name</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-person-circle"></i></div>
-                              <input type="text" class="form-control radius-30 ps-5" id="inputName" value="{{$admin_user->name}}" name="name" placeholder="Enter Name">
+                              <input type="text" class="form-control radius-30 ps-5" id="inputName" value="{{$admin_user->name}}" name="name" placeholder="Enter Name" required>
                             </div>
                           </div>
                         
@@ -89,7 +89,7 @@
                             <label for="inputEmailAddress" class="form-label">Email Address</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-envelope-fill"></i></div>
-                              <input type="email" class="form-control radius-30 ps-5" id="inputEmailAddress" value="{{$admin_user->email}}" name="email" placeholder="Email">
+                              <input type="email" class="form-control radius-30 ps-5" id="inputEmailAddress" value="{{$admin_user->email}}" name="email" placeholder="Email" required>
                             </div>
                           </div>
                           <div class="col-12 ">

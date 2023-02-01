@@ -11,14 +11,14 @@
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">Admin Permissions</li>
+								<li class="breadcrumb-item active" aria-current="page">Front Permissions</li>
 							</ol>
 						</nav>
 					</div>
 					<div class="ms-auto">
 						<div class="btn-group">
 							@can('add')
-							<a href="{{route('add-edit-permission')}}" class="btn btn-primary">Add New</a>
+							<a href="{{route('front.add_permission')}}" class="btn btn-primary">Add New</a>
 							@endcan
 						</div>
 					</div>
@@ -78,10 +78,14 @@
 										<td>
                              <div class="table-actions d-flex align-items-center gap-3 fs-6">
                                <!-- <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Views"><i class="bi bi-eye-fill"></i></a> -->
-                               <a href="{{route('add-edit-permission',$permission->id)}}" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"
+							   @can('edit')
+                               <a href="{{route('front.edit_permission',$permission->id)}}" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"
 							   ><i class="bi bi-pencil-fill"></i></a>
-                               <a href="{{route('delete_permission',$permission->id)}}" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"
+							   @endcan
+							   @can('delete')
+                               <a href="{{route('front.delete_permission',$permission->id)}}" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"
 							   onClick="return confirm('Are you sure! You want to delete it?')"><i class="bi bi-trash-fill"></i></a>
+							   @endcan
                              </div>
                            </td>
 

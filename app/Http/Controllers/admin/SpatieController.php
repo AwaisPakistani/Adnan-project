@@ -13,8 +13,8 @@ class SpatieController extends Controller
 {
     // roles
     public function roles(){
-        $roles=Role::get();
-        $permissions=Permission::get();
+        $roles=Role::where('guard_name','web')->get();
+        $permissions=Permission::where('guard_name','web')->get();
         return view('admin.roles.index')->with(compact('roles','permissions'));
     }
     public function add_edit_role(Request $request,$id=null){
@@ -26,20 +26,20 @@ class SpatieController extends Controller
                 $data=$request->all();
                 // echo "<pre>";
                 // print_r($data);die;
-               $role = Role::create(['name' => $data['role']]);
+               $role = Role::create(['guard_name'=>'web','name' => $data['role']]);
                Session::flash('success_message','Role has been added successfully!');
                return redirect()->back();
             }
             return view('admin.roles.create')->with(compact('title','show_role'));
         }else{
              $title='Edit Role';
-             $show_role=Role::where('id',$id)->first();
+             $show_role=Role::where(['id'=>$id,'guard_name'=>'web'])->first();
              if($request->isMethod('post')){
                $data=$request->all();
                // echo "<pre>";
                // print_r($data);die;
                //dd($data);
-               $role = Role::where('id',$id)->update(['name' => $data['role']]);
+               $role = Role::where(['id'=>$id,'guard_name'=>'web'])->update(['name' => $data['role']]);
                Session::flash('success_message','Role has been updated successfully!');
                return redirect()->back();
             }
@@ -53,9 +53,9 @@ class SpatieController extends Controller
     }
 
     public function delete_role($id){
-        Role::where('id',$id)->delete();
+        Role::where('guard_name','web')->where('id',$id)->delete();
         Session::flash('success_message','Role has been deleted successfully!');
-               return redirect()->back();
+        return redirect()->back();
     }
 
     public function update_roles_permission(Request $request){
@@ -85,7 +85,7 @@ class SpatieController extends Controller
 
     // permissions
     public function permissions(){
-        $permissions=Permission::get();
+        $permissions=Permission::where('guard_name','web')->get();
         return view('admin.permissions.index')->with(compact('permissions'));
     }
 
@@ -97,21 +97,21 @@ class SpatieController extends Controller
                 $data=$request->all();
                 // echo "<pre>";
                 // print_r($data);die;
-                $permission = Permission::create(['name' => $data['permission']]);
+                $permission = Permission::create(['guard_name'=>'web','name' => $data['permission']]);
                 Session::flash('success_message','Permission has been added successfully!');
                 return redirect()->back();
            }
            return view('admin.permissions.add-edit-permission')->with(compact('title','show_permission'));
         }else{
             $title='Edit Permission';
-            $show_permission=Permission::where('id',$id)->first();
+            $show_permission=Permission::where(['id'=>$id,'guard_name'=>'web'])->first();
             //dd($show_permission);
             if($request->isMethod('post')){
                $data=$request->all();
                // echo "<pre>";
                // print_r($data);die;
                //dd($data);
-               $permission = Permission::where('id',$id)->update(['name' => $data['permission']]);
+               $permission = Permission::where(['id'=>$id,'guard_name'=>'web'])->update(['name' => $data['permission']]);
                Session::flash('success_message','Permission has been updated successfully!');
                return redirect()->back();
             }
@@ -122,7 +122,7 @@ class SpatieController extends Controller
     }
 
     public function delete_permission($id){
-        Permission::where('id',$id)->delete();
+        Permission::where(['id'=>$id,'guard_name'=>'web'])->delete();
         Session::flash('success_message','Permission has been deleted successfully!');
         return redirect()->back();               
     }

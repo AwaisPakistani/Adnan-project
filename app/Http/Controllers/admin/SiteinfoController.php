@@ -50,11 +50,11 @@ class SiteinfoController extends Controller
             //dd($iconImage);
             if($iconImage){
                 
-                $img_path = 'storage/images/admin/site_icon/';
+                $img_path = Siteintro::with('site_icon')->where('id',1)->first();
                 // Delete large image from folder if exists
-                if (file_exists($img_path.$iconImage->url)) {
-                    //dd('ghgjgh');
-                    unlink($img_path.$iconImage->url);
+                $path=$img_path->site_icon->url;
+                if(file_exists('storage/'.$path)){
+                    unlink('storage/'.$path);
                 }
                 
                 //$ext=$request->site_icon_image->extension();
@@ -115,22 +115,19 @@ class SiteinfoController extends Controller
                  $data=$request->all();
                  //dd($data);
                  $logo=Siteintro::where('id',2)->first();
-                 //dd($icon->id);
-                // Add Image
-                //dd($id);
+                
                  $logoImage=Image::where([
                  'imageable_type'=>'App\Models\Siteintro',
                  'imageable_id'=>2
                  ])->first();
                  
                  //dd($iconImage);
-                 if($logoImage){
-                     
-                     $img_path = 'storage/images/admin/logo/';
+                 if($logoImage){                     
+                     $img_path = Siteintro::with('logo')->where('id',2)->first();
                      // Delete large image from folder if exists
-                     if (file_exists($img_path.$iconImage->url)) {
-                         //dd('ghgjgh');
-                         unlink($img_path.$iconImage->url);
+                     $path=$img_path->logo->url;
+                     if(file_exists('storage/'.$path)){
+                         unlink('storage/'.$path);
                      }
                      
                      //$ext=$request->site_icon_image->extension();

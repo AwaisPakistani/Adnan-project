@@ -93,8 +93,8 @@
                             @else
                             src="{{url('assets/images/avatars/1avatar.jpg')}}" 
                             @endif
-                             id="icon_display" onclick="triggerclick()" width="50px" height="50px" alt="User Image"> <br/>
-                            <input type="file" class="form-control" name="site_icon_image" onchange="displayImage(this)" id="icon_image" style="display: none;">
+                           id="icon_display" onclick="triggerclick()" width="50px" height="50px" alt="User Image"> <br/>
+                            <input type="file" class="form-control" name="site_icon_image" onchange="displayImage(this)" id="siteiconimage" >
                            
                            </div>
                           </div>

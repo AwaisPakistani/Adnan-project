@@ -60,15 +60,15 @@ $iconpath=$icon->site_icon->url;
 
      #icon_display{
       display: block;
-      width: 10%;
-      height:50px;
+      width: 20%;
+      height:75px;
       margin: 10px auto;
       border-radius: 100%;
     }
      #icon_display:hover{
       display: block;
-      width: 10%;
-      height:50px;
+      width: 20%;
+      height:75px;
       margin: 10px auto;
       border-radius: 100%;
       opacity: 0.7;

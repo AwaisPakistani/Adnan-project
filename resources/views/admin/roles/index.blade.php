@@ -17,14 +17,11 @@
 					</div>
 					<div class="ms-auto">
 						<div class="btn-group">
-							<button type="button" class="btn btn-primary">Settings</button>
-							<button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">	<span class="visually-hidden">Toggle Dropdown</span>
-							</button>
-							<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">	<a class="dropdown-item" href="javascript:;">Action</a>
-								<a class="dropdown-item" href="javascript:;">Another action</a>
-								<a class="dropdown-item" href="javascript:;">Something else here</a>
-								<div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
-							</div>
+						@role('superadmin')
+						<a href="{{route('add-edit-role')}}" class="btn btn-primary">Add Role</a>
+						@endrole
+							
+							
 						</div>
 					</div>
 				</div>
@@ -32,6 +29,32 @@
 				
 				
 				<h6 class="mb-0 text-uppercase">Add Role</h6>
+				 <!--alerts-->
+                 @if(Session::has('success_message'))
+                <div class="alert border-0 bg-light-success alert-dismissible fade show py-2">
+                    <div class="d-flex align-items-center">
+                      <div class="fs-3 text-success"><i class="bi bi-check-circle-fill"></i>
+                      </div>
+                      <div class="ms-3">
+                        <div class="text-success">{{Session::get('success_message')}}</div>
+                      </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                  @endif
+                  @if(Session::has('error_message'))
+                  <div class="alert border-0 bg-light-danger alert-dismissible fade show py-2">
+                    <div class="d-flex align-items-center">
+                      <div class="fs-3 text-danger"><i class="bi bi-x-circle-fill"></i>
+                      </div>
+                      <div class="ms-3">
+                        <div class="text-danger">{{Session::get('error_message')}}</div>
+                      </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                  @endif
+                  <!--alerts-->
 				<hr/>
 				<div class="card">
 					<div class="card-body">
@@ -89,8 +112,8 @@
 						   </td>
 						   <td>
                              <div class="table-actions d-flex align-items-center gap-3 fs-6">
-                               <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Views"
-							   id="sweetalertconfirm"><i class="bi bi-eye-fill"></i></a>
+                               <!-- <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Views"
+							   id="sweetalertconfirm"><i class="bi bi-eye-fill"></i></a> -->
                                <a href="{{route('add-edit-role',$role->id)}}" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bi bi-pencil-fill"></i></a>
                                <a href="{{route('delete-role',$role->id)}}" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete" onClick="return confirm('Are you sure! You want to delete it?')"><i class="bi bi-trash-fill"></i></a>
                              </div>

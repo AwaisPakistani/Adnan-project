@@ -94,7 +94,7 @@
                             src="{{url('assets/images/avatars/1avatar.jpg')}}" 
                             @endif
                              id="profile_display" onclick="triggerclick()" width="150px" height="150px" alt="User Image"> <br/>
-                            <input type="file" class="form-control" name="profile_image" onchange="displayImage(this)" id="profile_image" style="display: none;">
+                            <input type="file" class="form-control" name="profile_image" onchange="displayImage(this)" id="profile_image" required>
                            </div>
                           </div>
                         

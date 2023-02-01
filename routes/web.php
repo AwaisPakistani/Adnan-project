@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\SpatieController;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\SiteinfoController;
+use App\Http\Controllers\admin\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,7 +25,6 @@ Route::group(['middleware'=>['AdminGate']],function(){
      Route::prefix('admin')->namespace('admin')->group(function ()
     //  Route::prefix('admin')->name('admin.')->namespace('admin')->group(function ()
       {
-         
          // Website Introduction
          Route::match(['get', 'post'], '/site-identity/{id}', [SiteinfoController::class, 'site_identity'])->name('siteintro')->middleware('role:superadmin|admin');
 
@@ -37,18 +37,6 @@ Route::group(['middleware'=>['AdminGate']],function(){
          Route::get('/display-social-media', [SiteinfoController::class, 'view_social'])->name('view_social');
 
          Route::get('/delete-social-media/{id}', [SiteinfoController::class, 'delete_social'])->name('delete_social')->middleware('permission:delete');
-
-         
-
-         
-
-         
-         
-
-
-
-
-
 
          //admins
          Route::get('/admins', [AdminController::class, 'admins'])->name('admin.admins')->middleware('role:superadmin');
@@ -79,7 +67,19 @@ Route::group(['middleware'=>['AdminGate']],function(){
          Route::match(['get', 'post'], '/add-edit-permission/{id?}', [SpatieController::class, 'add_edit_permission'])->name('add-edit-permission')->middleware('role:superadmin|admin');
          
          Route::get('/delete-permission/{id}', [SpatieController::class, 'delete_permission'])->name('delete_permission')->middleware('role:superadmin|admin');
+
+         // Categoies
+         Route::match(['get', 'post'], '/add-category', [CategoryController::class, 'add_category'])->name('admin.add_category')->middleware('permission:add');
+
+         Route::match(['get', 'post'], '/edit-category/{id}', [CategoryController::class, 'edit_category'])->name('admin.edit_category')->middleware('permission:edit');
+
+         Route::get('/view-categories', [CategoryController::class, 'view_categories'])->name('admin.view_categories')->middleware('permission:view');
+
+
+         Route::get('/delete-category/{id}', [CategoryController::class, 'delete_category'])->name('admin.delete_category')->middleware('permission:delete');
+
+         
     });
 });
 
-
+require __DIR__.'/frontroutes.php';

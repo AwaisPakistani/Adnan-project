@@ -52,7 +52,7 @@
  <!-- Icon Display -->
 <script type="text/javascript">
     function triggerclick(){
-      document.querySelector('#icon_image').click();
+      document.querySelector('#siteiconimage').click();
     }
     function displayImage(e){
       if (e.files[0]) {
