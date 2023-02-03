@@ -25,6 +25,7 @@ Route::group(['middleware'=>['AdminGate']],function(){
      Route::prefix('admin')->namespace('admin')->group(function ()
     //  Route::prefix('admin')->name('admin.')->namespace('admin')->group(function ()
       {
+         Route::get('/', [HomeController::class, 'index']);
          // Website Introduction
          Route::match(['get', 'post'], '/site-identity/{id}', [SiteinfoController::class, 'site_identity'])->name('siteintro')->middleware('role:superadmin|admin');
 
@@ -52,7 +53,7 @@ Route::group(['middleware'=>['AdminGate']],function(){
          Route::get('/delete/{id}', [AdminController::class, 'delete'])->name('admin.delete')->middleware('role:superadmin');
          Route::match(['get','post'],'/edit/{id}', [AdminController::class, 'edit'])->name('admin.edit')->middleware('role:superadmin');
          
-         Route::get('/', [HomeController::class, 'index']);
+         
          // roles
          Route::get('/roles', [SpatieController::class, 'roles'])->name('admin.roles');
          

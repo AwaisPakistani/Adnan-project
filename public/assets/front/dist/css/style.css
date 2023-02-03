@@ -1,0 +1,24 @@
+.main-header{
+    background-color:#ff8000;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    color: white;
+   
+}
+header .site-name{
+    color: white;
+}
+header .nav .nav-link{
+    color: white;
+}
+footer a{
+    text-decoration: none;
+    color: white;
+}
+footer .social-icons{
+    background-color: #ff8000;
+    border-radius: 100%;
+}
+.footer-pages div{
+    color: white;
+}

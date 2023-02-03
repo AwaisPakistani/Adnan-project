@@ -3,8 +3,9 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\front\FrontRoleController;
 use App\Http\Controllers\front\FrontPermissionController;
+use App\Http\Controllers\front\IndexController;
 
-
+Route::get('/', [IndexController::class, 'index']);
 // Roles
 
 Route::match(['get','post'],'/front/add_front_role',[FrontRoleController::class,'add_front_role'])->name('front.add_role')->middleware('permission:add');

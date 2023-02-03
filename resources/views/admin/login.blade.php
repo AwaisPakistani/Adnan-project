@@ -1,3 +1,7 @@
+@php 
+use App\Models\Siteintro;
+$site_icon=Siteintro::with('site_icon')->where('id',1)->first();
+@endphp
 <!doctype html>
 <html lang="en">
 
@@ -5,7 +9,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="{{url('assets/images/favicon-32x32.png')}}" type="image/png" />
+  <link rel="icon" href="{{url('storage/'.$site_icon->site_icon->url)}}" type="image/png" />
   <!-- Bootstrap CSS -->
   <link href="{{url('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
   <link href="{{url('assets/css/bootstrap-extended.css')}}" rel="stylesheet" />
@@ -17,7 +21,7 @@
   <!-- loader-->
 	<link href="{{url('assets/css/pace.min.css')}}" rel="stylesheet" />
 
-  <title>Onedash - Bootstrap 5 Admin Template</title>
+  <title>{{$site_icon->site_name}} | Login</title>
 </head>
 
 <body class="bg-surface">

@@ -91,5 +91,5 @@ $iconpath=$icon->site_icon->url;
       background-color: grey;
      }
   </style>
-  <title>Onedash - Bootstrap 5 Admin Template</title>
+  <title>{{$icon->site_name}}</title>
 </head>
