@@ -17,6 +17,55 @@ $(document).ready(function(){
           }
         });
 	});
+  // contacts
+     //emails
+  $("#add-email").on('click',function(){
+      var emailCounter=$('.emailCount').length;
+      // alert(emailCounter); return false;
+      //alert('test'); return;
+      emailCounter++;
+      if (emailCounter > 3) {
+        //alert('limit'); return false;
+        $('#emailalert').show('noshowemail');
+        return false;
+      }
+       newDiv=$(document.createElement('div')).attr('class','formgroupemail');
+       newDiv.after().html('<br><input type="email" class="form-control" name="email[]" id="email" placeholder="Enter email">');
+       newDiv.appendTo('#emailFieldGroup');
+    
+  });
+     // addresses
+  $("#addaddress").on('click',function(){
+      var addressCounter=$('.addressCount').length;
+      // alert(addressCounter); return false;
+      // alert('test'); return;
+      addressCounter++;
+      if (addressCounter > 3) {
+        //alert('limit'); return false;
+        $('#addressalert').show('noshow');
+        return false;
+      }
+       newDiv=$(document.createElement('div')).attr('class','formgroup');
+       newDiv.after().html('<br><input type="text" class="form-control" name="address[]" id="address" placeholder="Enter address">');
+       newDiv.appendTo('#addressFieldGroup');
+    
+  });
+     // phone numbers
+  $("#addphone").on('click',function(){
+      var phoneCounter=$('.phoneCount').length;
+      // alert(phoneCounter); return false;
+      // alert('test'); return;
+      phoneCounter++;
+      if (phoneCounter > 3) {
+        //alert('limit'); return false;
+        $('#phonealert').show('noshowphone');
+        return false;
+      }
+       newDiv=$(document.createElement('div')).attr('class','formgroupphone');
+       newDiv.after().html('<br><input type="tel" class="form-control" name="phone[]" id="phone" placeholder="Enter phone">');
+       newDiv.appendTo('#phoneFieldGroup');
+    
+  });
 
   $(".confirmalert").on("click", function() {
     // if(confirm('Are you sure you want to delete it?')){

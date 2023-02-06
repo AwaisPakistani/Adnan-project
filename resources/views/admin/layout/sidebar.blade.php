@@ -197,6 +197,28 @@ $myid=Auth::user()->id;
                 </li>
               </ul>
             </li>
+            <li>
+              <a href="{{route('admin.add_edit_contacts',1)}}">
+                <div class="parent-icon"><i class="bi bi-phone-fill"></i>
+                </div>
+                <div class="menu-title">Contacts</div>
+              </a>
+            </li>
+            <li>
+              <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon"><i class="bi bi-book-fill"></i>
+                </div>
+                <div class="menu-title">Sliders</div>
+              </a>
+              <ul>
+                <li> <a href="{{route('admin.add_slider')}}"><i class="bi bi-circle"></i>Add Slider</a>
+                </li>
+                
+                <li> <a href="{{route('admin.view_sliders')}}"><i class="bi bi-circle"></i>View Sliders</a>
+                </li>
+              </ul>
+            </li>
+            
            
           </ul>
           <!--end navigation-->

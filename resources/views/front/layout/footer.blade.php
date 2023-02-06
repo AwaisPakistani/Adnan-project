@@ -73,16 +73,32 @@
 
           <ul class="fa-ul" style="margin-left: 1.65em;">
             <li class="mb-3">
-              <span class="fa-li"><i class="fas fa-home"></i></span><span class="ms-2">New York, NY 10012, US</span>
+              <span class="fa-li"><i class="fas fa-home"></i></span><span class="ms-2">
+                @if(!empty($address[0]))
+                {{$address[0]}}
+                @endif
+              </span>
             </li>
             <li class="mb-3">
-              <span class="fa-li"><i class="fas fa-envelope"></i></span><span class="ms-2">info@example.com</span>
+              <span class="fa-li"><i class="fas fa-envelope"></i></span><span class="ms-2">
+              @if(!empty($email[0]))
+              {{$email[0]}}
+              @endif
+            </span>
             </li>
             <li class="mb-3">
-              <span class="fa-li"><i class="fas fa-phone"></i></span><span class="ms-2">+ 01 234 567 88</span>
+              <span class="fa-li"><i class="fas fa-phone"></i></span><span class="ms-2">
+              @if(!empty($phone[0]))  
+              {{$phone[0]}}
+              @endif
+            </span>
             </li>
             <li class="mb-3">
-              <span class="fa-li"><i class="fas fa-print"></i></span><span class="ms-2">+ 01 234 567 89</span>
+              <span class="fa-li"><i class="fas fa-phone"></i></span><span class="ms-2">
+              @if(!empty($phone[1]))
+              {{$phone[1]}}
+              @endif
+            </span>
             </li>
           </ul>
         </div>

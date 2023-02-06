@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Siteintro;
 use App\Models\Image;
 use App\Models\Social;
+use App\Models\Slider;
 use Session;
 
 class SiteinfoController extends Controller
@@ -218,5 +219,75 @@ class SiteinfoController extends Controller
         Social::where('id',$id)->delete();
         Session::flash('success_message','Social platform has been deleted successfully');
         return redirect()->back();
+    }
+
+    // Sliders
+
+    public function add_slider(Request $request){
+        $title='Add Slider';
+        if($request->isMethod('post')){
+            $data=$request->all();
+            //dd($data);
+            $image_path = $request->file('image')->store('images/admin/slides', 'public');;
+            $slide=new Slider;
+            $slide->title=$data['title'];
+            $slide->description=$data['description'];
+            $slide->button_title=$data['slider_button'];
+            $slide->button_url=$data['slider_url'];
+            $slide->image=$image_path;
+            $slide->save();
+            Session::flash('success_message','Slide has been added successfully!');
+            return redirect()->back(); 
+        }
+        return view('admin.site.sliders.create')->with(compact('title'));
+    }
+
+    public function edit_slider(Request $request,$id){
+        $title='Update Slider';
+        $slider_edit=Slider::where('id',$id)->first();
+        if($request->isMethod('post')){
+            $data=$request->all();
+            //dd($data);
+            $image_path = $request->file('image')->store('images/admin/slides', 'public');;
+            $slide=Slider::find($id);
+            $slide->title=$data['title'];
+            $slide->description=$data['description'];
+            $slide->button_title=$data['slider_button'];
+            $slide->button_url=$data['slider_url'];
+            $slide->image=$image_path;
+            $slide->save();
+            Session::flash('success_message','Slide has been added successfully!');
+            return redirect()->back(); 
+        }
+        return view('admin.site.sliders.update')->with(compact('title','slider_edit'));
+    }
+    public function view_sliders(){
+        $slides=Slider::get();
+        return view('admin.site.sliders.index')->with(compact('slides'));
+    }
+    public function delete_slider($id){
+        $imagepath=Slider::where('id',$id)->first();
+        $path=$imagepath->image;
+        if(file_exists('storage/'.$path)){
+            unlink('storage/'.$path);
+        }
+       
+       
+            Slider::where('id',$id)->delete();
+            Session::flash('success_message','Slider has been deleted successfully!');
+            return redirect()->back();
+       
+    }
+    public function delete_slider_image($id){
+        $imagepath=Slider::where('id',$id)->first();
+        $path=$imagepath->image;
+        if(file_exists('storage/'.$path)){
+            unlink('storage/'.$path);
+        }
+       
+       
+            Slider::where('id',$id)->update(['image'=>'']);
+            Session::flash('success_message','Slider Image has been deleted successfully!');
+            return redirect()->back();
     }
 }

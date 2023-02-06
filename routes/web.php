@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\SpatieController;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\SiteinfoController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\ContactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,7 +79,21 @@ Route::group(['middleware'=>['AdminGate']],function(){
 
 
          Route::get('/delete-category/{id}', [CategoryController::class, 'delete_category'])->name('admin.delete_category')->middleware('permission:delete');
+         
+         // contacts
+         Route::match(['get', 'post'], '/add-edit-contacts/{id?}', [ContactController::class, 'add_edit_contacts'])->name('admin.add_edit_contacts')->middleware('permission:add|edit');
+         // sliders
+         Route::match(['get', 'post'], '/add-slider', [SiteinfoController::class, 'add_slider'])->name('admin.add_slider')->middleware('permission:add');
 
+         Route::match(['get', 'post'], '/edit-slider/{id}', [SiteinfoController::class, 'edit_slider'])->name('admin.edit_slider')->middleware('permission:edit');
+
+         Route::get('/view-sliders', [SiteinfoController::class, 'view_sliders'])->name('admin.view_sliders')->middleware('permission:view');
+
+
+         Route::get('/delete-slider/{id}', [SiteinfoController::class, 'delete_slider'])->name('admin.delete_slider')->middleware('permission:delete');
+
+         
+         Route::get('/delete-slider-image/{id}', [SiteinfoController::class, 'delete_slider_image'])->name('admin.delete_slider_image')->middleware('permission:delete|edit');
          
     });
 });
