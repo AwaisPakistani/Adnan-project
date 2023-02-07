@@ -8,6 +8,7 @@ use App\Models\Siteintro;
 use App\Models\Image;
 use App\Models\Social;
 use App\Models\Slider;
+use App\Models\AdvanceSetting;
 use Session;
 
 class SiteinfoController extends Controller
@@ -289,5 +290,34 @@ class SiteinfoController extends Controller
             Slider::where('id',$id)->update(['image'=>'']);
             Session::flash('success_message','Slider Image has been deleted successfully!');
             return redirect()->back();
+    }
+    // Advance Settings
+    public function add_edit_advanceSettings(Request $request,$id=null){
+        $title="Advance Settings";
+        $advance_setting=AdvanceSetting::first();
+        if($request->isMethod('post')){
+            $data=$request->all();
+            //dd($data);
+            if(!empty($advance_setting)){
+                $savedata=AdvanceSetting::where('id',1)->update([
+                    'main_color'=>$data['main_color'],
+                    'basic_color'=>$data['basic_color'],
+                    'button_color'=>$data['button_color'],
+                    'footer_copyright'=>$data['footer_copyright']
+                 ]);
+                 Session::flash('success_message','Slider Image has been changed successfully!');
+                 return redirect()->back();
+            }else{
+                $savedata=AdvanceSetting::create([
+                   'main_color'=>$data['main_color'],
+                   'basic_color'=>$data['basic_color'],
+                   'button_color'=>$data['button_color'],
+                   'footer_copyright'=>$data['footer_copyright']
+                ]);
+                Session::flash('success_message','Slider Image has been created successfully!');
+                return redirect()->back();
+            }
+        }
+        return view('admin.site.advance_settings')->with(compact('title','advance_setting'));
     }
 }

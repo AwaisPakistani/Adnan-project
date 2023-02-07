@@ -17,7 +17,7 @@
           <div class="mt-4">
             <!-- Social -->
             @foreach($social as $social_icon)
-            <a href="{{$social_icon->social_url}}" class="btn btn-floating social-icons btn-lg"><i class="{{$social_icon->social_class}}"></i></a>
+            <a href="{{$social_icon->social_url}}" class="btn btn-floating social-icons btn-lg" style="background-color:{{$advancesetting->main_color}};"><i class="{{$social_icon->social_class}}"></i></a>
             @endforeach
            
             <!-- Social -->
@@ -28,13 +28,15 @@
        <div class="col-lg-4 col-md-6 mb-4 mb-md-0 footer-pages">
           <h5 class="text-uppercase mb-4">Pages</h5>
           <div class="my-3">
-            <a href="#">HOME</a></div>
+            <a href="{{url('/')}}">HOME</a></div>
+          @if(!empty($pages))
+          @foreach($pages->take(2) as $page)
+          <div class="my-3 text-uppercase">
+            <a href="{{route('front.page.url',$page->id)}}">{{$page->page_name}}</a></div>
+          @endforeach
+          @endif
           <div class="my-3">
-            <a href="#">ABOUT US</a></div>
-          <div class="my-3">
-            <a href="#">PRIVACY POLICY</a></div>
-          <div class="my-3">
-            <a href="#">DISCLAIMER</a></div>
+            <a href="{{route('front.contact_page')}}">CONTACT US</a></div>
           <!-- <ul class="fa-ul" style="margin-left: 1.65em;">
             <li class="mb-3">
               <span class="ms-2">
@@ -112,17 +114,7 @@
 
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2020 Copyright:
-      <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+      {{$advancesetting->footer_copyright}}
     </div>
     <!-- Copyright -->
   </footer>
-  
-
-<!-- End of .container -->
-
-<!-- FOOTER -->
-  <!-- <footer class="container">
-    <p class="float-end"><a href="#">Back to top</a></p>
-    <p>&copy; 2017–2021 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-  </footer> -->

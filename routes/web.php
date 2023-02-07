@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\SiteinfoController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ContactController;
+use App\Http\Controllers\admin\NewPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -94,6 +95,17 @@ Route::group(['middleware'=>['AdminGate']],function(){
 
          
          Route::get('/delete-slider-image/{id}', [SiteinfoController::class, 'delete_slider_image'])->name('admin.delete_slider_image')->middleware('permission:delete|edit');
+         // Pages NewPageController
+         Route::match(['get', 'post'], '/add-page', [NewPageController::class, 'add_page'])->name('admin.add_page')->middleware('permission:add');
+
+         Route::match(['get', 'post'], '/edit-page/{id}', [NewPageController::class, 'edit_page'])->name('admin.edit_page')->middleware('permission:edit');
+
+         Route::get('/view-page', [NewPageController::class, 'view_pages'])->name('admin.view_pages')->middleware('permission:view');
+
+
+         Route::get('/delete-page/{id}', [NewPageController::class, 'delete_page'])->name('admin.delete_page')->middleware('permission:delete');
+         // Advance Settings (Main color, basic color and copyright footer)
+         Route::match(['get', 'post'], '/add-edit-advance-setting/{id?}', [SiteinfoController::class, 'add_edit_advanceSettings'])->name('admin.add_edit_advanceSettings')->middleware('role:superadmin');
          
     });
 });

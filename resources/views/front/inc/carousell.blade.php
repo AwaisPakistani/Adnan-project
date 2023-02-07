@@ -1,20 +1,27 @@
+ @if(!empty($slides))
  <div id="carousel text-start" >
     <div class="bd-example">
         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-indicators">
-            
+            @php
+            $nb=1;
+            @endphp
             @foreach($slides as $slide)
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{$slide->id}}"
-            @if($slide->id==1)
+            @if($nb==1)
             class="active"
             @endif
             aria-label="Slide {{$slide->id}}" aria-current="true"></button>
+            @php $nb++;  @endphp
             @endforeach
+            @php 
+            $ni=1;
+            @endphp
           </div>
           <div class="carousel-inner">
             @foreach($slides as $slide)
             <div class="carousel-item text-start
-            @if($slide->id==1)
+            @if($ni==1)
             active
             @endif
             ">
@@ -26,12 +33,15 @@
                  <img src="{{url('storage/'.$slide->image)}}"> 
               </text></svg>
              
-              <div class="carousel-caption d-none d-md-block">
+              <div class="carousel-caption text-start d-none d-md-block">
                 <h1>{{$slide->title}}</h1>
                 <p>{{$slide->description}}</p>
                 <p><a class="btn btn-lg btn-primary" href="{{$slide->button_url}}">{{$slide->button_title}}</a></p>
               </div>
             </div>
+            @php
+            $ni++;
+            @endphp
             @endforeach
            
           </div>
@@ -46,3 +56,4 @@
         </div>
     </div>
 </div>
+@endif

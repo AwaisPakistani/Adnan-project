@@ -48,6 +48,8 @@
   <script src="{{url('assets/js/todo.js')}}"></script>
   <!-- Sweet Alert 2 -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+
 
  <!-- Icon Display -->
 <script type="text/javascript">

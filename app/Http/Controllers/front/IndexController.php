@@ -10,7 +10,8 @@ use App\Models\Frontuser;
 use App\Models\Social;
 use App\Models\Contact;
 use App\Models\Slider;
-
+use App\Models\Page;
+use App\Models\AdvanceSetting;
 class IndexController extends Controller
 {
     public function __construct(){
@@ -23,6 +24,8 @@ class IndexController extends Controller
        $email=json_decode($contacts->email);
        $phone=json_decode($contacts->phone);
        $slides=Slider::get();
+       $pages=Page::get();
+       $advancesetting=AdvanceSetting::first();
        //dd($address);
        view()->share([
         'site_identity'=>$site_identity,
@@ -33,6 +36,8 @@ class IndexController extends Controller
         'email'=>$email,
         'phone'=>$phone,
         'slides'=>$slides,
+        'pages'=>$pages,
+        'advancesetting'=>$advancesetting,
       ]);
     }
     public function index(){

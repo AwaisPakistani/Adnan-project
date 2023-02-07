@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\front\FrontRoleController;
 use App\Http\Controllers\front\FrontPermissionController;
 use App\Http\Controllers\front\IndexController;
+use App\Http\Controllers\front\PageController;
 
 Route::get('/', [IndexController::class, 'index']);
 // Roles
@@ -25,6 +26,14 @@ Route::get('/front/view_front_permissions', [FrontPermissionController::class, '
 Route::get('/front/delete_permission/{id}', [FrontPermissionController::class, 'delete_permission'])->name('front.delete_permission')->middleware('permission:delete');
 
 Route::match(['get','post'],'/front/edit_front_permission/{id}',[FrontPermissionController::class,'edit_front_permission'])->name('front.edit_permission')->middleware('permission:edit');
+//////////////////////
+////////Pages/////////
+//////////////////////
+
+// Contact Page
+Route::get('contact-page',[PageController::class,'contact_page'])->name('front.contact_page');
+// Get pages
+Route::get('page/{url}',[PageController::class,'front_page'])->name('front.page.url');
 
 
 

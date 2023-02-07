@@ -50,6 +50,11 @@ $myid=Auth::user()->id;
                 @endrole
                 <li> <a href="{{route('view_social')}}"><i class="bi bi-circle"></i>Social</a>
                 </li>
+                @role('superadmin')
+                <li> <a href="{{route('admin.add_edit_advanceSettings')}}"><i class="bi bi-circle"></i>Advance Settings</a>
+                </li>
+                @endrole
+                
                
               </ul>
             </li>
@@ -211,14 +216,33 @@ $myid=Auth::user()->id;
                 <div class="menu-title">Sliders</div>
               </a>
               <ul>
+                @can('add')
                 <li> <a href="{{route('admin.add_slider')}}"><i class="bi bi-circle"></i>Add Slider</a>
                 </li>
-                
+                @endcan
+                @can('view')
                 <li> <a href="{{route('admin.view_sliders')}}"><i class="bi bi-circle"></i>View Sliders</a>
                 </li>
+                @endcan
               </ul>
             </li>
-            
+            <li>
+              <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon"><i class="bi bi-file-fill"></i>
+                </div>
+                <div class="menu-title">Pages</div>
+              </a>
+              <ul>
+                @can('add')
+                <li> <a href="{{route('admin.add_page')}}"><i class="bi bi-circle"></i>Add Page</a>
+                </li>
+                @endcan
+                @can('view')
+                <li> <a href="{{route('admin.view_pages')}}"><i class="bi bi-circle"></i>View Pages</a>
+                </li>
+                @endcan
+              </ul>
+            </li>
            
           </ul>
           <!--end navigation-->
