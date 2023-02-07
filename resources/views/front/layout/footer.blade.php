@@ -17,7 +17,7 @@
           <div class="mt-4">
             <!-- Social -->
             @foreach($social as $social_icon)
-            <a href="{{$social_icon->social_url}}" class="btn btn-floating social-icons btn-lg" style="background-color:{{$advancesetting->main_color}};"><i class="{{$social_icon->social_class}}"></i></a>
+            <a href="{{$social_icon->social_url}}" class="btn btn-floating social-icons btn-lg" style="background-color:{{$advancesetting->main_color}};color:{{$advancesetting->basic_color}};"><i class="{{$social_icon->social_class}}"></i></a>
             @endforeach
            
             <!-- Social -->

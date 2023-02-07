@@ -1,4 +1,4 @@
-<script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.20.1/full-all/ckeditor.js"></script>
 @extends('admin.layout.master')
 @section('content')
                  
