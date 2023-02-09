@@ -9,14 +9,31 @@
     <div class="row">
     <div class="col-md-7 col-lg-8">
         <h4 class="mb-3 py-4">Get In Touch</h4>
-        <form class="needs-validation" style="padding-right:50px;" novalidate="">
+        <form method="post" action="{{route('front.contact_form')}}" class="needs-validation" style="padding-right:50px;" novalidate="">@csrf
           <div class="row g-3">
-
+            <div class="col-12">
+          
+                  @if(Session::has('success_message'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{Session::get('success_message')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                  @endif
+                  @if(Session::has('error_message'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{Session::get('error_message')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                  @endif
+                 
+                
+                 
+            </div>
             <div class="col-12">
               <label for="username" class="form-label">Username</label>
               <div class="input-group has-validation">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
-                <input type="text" class="form-control" id="username" placeholder="Username" required="">
+                <input type="text" name="username" class="form-control" id="username" placeholder="Username" required>
               <div class="invalid-feedback">
                   Your username is required.
                 </div>
@@ -27,7 +44,7 @@
               <label for="username" class="form-label">Email</label>
               <div class="input-group has-validation">
                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                <input type="email" class="form-control" id="username" placeholder="you@example.com" required="">
+                <input type="email" name="email" class="form-control" id="username" placeholder="you@example.com" required>
               <div class="invalid-feedback">
               Please enter a valid email address for shipping updates.
                 </div>
@@ -38,7 +55,7 @@
               <label for="username" class="form-label">Phone</label>
               <div class="input-group has-validation">
                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                <input type="number" class="form-control" id="username" placeholder="03xx-xxxxxxx" required="">
+                <input type="number" name="phone" class="form-control" id="username" placeholder="03xx-xxxxxxx" required>
               <div class="invalid-feedback">
               Please enter a valid mobile number.
                 </div>
@@ -47,14 +64,19 @@
           
 
             <div class="col-12">
-              <label for="address" class="form-label">Address</label>
-              <textarea type="textarea" class="form-control" id="address" placeholder="Enter you message..." required=""></textarea>
+              <label for="address" class="form-label">Message</label>
+              <textarea type="textarea" name="message" class="form-control" id="address" placeholder="Enter you message..." required></textarea>
               <div class="invalid-feedback">
                 Please enter your message.
               </div>
             </div>
             
-          <button class="w-100 btn-lg" style="background-color:{{$advancesetting->button_color}}; color:{{$advancesetting->basic_color}}; border:0px;" type="submit">Send</button>
+          <button class="w-100 btn-lg" style="background-color:{{$advancesetting->button_color}}; color:{{$advancesetting->basic_color}}; border:0px;" type="submit">Send 
+             <!-- <div class="spinner-grow text-warning loader" role="status" style="dislplay:none;">
+              <span class="visually-hidden">Loading...</span>
+            </div> -->
+          </button>
+          
 
         </div>
         </form>
@@ -72,7 +94,9 @@
           <ul>
             @if(!empty($address))
                 @foreach($address as $add)
+                  @if(!empty($add))
                   <li>{{$add}}</li>
+                  @endif
                 @endforeach
             @endif
           </ul>
@@ -81,7 +105,9 @@
           <ul>
             @if(!empty($email))
                 @foreach($email as $mail)
+                @if(!empty($mail))
                   <li>{{$mail}}</li>
+                @endif
                 @endforeach
             @endif
           </ul>
@@ -89,7 +115,9 @@
           <ul>
             @if(!empty($phone))
                 @foreach($phone as $mobile)
+                @if(!empty($mobile))
                   <li>{{$mobile}}</li>
+                @endif
                 @endforeach
             @endif
           </ul>

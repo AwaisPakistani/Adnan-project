@@ -39,7 +39,7 @@
     <!-- <link href="{{url('assets/front/dist/css/cheatsheet.css')}}" rel="stylesheet"> -->
     
   </head>
-  <body>
+  <body style="padding:0px;">
     
 
 

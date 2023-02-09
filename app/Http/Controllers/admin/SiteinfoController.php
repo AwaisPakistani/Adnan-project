@@ -20,6 +20,12 @@ class SiteinfoController extends Controller
         if($request->isMethod('post')){
             $data=$request->all();
             //dd($data);
+            if(empty($data['site_name'])){
+                $data['site_name']='';
+            }
+            if(empty($data['description'])){
+                $data['description']='';
+            }
             $site=Siteintro::where('id',1)->update([
                 'site_name'=>$data['site_name'],
                 'description'=>$data['description']

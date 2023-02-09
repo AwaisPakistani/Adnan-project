@@ -34,7 +34,8 @@ Route::match(['get','post'],'/front/edit_front_permission/{id}',[FrontPermission
 Route::get('contact-page',[PageController::class,'contact_page'])->name('front.contact_page');
 // Get pages
 Route::get('page/{url}',[PageController::class,'front_page'])->name('front.page.url');
-
+// contact form 
+Route::post('/front/contact_form',[PageController::class,'contact_form'])->name('front.contact_form');
 
 
 
