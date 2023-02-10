@@ -15,4 +15,7 @@ class Category extends Model
     public function category_image(){
         return $this->morphOne(Image::class,'imageable');
     }
+    public function journals(){
+        return $this->hasMany(Journal::class);
+    }
 }

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 
 class Frontuser extends Authenticatable
@@ -15,4 +17,12 @@ class Frontuser extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
     protected $guard='frontuser';
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
+        'image',
+        'password',
+    ];
+    
 }

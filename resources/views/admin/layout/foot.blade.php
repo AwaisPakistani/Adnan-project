@@ -46,8 +46,10 @@
   <script src="{{url('assets/js/admin.js')}}"></script>
   <!-- Social Media -->
   <script src="{{url('assets/js/todo.js')}}"></script>
+  <script src="{{url('assets/plugins/input-tags/js/tagsinput.js')}}"></script>
   <!-- Sweet Alert 2 -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
   
 
 

@@ -255,7 +255,11 @@ class SiteinfoController extends Controller
         if($request->isMethod('post')){
             $data=$request->all();
             //dd($data);
-            $image_path = $request->file('image')->store('images/admin/slides', 'public');;
+            if($request->hasFile('image')){
+                $image_path = $request->file('image')->store('images/admin/slides', 'public');
+            }else{
+                $image_path=$slider_edit->image;
+            }
             $slide=Slider::find($id);
             $slide->title=$data['title'];
             $slide->description=$data['description'];

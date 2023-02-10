@@ -67,6 +67,7 @@
                          @if(!empty($slider_edit->title))
                          value="{{$slider_edit->title}}"
                          @endif
+                         
                          placeholder="Enter Slider Title" 
                          >
                 </div>

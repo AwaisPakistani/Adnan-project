@@ -104,12 +104,14 @@ class AdminController extends Controller
             'imageable_id'=>$admin->id
            ]);
            // End Add Image
-           
+
+           // assignRole
             $admin->assignRole($data['role']);
+           // message
             Session::flash('success_message','Admin User has been added successfully!');
         	return redirect()->back(); 
         }
-        $roles=Role::get();
+        $roles=Role::where('guard_name','web')->get();
         return view('admin.admin_users.create')->with(compact('roles'));
     }
     public function edit(Request $request,$id)
@@ -140,7 +142,7 @@ class AdminController extends Controller
         	return redirect()->back(); 
         }
         
-        $roles=Role::get();
+        $roles=Role::where('guard_name','web')->get();
         return view('admin.admin_users.update')->with(compact('roles','admin_user','title'));
     }
 

@@ -18,6 +18,7 @@ $iconpath=$icon->site_icon->url;
   <!-- Bootstrap CSS -->
   <link href="{{url('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
   <link href="{{url('assets/css/bootstrap-extended.css')}}" rel="stylesheet" />
+  <link href="{{url('assets/plugins/input-tags/css/tagsinput.css')}}" rel="stylesheet" />
   <link href="{{url('assets/css/style.css')}}" rel="stylesheet" />
   <link href="{{url('assets/css/icons.css')}}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">

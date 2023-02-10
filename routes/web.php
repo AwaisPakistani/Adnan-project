@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\SiteinfoController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ContactController;
 use App\Http\Controllers\admin\NewPageController;
+//use App\Http\Controllers\front\FrontRoleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -80,6 +81,7 @@ Route::group(['middleware'=>['AdminGate']],function(){
 
 
          Route::get('/delete-category/{id}', [CategoryController::class, 'delete_category'])->name('admin.delete_category')->middleware('permission:delete');
+
          
          // contacts
          Route::match(['get', 'post'], '/add-edit-contacts/{id?}', [ContactController::class, 'add_edit_contacts'])->name('admin.add_edit_contacts')->middleware('permission:add|edit');

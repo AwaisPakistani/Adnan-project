@@ -175,17 +175,22 @@ $myid=Auth::user()->id;
               </ul>
             </li>
             <li>
-              <a class="has-arrow" href="javascript:;">
+              <a class="has-arrow" href="#">
                 <div class="parent-icon"><i class="bi bi-person-fill"></i>
                 </div>
                 <div class="menu-title">Chief Editor</div>
               </a>
               <ul>
-                <li> <a href="table-basic-table.html"><i class="bi bi-circle"></i>Add Chiefeditor</a>
+                @can('add')
+                <li> <a href="{{route('front.add_chiefeditor')}}"><i class="bi bi-circle"></i>Add Chiefeditor</a>
                 </li>
+                @endcan
+                @can('view')
+                <li> <a href="{{route('front.view_chiefeditors')}}"><i class="bi bi-circle"></i>View Chiefeditor</a>
+                </li>
+                @endcan
                 
-                <li> <a href="table-advance-tables.html"><i class="bi bi-circle"></i>View Chiefeditor</a>
-                </li>
+                
               </ul>
             </li>
             <li>
@@ -195,10 +200,10 @@ $myid=Auth::user()->id;
                 <div class="menu-title">Journals</div>
               </a>
               <ul>
-                <li> <a href="table-basic-table.html"><i class="bi bi-circle"></i>Add Journal</a>
-                </li>
+                <li> <a href="{{route('front.add_journal')}}"><i class="bi bi-circle"></i>Add Journal</a>
+                </li> 
                 
-                <li> <a href="table-advance-tables.html"><i class="bi bi-circle"></i>View Journals</a>
+                <li> <a href="{{route('front.view_journals')}}"><i class="bi bi-circle"></i>View Journals</a>
                 </li>
               </ul>
             </li>

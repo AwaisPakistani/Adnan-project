@@ -5,6 +5,7 @@ use App\Http\Controllers\front\FrontRoleController;
 use App\Http\Controllers\front\FrontPermissionController;
 use App\Http\Controllers\front\IndexController;
 use App\Http\Controllers\front\PageController;
+use App\Http\Controllers\front\JournalController;
 
 Route::get('/', [IndexController::class, 'index']);
 // Roles
@@ -37,5 +38,21 @@ Route::get('page/{url}',[PageController::class,'front_page'])->name('front.page.
 // contact form 
 Route::post('/front/contact_form',[PageController::class,'contact_form'])->name('front.contact_form');
 
+ // chiefeditor
+           
+ Route::match(['get', 'post'], '/add-chiefeditor', [FrontRoleController::class, 'add_chiefeditor'])->name('front.add_chiefeditor')->middleware('permission:add');
 
+ Route::match(['get', 'post'], '/edit-chiefeditor/{id}', [FrontRoleController::class, 'edit_chiefeditor'])->name('front.edit_chiefeditor')->middleware('permission:edit');
 
+ Route::get('/view-chiefeditors', [FrontRoleController::class, 'view_chiefeditors'])->name('front.view_chiefeditors')->middleware('permission:view');
+
+ Route::get('/delete-chiefeditor/{id}', [FrontRoleController::class, 'delete_chiefeditor'])->name('front.delete_chiefeditor')->middleware('permission:delete');
+
+ Route::get('/delete-chief-image/{id}', [FrontRoleController::class, 'delete_chief_image'])->name('front.delete_chief_image')->middleware('permission:edit|delete');
+
+ Route::match(['get', 'post'], '/change-chief-password/{id}', [FrontRoleController::class, 'change_chief_password'])->name('front.change_chief_password')->middleware('permission:edit');
+
+ // Journals
+ Route::match(['get', 'post'], '/add-journal', [JournalController::class, 'add_journal'])->name('front.add_journal')->middleware('permission:add');
+
+ Route::get('/view-journals', [JournalController::class, 'view_journals'])->name('front.view_journals')->middleware('permission:view');
