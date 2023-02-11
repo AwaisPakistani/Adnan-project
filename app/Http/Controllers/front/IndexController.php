@@ -47,6 +47,6 @@ class IndexController extends Controller
 
     public function view_category_detail($id){
       $category=Category::with('journals')->where('id',$id)->first();
-      dd($category);
+      return view('front.pages.category_detail',compact('category'));
     }
 }
