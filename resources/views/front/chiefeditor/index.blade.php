@@ -17,7 +17,7 @@
 					</div>
 					<div class="ms-auto">
 						<div class="btn-group">
-                            @can('view')
+                            @can('add')
 							<a href="{{route('front.add_chiefeditor')}}" class="btn btn-primary">Add New</a>
 							@endcan
 							

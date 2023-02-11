@@ -84,6 +84,32 @@
       }
     }
   </script>
+<script>
+  $(document).ready(function(){
+    $('.journal_moreinfo').on('change',function(){
+       var journal_moreinfo=$('.journal_moreinfo').val();
+       //alert(journal_moreinfo); return false;
+       var extension = journal_moreinfo.replace(/^.*\./, '');
+       if(extension=='pdf' || extension=='PDF'){
+        $("#journal_moreinfo").html('<strong style="color:green;">File selected</strong>');
+       }else{
+        $("#journal_moreinfo").html('<strong style="color:red;">Just PDF will be accepted for this field</strong>');
+         return false;
+       }
+    });
+    $('.author_guide').on('change',function(){
+       var author_guide=$('.author_guide').val();
+       //alert(author_guide); return false;
+       var extension = author_guide.replace(/^.*\./, '');
+       if(extension=='pdf' || extension=='PDF'){
+        $("#author_note").html('<strong style="color:green;">File selected</strong>');
+       }else{
+        $("#author_note").html('<strong style="color:red;">Just PDF will be accepted for this field</strong>');
+         return false;
+       }
+    });
+  });
+</script>
 
 
 </body>

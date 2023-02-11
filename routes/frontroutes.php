@@ -55,4 +55,16 @@ Route::post('/front/contact_form',[PageController::class,'contact_form'])->name(
  // Journals
  Route::match(['get', 'post'], '/add-journal', [JournalController::class, 'add_journal'])->name('front.add_journal')->middleware('permission:add');
 
+ Route::match(['get', 'post'], '/edit-journal/{id}', [JournalController::class, 'edit_journal'])->name('front.edit_journal')->middleware('permission:edit');
+
  Route::get('/view-journals', [JournalController::class, 'view_journals'])->name('front.view_journals')->middleware('permission:view');
+
+ Route::get('/delete-journal/{id}', [JournalController::class, 'delete_journal'])->name('front.delete_journal')->middleware('permission:delete');
+ // Delete journal More Info
+ Route::get('/delete-journal-moreinfo/{id}', [JournalController::class, 'delete_journal_moreinfo'])->name('front.journal.delete_moreinfo')->middleware('permission:edit|delete');
+// front.journal.delete_author_guideline
+Route::get('/delete-journal-author-guideline/{id}', [JournalController::class, 'delete_journal_author_guideline'])->name('front.journal.delete_author_guideline')->middleware('permission:edit|delete');
+
+// Categories
+
+Route::get('/view-category-detail/{id}', [IndexController::class, 'view_category_detail'])->name('front.view_category_detail');

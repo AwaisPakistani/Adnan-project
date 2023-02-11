@@ -44,4 +44,9 @@ class IndexController extends Controller
         $categories=Category::with('category_image')->where('category_status','show')->get();
         return view('front.index')->with(compact('categories'));
     }
+
+    public function view_category_detail($id){
+      $category=Category::with('journals')->where('id',$id)->first();
+      dd($category);
+    }
 }

@@ -19,7 +19,7 @@
 					<div class="ms-auto">
 						<div class="btn-group">
               @can('view')
-							<a href="{{route('front.view_chiefeditors')}}" class="btn btn-primary">View Chiefeditors</a>
+							<a href="{{route('front.view_journals')}}" class="btn btn-primary">View Journals</a>
               @endcan
 						</div>
 					</div>
@@ -69,7 +69,8 @@
                             label">Journal Name</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"></div>
-                              <input type="text" class="form-control radius-30 ps-5" id="inputName" name="journal_name" 
+                              <input type="text" class="form-control radius-30 ps-5" id="inputName" name="journal_name"
+                              value="{{old('journal_name')}}" 
                               placeholder="Enter Journal Name" required>
                             </div>
                           </div>
@@ -78,8 +79,10 @@
                             label">ISSN</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"></div>
-                              <input type="text" class="form-control radius-30 ps-5" id="inputName" name="ISSN" 
-                              placeholder="Enter ISSN" required>
+                              <input type="text" class="form-control radius-30 ps-5" id="inputName" name="issn" 
+                              value="{{old('issn')}}"
+                              placeholder="Enter ISSN"
+                              required>
                             </div>
                           </div>
                         </div><br>
@@ -89,7 +92,8 @@
                             label">Category </label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"></div>
-                              <select class="single-select select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                              <select class="single-select select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true"
+                              name="category_id">
                                 <option value="">Select Category</option>
                                 @foreach($categories as $category)
                                 <option  value="{{$category->id}}">{{$category->category_name}}</option>
@@ -102,7 +106,7 @@
                             label">Assign Chiefeditor</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"></div>
-                              <select class="form-control">
+                              <select class="form-control" name="assign_chiefeditor">
                                 <option value="">Select Chiefeditor</option>
                                 @foreach($chiefeditor as $chief)
                                 @if($chief->hasRole('chiefeditor'))
@@ -164,17 +168,19 @@
                             label">More Info</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"></div>
-                             <input type="file" class="form-control" name="more_info">
+                             <input type="file" 
+                             class="form-control journal_moreinfo" name="more_info"
+                             >
                             </div>
-                            <span style="color:green;">Note:Just PDF files will be acceptable</span><br><br>
+                            <span style="color:green;" id="journal_moreinfo">Note:Just PDF files will be acceptable</span><br><br>
 
                             <label for="inputName" class="form- 
                             label">Author Guidelines</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"></div>
-                             <input type="file" class="form-control" name="author_guidelines">
+                             <input type="file" class="form-control author_guide" name="author_guidelines">
                             </div>
-                            <span style="color:green;">Note:Just PDF files will be acceptable</span><br><br>
+                            <span style="color:green;" id="author_note">Note:Just PDF files will be acceptable</span><br><br>
                             <label for="inputName" class="form- 
                             label">Days Review</label>
                             <div class="ms-auto position-relative">
@@ -209,8 +215,7 @@
                             label">Meta Description</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"></div>
-                             <textarea  type="textarea" class="form-control" name="meta_description" placeholder="Enter Meta Description">
-                             </textarea>
+                             <textarea  type="textarea" class="form-control" name="meta_description" placeholder="Enter Meta Description"></textarea>
                             </div>
                           </div>
                           <div class="col-6 ">
@@ -218,9 +223,9 @@
                             label">Meta Keywords</label>
                             <div class="mb-3 ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"></div>
-							<input type="text" class="form-control" name="meta_keywords" 
+							               <input type="text" class="form-control" name="meta_keywords" 
                              data-role="tagsinput" placeholder="Enter Meta Keywords" required><br>
-                             <span style="color:green;">Note: Enter Comma(,) to save</span>
+                             <span style="color:green;">Note: Enter Comma(,) to save and switch to enter for more keyword</span>
                             </div>
                           </div>
                         </div><br>

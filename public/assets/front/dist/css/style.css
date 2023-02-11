@@ -2,6 +2,9 @@
     border-top-left-radius: 30px;
     border-bottom-right-radius: 30px;   
 }
+.mainhome a{
+    text-decoration: none;
+}
 header .site-name{
     color: white;
 }
