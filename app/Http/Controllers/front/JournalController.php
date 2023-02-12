@@ -11,6 +11,7 @@ use Session;
 
 class JournalController extends Controller
 {
+    // admin journal functions
     public function add_journal(Request $request){
         $title="Add Journal";
         $categories=Category::get();
@@ -180,4 +181,5 @@ class JournalController extends Controller
             return redirect()->back();
     }
 
+  
 }

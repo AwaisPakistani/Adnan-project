@@ -14,6 +14,8 @@
 
     <!-- Bootstrap core CSS -->
 <link href="{{url('assets/front/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+<link href="{{url('assets/front/dist/css/datatable.min.css')}}" rel="stylesheet">
+<link href="{{url('assets/front/dist/css/cdn.css')}}" rel="stylesheet">
 <link href="{{url('assets/front/dist/css/style.css')}}" rel="stylesheet">
 
     <style>

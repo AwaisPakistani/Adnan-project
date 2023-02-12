@@ -6,6 +6,7 @@ use App\Http\Controllers\front\FrontPermissionController;
 use App\Http\Controllers\front\IndexController;
 use App\Http\Controllers\front\PageController;
 use App\Http\Controllers\front\JournalController;
+use App\Http\Controllers\front\FrontJournalController;
 
 Route::get('/', [IndexController::class, 'index']);
 // Roles
@@ -68,3 +69,6 @@ Route::get('/delete-journal-author-guideline/{id}', [JournalController::class, '
 // Categories
 
 Route::get('/view-category-detail/{id}', [IndexController::class, 'view_category_detail'])->name('front.view_category_detail');
+
+// Journals
+Route::get('/view-journal-detail/{id}', [FrontJournalController::class, 'view_journal_detail'])->name('front.journal_detail');

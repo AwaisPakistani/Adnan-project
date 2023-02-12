@@ -47,6 +47,7 @@ class IndexController extends Controller
 
     public function view_category_detail($id){
       $category=Category::with('journals')->where('id',$id)->first();
-      return view('front.pages.category_detail',compact('category'));
+      $categories_all=Category::get();
+      return view('front.pages.category_detail',compact('category','categories_all'));
     }
 }
