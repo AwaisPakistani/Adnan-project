@@ -6,7 +6,7 @@
 <div class="container mb-3 mt-3">
     <div class="row">
         <div class="col-lg-9 mt-2">
-            {{$category->category_name}}
+            <h3>Journals related {{$category->category_name}}</h3>
             <table id="example" class="table table-striped" style="width:100%">
                 <thead>
                    

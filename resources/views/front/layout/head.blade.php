@@ -17,6 +17,7 @@
 <link href="{{url('assets/front/dist/css/datatable.min.css')}}" rel="stylesheet">
 <link href="{{url('assets/front/dist/css/cdn.css')}}" rel="stylesheet">
 <link href="{{url('assets/front/dist/css/style.css')}}" rel="stylesheet">
+<link href="{{url('assets/front/dist/css/signin.css')}}" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {

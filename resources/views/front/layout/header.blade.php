@@ -1,7 +1,7 @@
 <div class="container">
 <header class="d-flex flex-wrap justify-content-center py-4 px-3 mb-0 border-bottom main-header" style="background-color:{{$advancesetting->main_color}};color:{{$advancesetting->basic_color}};">
       <a href="{{url('/')}}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-        <img class="rounded-circle" src="{{url('storage/'.$logo->logo->url)}}" width="100%" height="50" alt="logo">&nbsp;&nbsp;&nbsp;
+        <img src="{{url('storage/'.$logo->logo->url)}}" width="100%" height="50" alt="logo">&nbsp;&nbsp;&nbsp;
         <!-- <span class="fs-4 site-name">{{$site_identity->site_name}}</span> -->
       </a>
 

@@ -72,3 +72,9 @@ Route::get('/view-category-detail/{id}', [IndexController::class, 'view_category
 
 // Journals
 Route::get('/view-journal-detail/{id}', [FrontJournalController::class, 'view_journal_detail'])->name('front.journal_detail');
+
+Route::match(['get', 'post'], '/chiefeditor-login/{id}', [FrontJournalController::class, 'chiefeditor_login'])->name('front.chiefeditor.login');
+Route::match(['get', 'post'], '/chiefeditor-signin/{id}', [FrontJournalController::class, 'chiefeditor_login_form'])->name('front.chiefeditor_login');
+
+// front.chiefeditor.dashboard
+Route::get('/chiefeditor-dashboard/{journal}', [FrontJournalController::class, 'chiefeditor_dashboard'])->name('front.chiefeditor.dashboard');
