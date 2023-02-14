@@ -48,14 +48,11 @@
                </div>
               </div>
             </div>
-            <div class="collapse multi-collapse" id="journal_volumes">
+            <div>
               <div class="card card-body">
                   <div class="row">
-                      <div class="col-lg-6 text-start">
-                        <h3>Journal Volumes</h3>
-                      </div>
-                      <div class="col-lg-6">
-                        <a href="#" class="btn btn-sm" style="background-color:{{$advancesetting->button_color}}; color:white;">Create</a>
+                      <div class="col-lg-12 text-start">
+                        <h3>Journal Volume</h3>
                       </div>
                   </div>
               </div>

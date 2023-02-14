@@ -78,3 +78,6 @@ Route::match(['get', 'post'], '/chiefeditor-signin/{id}', [FrontJournalControlle
 
 // front.chiefeditor.dashboard
 Route::get('/chiefeditor-dashboard/{journal}', [FrontJournalController::class, 'chiefeditor_dashboard'])->name('front.chiefeditor.dashboard');
+
+// Journal Volumes
+Route::match(['get', 'post'], '/add-journal-volume/{journal}', [FrontJournalController::class, 'add_journal_volume'])->name('front.add_journal_volume');

@@ -37,4 +37,10 @@ class Journal extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
+    public function Journal_volumes(){
+        return $this->hasMany(JournalVolume::class);  
+    }
+    public function Journal_issues(){
+        return $this->hasMany(JournalIssue::class);  
+    }
 }

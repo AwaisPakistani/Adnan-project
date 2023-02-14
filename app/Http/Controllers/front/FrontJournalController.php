@@ -89,4 +89,11 @@ class FrontJournalController extends Controller
         Session::flash('success_message','You have logged in successfully');
         return view('front.pages.journal.chiefeditor.chiefeditor_dashboard',compact('journal','chief'));
     }
+    // Journal Volumes
+    public function add_journal_volume(Request $request,$journal_id){
+        $id=Auth::guard('frontuser')->user()->id;
+        $chief=Frontuser::where('id',$id)->first();
+        $journal=Journal::where('id',$journal_id)->first();
+        return view('front.pages.journal.journal_volume.create',compact('chief','journal'));
+    }
 }

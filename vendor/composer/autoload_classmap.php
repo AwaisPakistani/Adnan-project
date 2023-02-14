@@ -40,6 +40,7 @@ return array(
     'App\\Models\\Frontuser' => $baseDir . '/app/Models/Frontuser.php',
     'App\\Models\\Image' => $baseDir . '/app/Models/Image.php',
     'App\\Models\\Journal' => $baseDir . '/app/Models/Journal.php',
+    'App\\Models\\JournalIssue' => $baseDir . '/app/Models/JournalIssue.php',
     'App\\Models\\JournalVolume' => $baseDir . '/app/Models/JournalVolume.php',
     'App\\Models\\Page' => $baseDir . '/app/Models/Page.php',
     'App\\Models\\Siteintro' => $baseDir . '/app/Models/Siteintro.php',

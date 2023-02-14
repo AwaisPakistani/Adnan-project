@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('journal_volumes', function (Blueprint $table) {
             $table->id();
+            $table->string('journal_volume_name');
+            $table->foreignId('journal_id')->constrained('journals');
+            $table->string('journal_volume_status')->enum('Pending','Approved','Banned');
             $table->timestamps();
         });
     }

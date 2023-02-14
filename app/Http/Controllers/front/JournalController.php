@@ -32,6 +32,13 @@ class JournalController extends Controller
                     return redirect()->back();
                 }
             }
+            // check for chiefeditor existance in journal
+            $checkjournalchief=Journal::where('assign_chiefeditor',$data['assign_chiefeditor'])->count();
+            if($checkjournalchief > 0){
+                Session::flash('error_message','This chiefeditor has already assigned for another journal.So please choose other chiefeditor for this Journal!');
+                return redirect()->back();
+            }
+            // save Journal
        
             $journal=new Journal;
             $journal->journal_name=$data['journal_name'];

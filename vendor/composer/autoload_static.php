@@ -550,6 +550,7 @@ class ComposerStaticInita9ff92e5355e79c1305e1e62f7c063c1
         'App\\Models\\Frontuser' => __DIR__ . '/../..' . '/app/Models/Frontuser.php',
         'App\\Models\\Image' => __DIR__ . '/../..' . '/app/Models/Image.php',
         'App\\Models\\Journal' => __DIR__ . '/../..' . '/app/Models/Journal.php',
+        'App\\Models\\JournalIssue' => __DIR__ . '/../..' . '/app/Models/JournalIssue.php',
         'App\\Models\\JournalVolume' => __DIR__ . '/../..' . '/app/Models/JournalVolume.php',
         'App\\Models\\Page' => __DIR__ . '/../..' . '/app/Models/Page.php',
         'App\\Models\\Siteintro' => __DIR__ . '/../..' . '/app/Models/Siteintro.php',

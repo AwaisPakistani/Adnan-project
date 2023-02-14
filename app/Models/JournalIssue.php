@@ -5,18 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class JournalVolume extends Model
+class JournalIssue extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'journal_volume_name',
+        'journal_issue_name',
+        'journal_volume_id ',
         'journal_id ',
-        'journal_volume_status',
+        'journal_issue_status',
+        'year',
     ];
     public function journal(){
         return $this->belongsTo(Journal::class);
     }
-    public function journal_volume_issues(){
-        return $this->hasMany(JournalIssue::class);
+    public function journal_volume(){
+        return $this->belongsTo(JournalVolume::class);
     }
 }
