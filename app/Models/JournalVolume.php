@@ -19,4 +19,7 @@ class JournalVolume extends Model
     public function journal_volume_issues(){
         return $this->hasMany(JournalIssue::class);
     }
+    public function current_issue(){
+        return $this->hasOne(CurrentIssue::this);
+    }
 }

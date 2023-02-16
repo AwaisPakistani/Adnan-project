@@ -22,40 +22,23 @@
        
 
         <div class="content">
-            <div class="collapse multi-collapse" id="multiCollapseExample2">
-              <div class="card card-body">
-              <div class="alerts">
-                  @if(Session::has('success_message'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{Session::get('success_message')}}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                  @endif
-                  @if(Session::has('error_message'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{Session::get('error_message')}}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                  @endif
-               </div>
-              </div>
-            </div>
+            
         <div>
               <div class="card card-body">
                   <div class="row">
                       <div class="col-lg-12">
                         <span>
-                          <h3 class="text-start">Journal Volume</h3>
-                          <a href="{{route('front.add_journal_volume',$journal->id)}}" class="btn text-end" style="background-color:{{$advancesetting->button_color}}; color:white;">Create</a>
+                          <h3 class="text-start">Current Issues</h3>
+                          <a href="{{route('front.add_journal_current_issue',$journal->id)}}" class="btn text-end" style="background-color:{{$advancesetting->button_color}}; color:white;">Create New</a>
                         </span>
-                        <table @if($journal_volumes->count() > 10) id="example" @endif class="table table-striped" style="width:100%">
+                        <table @if($journal_issues->count() > 10) id="example" @endif class="table table-striped" style="width:100%">
                 <thead>
                    
                     <tr>
                         <th>S.No</th>
                         <th>Volume Name</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th>Issue Name</th>
+                        <!-- <th>Action</th> -->
                     </tr>
                     
                 </thead>
@@ -63,34 +46,20 @@
                 @php
                 $sr=1;
                 @endphp
-                @foreach($journal_volumes as $volume)
+                @foreach($current_issues as $issue)
                     <tr>
                         <td>{{$sr}}</td>
+                        <td></td>
+                        <td></td>
                         
-                        <td>
-                       
-                            {{$volume->journal_volume_name}}
                         
-                        </td>
-                        <td>
-                        <div class="badge rounded-pill 
-                        @if($volume->journal_volume_status=='pending')
-                        bg-warning
-                        @elseif($volume->journal_volume_status=='approved')
-                        bg-success
-                        @else
-                        btn-danger
-                        @endif
-                        ">
-                          {{$volume->journal_volume_status}}
-                        </div>  
-                        </td>
-                        <td>
+                        <!-- <td>
                         <div class="btn-group me-2" role="group" aria-label="Second group">
-                        <a href="{{url('edit-journal-volume/'.$journal->id.'/'.$volume->id)}}" class="btn btn-warning">Edit</a>
-                        <a href="{{route('front.journal_volume_delete',$volume->id)}}" class="btn btn-danger">Delete</a>
+                        <a href="#" class="btn btn-warning">Edit</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
                       </div>
-                        </td>
+                        </td> -->
+                        <td></td>
                     </tr>
                     @php
                     $sr++;
@@ -102,8 +71,8 @@
                     <tr>
                         <th>S.No</th>
                         <th>Volume Name</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th>Issue Name</th>
+                        <!-- <th>Action</th> -->
                     </tr>
                 
                 </tfoot>

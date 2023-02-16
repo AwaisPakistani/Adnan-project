@@ -81,3 +81,18 @@ Route::get('/chiefeditor-dashboard/{journal}', [FrontJournalController::class, '
 
 // Journal Volumes
 Route::match(['get', 'post'], '/add-journal-volume/{journal}', [FrontJournalController::class, 'add_journal_volume'])->name('front.add_journal_volume');
+Route::get('/journal-volumes/{journal}', [FrontJournalController::class, 'journal_volume'])->name('front.journal_volume');
+Route::match(['get', 'post'], '/edit-journal-volume/{journal}/{volume}', [FrontJournalController::class, 'edit_journal_volume'])->name('front.edit_journal_volume');
+Route::get('/journal-volume-delete/{id}', [FrontJournalController::class, 'journal_volume_delete'])->name('front.journal_volume_delete');
+
+// Journal Issues 
+Route::get('/journal-issues/{journal}', [FrontJournalController::class, 'journal_issues'])->name('front.journal_issues');
+Route::match(['get', 'post'], '/add-journal-issue/{journal}', [FrontJournalController::class, 'add_journal_issue'])->name('front.add_journal_issue');
+Route::get('/journal-volume-issue-delete/{id}', [FrontJournalController::class, 'journal_volume_issue_delete'])->name('front.journal_volume_issue_delete');
+Route::match(['get', 'post'], '/edit-journal-issue/{journal}/{issue}', [FrontJournalController::class, 'edit_journal_issue'])->name('front.edit_journal_issue');
+
+//Current Issues
+Route::get('/current-issues/{journal}', [FrontJournalController::class, 'current_issues'])->name('front.current_issues');
+Route::match(['get', 'post'], '/add-current-issue/{journal}', [FrontJournalController::class, 'add_journal_current_issue'])->name('front.add_journal_current_issue');
+// front/getting-issues-of-volums
+Route::post('front/getting-issues-of-volume', [FrontJournalController::class, 'current_volume_issues']);

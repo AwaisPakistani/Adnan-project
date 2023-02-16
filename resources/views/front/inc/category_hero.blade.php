@@ -8,6 +8,6 @@
     
 }
 </style>
-<div class="container-fluid pagehero text-center">
+<div class="container-fluid pagehero text-center text-capital">
 {{$category->category_name}}
 </div>

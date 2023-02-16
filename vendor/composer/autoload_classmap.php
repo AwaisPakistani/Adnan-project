@@ -37,6 +37,7 @@ return array(
     'App\\Models\\AdvanceSetting' => $baseDir . '/app/Models/AdvanceSetting.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\Contact' => $baseDir . '/app/Models/Contact.php',
+    'App\\Models\\CurrentIssue' => $baseDir . '/app/Models/CurrentIssue.php',
     'App\\Models\\Frontuser' => $baseDir . '/app/Models/Frontuser.php',
     'App\\Models\\Image' => $baseDir . '/app/Models/Image.php',
     'App\\Models\\Journal' => $baseDir . '/app/Models/Journal.php',

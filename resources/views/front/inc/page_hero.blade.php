@@ -7,7 +7,7 @@
     font-size:2.5em;
 }
 </style>
-<div class="container-fluid pagehero text-center">
+<div class="container-fluid pagehero text-center text-capital">
 {{$page->page_name}}
 </div>
 

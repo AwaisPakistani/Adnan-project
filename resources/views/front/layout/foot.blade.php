@@ -3,6 +3,8 @@
 
 
     <script src="{{url('assets/front/dist/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url('assets/front/dist/js/jquery.min.js')}}"></script>
+    <script src="{{url('assets/front/dist/js/front.js')}}"></script>
     <script>
        <script src="{{url('assets/front/dist/js/jquery.min.js')}}"></script>
     <script src="{{url('assets/front/dist/js/datatable_net.min.js')}}"></script>
