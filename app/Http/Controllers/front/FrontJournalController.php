@@ -52,7 +52,12 @@ class FrontJournalController extends Controller
         $journal=Journal::with('category')->where('id',$id)->first();
         return view('front.pages.journal.journal_detail',compact('journal'));
     }
-
+    
+    public function front_register(Request $request,$journal_id){
+        $journal=Journal::with('category')->where('id',$journal_id)->first();
+        //dd($journal);
+        return view('front.pages.journal.register',compact('journal'));
+    }
     public function chiefeditor_login(Request $request,$id){
         $journal=Journal::with('category')->where('id',$id)->first();
         if ($request->isMethod('post')) {
@@ -204,7 +209,9 @@ class FrontJournalController extends Controller
         $journal=Journal::where('id',$journal_id)->first();
         $journal_volumes=JournalVolume::with('journal_volume_issues')->where('journal_id',$journal_id)->get();
         $journal_issues=JournalIssue::with('journal_volume')->where('journal_id',$journal_id)->get();
-        $current_issues=CurrentIssue::where('journal_id',$journal_id)->get();
+        $current_issues=CurrentIssue::with('journal_volume','journal_issue')->where('journal_id',$journal_id)->get();
+        
+
         return view('front.pages.journal.current_issues.index',compact('chief','journal','journal_volumes','journal_issues','current_issues'));
     }
     public function add_journal_current_issue(Request $request,$journal_id){
@@ -214,16 +221,29 @@ class FrontJournalController extends Controller
         $volumes=JournalVolume::where('journal_id',$journal_id)->get();
         if($request->isMethod('post')){
             $data=$request->all();
+            $count=CurrentIssue::where(['journal_id'=>$data['journal'],'journal_volume_id'=>$data['volume']])->count();
             //dd($data);
-            $journal_issue=new JournalIssue;
-            $journal_issue->journal_issue_name=$data['issue_name'];
-            $journal_issue->journal_volume_id =$data['issue_volume'];
-            $journal_issue->journal_id =$journal_id;
-            $journal_issue->journal_issue_status=$data['issue_status'];
-            $journal_issue->year=$data['year'];
-            $journal_issue->save();
-            Session::flash('success_message','Journal Issue has been created');
-            return redirect()->back();
+            if($count > 0){
+                $ciid=CurrentIssue::where(['journal_id'=>$data['journal'],'journal_volume_id'=>$data['volume']])->first();
+                $current_issue=CurrentIssue::find($ciid->id);
+                $current_issue->frontuser_id=$id;
+                $current_issue->journal_id =$data['journal'];
+                $current_issue->journal_volume_id =$data['volume'];
+                $current_issue->issue_id=$data['issue'];
+                $current_issue->save();
+                Session::flash('success_message','Current Issue has been updated');
+                return redirect()->back();
+            }else{
+
+                $current_issue=new CurrentIssue;
+                $current_issue->frontuser_id=$id;
+                $current_issue->journal_id =$data['journal'];
+                $current_issue->journal_volume_id =$data['volume'];
+                $current_issue->issue_id=$data['issue'];
+                $current_issue->save();
+                Session::flash('success_message','Current Issue has been created');
+                return redirect()->back();
+            }
         }
         return view('front.pages.journal.current_issues.create',compact('chief','journal','volumes'));
     }
@@ -231,9 +251,11 @@ class FrontJournalController extends Controller
     public function current_volume_issues(Request $request){
          if($request->ajax()){
             $data=$request->all();
-            $issues=JournalVolume::with('journal_volume_issues')->where(['journal_id'=>$data['journal'],'volume'=>$data['volume']])->get();
+            $issues=JournalVolume::with('journal_volume_issues')->where(['journal_id'=>$data['journal'],'id'=>$data['volume']])->first();
+            $view=view('front.pages.journal.current_issues.select_issues',compact('issues'))->render();
+            
             return response()->json([
-                'data'=>'yes'
+                'data'=>$view
             ]);
          }
     }

@@ -1,3 +1,6 @@
+@php 
+use App\Models\JournalIssue;
+@endphp
 @extends('front.layout.main')
 <link href="{{url('assets/front/dist/css/datatable.min.css')}}" rel="stylesheet">
 <link href="{{url('assets/front/dist/css/cdn.css')}}" rel="stylesheet">
@@ -29,7 +32,7 @@
                       <div class="col-lg-12">
                         <span>
                           <h3 class="text-start">Current Issues</h3>
-                          <a href="{{route('front.add_journal_current_issue',$journal->id)}}" class="btn text-end" style="background-color:{{$advancesetting->button_color}}; color:white;">Create New</a>
+                          <a href="{{route('front.add_journal_current_issue',$journal->id)}}" class="btn text-end" style="background-color:{{$advancesetting->button_color}}; color:white;">Create/Update</a>
                         </span>
                         <table @if($journal_issues->count() > 10) id="example" @endif class="table table-striped" style="width:100%">
                 <thead>
@@ -49,8 +52,13 @@
                 @foreach($current_issues as $issue)
                     <tr>
                         <td>{{$sr}}</td>
-                        <td></td>
-                        <td></td>
+                        <td>{{$issue->journal_volume->journal_volume_name}}</td>
+                        <td>
+                            @php 
+                            $issuename=JournalIssue::where('id',$issue->issue_id)->value('journal_issue_name');
+                            echo $issuename;
+                            @endphp
+                        </td>
                         
                         
                         <!-- <td>

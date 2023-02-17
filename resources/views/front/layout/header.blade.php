@@ -19,15 +19,27 @@
       &nbsp; &nbsp; &nbsp;
       <div class="dropdown text-end">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            @if(Auth::guard('frontuser')->check())
             <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+            @else  
+            <i class="fas fa-user rounded-circle"></i>
+            <!-- <img src="" alt="mdo" width="32" height="32" class="rounded-circle"> -->
+            @endif
           </a>
+          @if(!empty($journal))
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
+       
+              @if(Auth::guard('frontuser')->check())
+              <li><a class="dropdown-item" href="{{url('front/logout/'.$journal->id)}}">Logout</a></li>
+              @else 
+              <li><a class="dropdown-item" href="{{route('front_register',$journal->id)}}">Register</a></li>
+              <!-- <li><hr class="dropdown-divider"></li> -->
+              <li><a class="dropdown-item" href="{{url('chiefeditor-login/'.$journal->id)}}">Login...</a></li>
+              @endif
+            @else 
+
           </ul>
+            @endif
         </div>
     </header>
 </div>

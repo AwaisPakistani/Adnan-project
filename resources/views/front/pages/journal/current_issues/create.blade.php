@@ -43,12 +43,14 @@
                                 </select>
                                 <input type="hidden" id="current_issue_journal" value="{{$journal->id}}" name="journal">
                             </div>
-                            <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Issue</label>
-                                <select class="form-select" aria-label=".form-select-lg example" name="issue" required>
-                                   <option>Select</option>
-                                   <option>Select2</option>
-                                </select>
+                            <div id="issueajax">
+                                    <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Issue</label>
+                                    <select class="form-select" aria-label=".form-select-lg example" name="issue" required>
+                                    <option>Select Issues</option>
+
+                                        </select>
+                                    </div>
                             </div>
                             
                             

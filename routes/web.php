@@ -28,7 +28,7 @@ Route::group(['middleware'=>['AdminGate']],function(){
      Route::prefix('admin')->namespace('admin')->group(function ()
     //  Route::prefix('admin')->name('admin.')->namespace('admin')->group(function ()
       {
-         Route::get('/', [HomeController::class, 'index']);
+         Route::get('/', [HomeController::class, 'index'])->name('home');
          // Website Introduction
          Route::match(['get', 'post'], '/site-identity/{id}', [SiteinfoController::class, 'site_identity'])->name('siteintro')->middleware('role:superadmin|admin');
 

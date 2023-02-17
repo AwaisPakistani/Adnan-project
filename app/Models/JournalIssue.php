@@ -21,4 +21,7 @@ class JournalIssue extends Model
     public function journal_volume(){
         return $this->belongsTo(JournalVolume::class);
     }
+    public function current_issue(){
+        return $this->hasOne(CurrentIssue::class);
+    }
 }

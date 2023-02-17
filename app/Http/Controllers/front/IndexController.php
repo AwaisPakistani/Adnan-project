@@ -4,6 +4,7 @@ namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Siteintro;
 use App\Models\Frontuser;
@@ -12,6 +13,7 @@ use App\Models\Contact;
 use App\Models\Slider;
 use App\Models\Page;
 use App\Models\AdvanceSetting;
+use Session;
 class IndexController extends Controller
 {
     public function __construct(){
@@ -49,5 +51,14 @@ class IndexController extends Controller
       $category=Category::with('journals')->where('id',$id)->first();
       $categories_all=Category::get();
       return view('front.pages.category_detail',compact('category','categories_all'));
+    }
+    public function logout(Request $request,$journal_id){
+      Auth::guard('frontuser')->logout();
+
+      $request->session()->invalidate();
+
+      $request->session()->regenerateToken();
+      Session::flash('success_message','You are logged out successfully');
+      return redirect('chiefeditor-login/'.$journal_id);
     }
 }

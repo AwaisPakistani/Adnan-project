@@ -73,26 +73,36 @@ Route::get('/view-category-detail/{id}', [IndexController::class, 'view_category
 // Journals
 Route::get('/view-journal-detail/{id}', [FrontJournalController::class, 'view_journal_detail'])->name('front.journal_detail');
 
-Route::match(['get', 'post'], '/chiefeditor-login/{id}', [FrontJournalController::class, 'chiefeditor_login'])->name('front.chiefeditor.login');
-Route::match(['get', 'post'], '/chiefeditor-signin/{id}', [FrontJournalController::class, 'chiefeditor_login_form'])->name('front.chiefeditor_login');
+Route::match(['get', 'post'], '/chiefeditor-login/{journal}', [FrontJournalController::class, 'chiefeditor_login'])->name('front.chiefeditor.login');
+Route::match(['get', 'post'], '/chiefeditor-signin/{journal}', [FrontJournalController::class, 'chiefeditor_login_form'])->name('front.chiefeditor_login');
 
+//front_register
+Route::match(['get', 'post'], '/user-register/{journal}', [FrontJournalController::class, 'front_register'])->name('front_register');
 // front.chiefeditor.dashboard
-Route::get('/chiefeditor-dashboard/{journal}', [FrontJournalController::class, 'chiefeditor_dashboard'])->name('front.chiefeditor.dashboard');
+Route::group(['middleware'=>['FrontGate']],function(){
 
-// Journal Volumes
-Route::match(['get', 'post'], '/add-journal-volume/{journal}', [FrontJournalController::class, 'add_journal_volume'])->name('front.add_journal_volume');
-Route::get('/journal-volumes/{journal}', [FrontJournalController::class, 'journal_volume'])->name('front.journal_volume');
-Route::match(['get', 'post'], '/edit-journal-volume/{journal}/{volume}', [FrontJournalController::class, 'edit_journal_volume'])->name('front.edit_journal_volume');
-Route::get('/journal-volume-delete/{id}', [FrontJournalController::class, 'journal_volume_delete'])->name('front.journal_volume_delete');
+    Route::get('/chiefeditor-dashboard/{journal}', [FrontJournalController::class, 'chiefeditor_dashboard'])->name('front.chiefeditor.dashboard');
+    
+    // Journal Volumes
+    Route::match(['get', 'post'], '/add-journal-volume/{journal}', [FrontJournalController::class, 'add_journal_volume'])->name('front.add_journal_volume');
+    Route::get('/journal-volumes/{journal}', [FrontJournalController::class, 'journal_volume'])->name('front.journal_volume');
+    Route::match(['get', 'post'], '/edit-journal-volume/{journal}/{volume}', [FrontJournalController::class, 'edit_journal_volume'])->name('front.edit_journal_volume');
+    Route::get('/journal-volume-delete/{id}', [FrontJournalController::class, 'journal_volume_delete'])->name('front.journal_volume_delete');
 
-// Journal Issues 
-Route::get('/journal-issues/{journal}', [FrontJournalController::class, 'journal_issues'])->name('front.journal_issues');
-Route::match(['get', 'post'], '/add-journal-issue/{journal}', [FrontJournalController::class, 'add_journal_issue'])->name('front.add_journal_issue');
-Route::get('/journal-volume-issue-delete/{id}', [FrontJournalController::class, 'journal_volume_issue_delete'])->name('front.journal_volume_issue_delete');
-Route::match(['get', 'post'], '/edit-journal-issue/{journal}/{issue}', [FrontJournalController::class, 'edit_journal_issue'])->name('front.edit_journal_issue');
+    // Journal Issues 
+    Route::get('/journal-issues/{journal}', [FrontJournalController::class, 'journal_issues'])->name('front.journal_issues');
+    Route::match(['get', 'post'], '/add-journal-issue/{journal}', [FrontJournalController::class, 'add_journal_issue'])->name('front.add_journal_issue');
+    Route::get('/journal-volume-issue-delete/{id}', [FrontJournalController::class, 'journal_volume_issue_delete'])->name('front.journal_volume_issue_delete');
+    Route::match(['get', 'post'], '/edit-journal-issue/{journal}/{issue}', [FrontJournalController::class, 'edit_journal_issue'])->name('front.edit_journal_issue');
 
-//Current Issues
-Route::get('/current-issues/{journal}', [FrontJournalController::class, 'current_issues'])->name('front.current_issues');
-Route::match(['get', 'post'], '/add-current-issue/{journal}', [FrontJournalController::class, 'add_journal_current_issue'])->name('front.add_journal_current_issue');
-// front/getting-issues-of-volums
-Route::post('front/getting-issues-of-volume', [FrontJournalController::class, 'current_volume_issues']);
+    //Current Issues
+    Route::get('/current-issues/{journal}', [FrontJournalController::class, 'current_issues'])->name('front.current_issues');
+    Route::match(['get', 'post'], '/add-current-issue/{journal}', [FrontJournalController::class, 'add_journal_current_issue'])->name('front.add_journal_current_issue');
+    // front/getting-issues-of-volums
+    Route::post('/jci', [FrontJournalController::class, 'current_volume_issues'])->name('getting_current_issues');
+
+});
+Route::get('front/logout/{journal}',[IndexController::class,'logout']);
+Route::post('/front/getting-issues-of-volume', [FrontJournalController::class, 'current_volume_issues'])->name('getting_current_issues');
+
+// front.user.logout

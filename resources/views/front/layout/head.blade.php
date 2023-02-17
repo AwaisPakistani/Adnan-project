@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="generator" content="Hugo 0.84.0">
     <title>{{$site_identity->site_name}}</title>
     <link rel="icon" href="{{url('storage/'.$site_icon->site_icon->url)}}" type="image/png" />
