@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2023 at 06:56 AM
+-- Generation Time: Feb 18, 2023 at 02:40 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -93,6 +93,32 @@ CREATE TABLE `contacts` (
 
 INSERT INTO `contacts` (`id`, `map`, `address`, `email`, `phone`, `created_at`, `updated_at`) VALUES
 (1, 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3321.1356592924167!2d73.09691491440357!3d33.6536466460786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfebcf73fff37d%3A0xa9924240526b768d!2sInsari%20Home!5e0!3m2!1sen!2s!4v1675568364129!5m2!1sen!2s', '[\"address1\",\"address\",\"address2\",null]', '[\"anjumawais296@gmail.com\",\"mail@gmail.com\",\"mail2@mail.com\",null]', '[\"67567676777\",\"78678786668\",\"57656786786678\",null]', '2023-02-04 23:41:36', '2023-02-07 23:34:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `current_issues`
+--
+
+CREATE TABLE `current_issues` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `frontuser_id` bigint(20) UNSIGNED NOT NULL,
+  `journal_id` bigint(20) UNSIGNED NOT NULL,
+  `journal_volume_id` bigint(20) UNSIGNED NOT NULL,
+  `issue_id` bigint(20) UNSIGNED NOT NULL,
+  `deleted_at` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `current_issues`
+--
+
+INSERT INTO `current_issues` (`id`, `frontuser_id`, `journal_id`, `journal_volume_id`, `issue_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, 1, NULL, '2023-02-16 04:31:38', '2023-02-16 05:04:07'),
+(2, 1, 1, 3, 5, NULL, '2023-02-16 05:03:39', '2023-02-16 05:03:39'),
+(3, 7, 5, 6, 9, NULL, '2023-02-16 06:39:45', '2023-02-16 06:42:46');
 
 -- --------------------------------------------------------
 
@@ -243,7 +269,13 @@ CREATE TABLE `journal_issues` (
 --
 
 INSERT INTO `journal_issues` (`id`, `journal_issue_name`, `journal_volume_id`, `journal_id`, `journal_issue_status`, `year`, `created_at`, `updated_at`) VALUES
-(1, 'issue 01', 1, 1, 'pending', '2023-02-16', '2023-02-14 23:45:55', '2023-02-15 00:49:04');
+(1, 'issue 01', 1, 1, 'pending', '2023-02-16', '2023-02-14 23:45:55', '2023-02-15 00:49:04'),
+(4, 'issuvol02', 3, 1, 'pending', '2023-02-16', '2023-02-16 01:54:57', '2023-02-16 01:54:57'),
+(5, 'issue22vol02', 3, 1, 'pending', '2023-02-16', '2023-02-16 02:14:22', '2023-02-16 02:14:22'),
+(6, 'vol1issue', 1, 1, 'pending', '2023-02-16', '2023-02-16 04:01:55', '2023-02-16 04:01:55'),
+(7, 'volissue', 4, 1, 'approved', '2023-02-16', '2023-02-16 04:03:00', '2023-02-16 04:03:00'),
+(8, 'Mth-issue1', 6, 5, 'pending', '2023-02-16', '2023-02-16 06:39:05', '2023-02-16 06:39:05'),
+(9, 'is1', 6, 5, 'approved', '2023-02-17', '2023-02-16 06:42:22', '2023-02-16 06:42:22');
 
 -- --------------------------------------------------------
 
@@ -268,7 +300,19 @@ INSERT INTO `journal_volumes` (`id`, `journal_volume_name`, `journal_id`, `journ
 (1, 'volume 1', 1, 'pending', '2023-02-14 19:24:47', '2023-02-15 00:23:57'),
 (3, 'volume 02', 1, 'pending', '2023-02-15 00:51:29', '2023-02-15 00:51:29'),
 (4, 'Volume 2', 1, 'pending', '2023-02-15 00:52:36', '2023-02-15 00:52:36'),
-(5, 'volume 1', 1, 'pending', '2023-02-15 00:53:42', '2023-02-15 00:53:42');
+(5, 'volume 1', 1, 'pending', '2023-02-15 00:53:42', '2023-02-15 00:53:42'),
+(6, 'Mth-vol1', 5, 'pending', '2023-02-16 06:38:06', '2023-02-16 06:38:06'),
+(7, 'Mth-vol2', 5, 'pending', '2023-02-16 06:38:17', '2023-02-16 06:38:17'),
+(8, 'Mth-vol3', 5, 'pending', '2023-02-16 06:40:13', '2023-02-16 06:40:13'),
+(9, 'Mth-vol4', 5, 'pending', '2023-02-16 06:40:25', '2023-02-16 06:40:25'),
+(10, 'Mth-vol5', 5, 'pending', '2023-02-16 06:40:34', '2023-02-16 06:40:34'),
+(11, 'Mth-vol6', 5, 'pending', '2023-02-16 06:40:40', '2023-02-16 06:40:40'),
+(12, 'Mth-vol7', 5, 'pending', '2023-02-16 06:40:49', '2023-02-16 06:40:49'),
+(13, 'Mth-vol8', 5, 'pending', '2023-02-16 06:40:58', '2023-02-16 06:40:58'),
+(14, 'Mth-vol9', 5, 'pending', '2023-02-16 06:41:05', '2023-02-16 06:41:05'),
+(15, 'Mth-vol10', 5, 'pending', '2023-02-16 06:41:11', '2023-02-16 06:41:11'),
+(16, 'Mth-vol11', 5, 'pending', '2023-02-16 06:41:17', '2023-02-16 06:41:17'),
+(17, 'Mth-vol12', 5, 'pending', '2023-02-16 06:41:23', '2023-02-16 06:41:23');
 
 -- --------------------------------------------------------
 
@@ -312,7 +356,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (23, '2023_02_10_035437_create_journals_table', 19),
 (24, '2023_02_13_105255_create_journal_volumes_table', 20),
 (25, '2023_02_14_085945_create_journal_issues_table', 21),
-(26, '2023_02_14_091325_create_journal_issues_table', 22);
+(26, '2023_02_14_091325_create_journal_issues_table', 22),
+(27, '2023_02_15_063916_create_current_issues_table', 23);
 
 -- --------------------------------------------------------
 
@@ -621,6 +666,16 @@ ALTER TABLE `contacts`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `current_issues`
+--
+ALTER TABLE `current_issues`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `current_issues_frontuser_id_foreign` (`frontuser_id`),
+  ADD KEY `current_issues_journal_id_foreign` (`journal_id`),
+  ADD KEY `current_issues_journal_volume_id_foreign` (`journal_volume_id`),
+  ADD KEY `current_issues_issue_id_foreign` (`issue_id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -772,6 +827,12 @@ ALTER TABLE `contacts`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `current_issues`
+--
+ALTER TABLE `current_issues`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -799,19 +860,19 @@ ALTER TABLE `journals`
 -- AUTO_INCREMENT for table `journal_issues`
 --
 ALTER TABLE `journal_issues`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `journal_volumes`
 --
 ALTER TABLE `journal_volumes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -864,6 +925,15 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `current_issues`
+--
+ALTER TABLE `current_issues`
+  ADD CONSTRAINT `current_issues_frontuser_id_foreign` FOREIGN KEY (`frontuser_id`) REFERENCES `frontusers` (`id`),
+  ADD CONSTRAINT `current_issues_issue_id_foreign` FOREIGN KEY (`issue_id`) REFERENCES `journal_issues` (`id`),
+  ADD CONSTRAINT `current_issues_journal_id_foreign` FOREIGN KEY (`journal_id`) REFERENCES `journals` (`id`),
+  ADD CONSTRAINT `current_issues_journal_volume_id_foreign` FOREIGN KEY (`journal_volume_id`) REFERENCES `journal_volumes` (`id`);
 
 --
 -- Constraints for table `journals`
