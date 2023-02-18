@@ -1,315 +1,483 @@
 @extends('front.layout.main')
-<link href="{{url('assets/front/dist/css/cdn.css')}}" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css">
+  
+  <link rel="stylesheet" href="signUp.css">
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.js"></script>
+  <script type="text/javascript" src="signUp.js"></script>
 <style>
-/*form styles*/
-#msform {
-    text-align: center;
-    position: relative;
-    margin-top: 30px;
-    color:black;
-}
+      #user_display{
+      display: block;
+      width: 40%;
+      height:220px;
+      margin: 10px auto;
+      border-radius: 100%;
+    }
+     #user_display:hover{
+      display: block;
+      width: 40%;
+      height:220px;
+      margin: 10px auto;
+      border-radius: 100%;
+      opacity: 0.7;
+      background-color: grey;
+     }
+    `p {
+        color: grey
+    }
 
-#msform fieldset {
-    background: white;
-    border: 0 none;
-    border-radius: 0px;
-    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-    padding: 20px 30px;
-    box-sizing: border-box;
-    width: 80%;
-    margin: 0 10%;
+    #heading {
+        text-transform: uppercase;
+        color: #673AB7;
+        font-weight: normal
+    }
 
-    /*stacking fieldsets above each other*/
-    position: relative;
-}
+    #msform {
+        text-align: center;
+        position: relative;
+        margin-top: 20px
+    }
 
-/*Hide all except first fieldset*/
-#msform fieldset:not(:first-of-type) {
-    display: none;
-}
+    #msform fieldset {
+        background: white;
+        border: 0 none;
+        border-radius: 0.5rem;
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+        padding-bottom: 20px;
+        position: relative
+    }
 
-/*inputs*/
-#msform input, #msform textarea {
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 0px;
-    margin-bottom: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: montserrat;
-    color: #2C3E50;
-    font-size: 13px;
-}
+    .form-card {
+        text-align: left
+    }
 
-#msform input:focus, #msform textarea:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    border: 1px solid #ee0979;
-    outline-width: 0;
-    transition: All 0.5s ease-in;
-    -webkit-transition: All 0.5s ease-in;
-    -moz-transition: All 0.5s ease-in;
-    -o-transition: All 0.5s ease-in;
-}
+    #msform fieldset:not(:first-of-type) {
+        display: none
+    }
 
-/*buttons*/
-#msform .action-button {
-    width: 100px;
-    background: #ee0979;
-    font-weight: bold;
-    color: white;
-    border: 0 none;
-    border-radius: 25px;
-    cursor: pointer;
-    padding: 10px 5px;
-    margin: 10px 5px;
-}
+    #msform input,
+    #msform textarea {
+        padding: 8px 15px 8px 15px;
+        border: 1px solid #ccc;
+        border-radius: 0px;
+        margin-bottom: 25px;
+        margin-top: 2px;
+        width: 100%;
+        box-sizing: border-box;
+        font-family: montserrat;
+        color: #2C3E50;
+        background-color: #ECEFF1;
+        font-size: 16px;
+        letter-spacing: 1px
+    }
 
-#msform .action-button:hover, #msform .action-button:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #ee0979;
-}
+    #msform input:focus,
+    #msform textarea:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border: 1px solid #673AB7;
+        outline-width: 0
+    }
 
-#msform .action-button-previous {
-    width: 100px;
-    background: #C5C5F1;
-    font-weight: bold;
-    color: white;
-    border: 0 none;
-    border-radius: 25px;
-    cursor: pointer;
-    padding: 10px 5px;
-    margin: 10px 5px;
-}
+    #msform .action-button {
+        width: 100px;
+        background-color:{{$advancesetting->button_color}};
+        color:{{$advancesetting->basic_color}};
+        font-weight: bold;
+        border: 0 none;
+        border-radius: 0px;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 0px 10px 5px;
+        float: right
+    }
 
-#msform .action-button-previous:hover, #msform .action-button-previous:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
-}
+    #msform .action-button:hover,
+    #msform .action-button:focus {
+        background-color:{{$advancesetting->button_color}};
+        color:{{$advancesetting->basic_color}};
+        opacity:0.8;
+    }
 
-/*headings*/
-.fs-title {
-    font-size: 18px;
-    text-transform: uppercase;
-    color: #2C3E50;
-    margin-bottom: 10px;
-    letter-spacing: 2px;
-    font-weight: bold;
-}
+    #msform .action-button-previous {
+        width: 100px;
+        background: #616161;
+        font-weight: bold;
+        color: white;
+        border: 0 none;
+        border-radius: 0px;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px 10px 0px;
+        float: right
+    }
 
-.fs-subtitle {
-    font-weight: normal;
-    font-size: 13px;
-    color: #666;
-    margin-bottom: 20px;
-}
+    #msform .action-button-previous:hover,
+    #msform .action-button-previous:focus {
+        background-color: #000000
+    }
 
-/*progressbar*/
-#progressbar {
-    margin-bottom: 30px;
-    overflow: hidden;
-    /*CSS counters to number the steps*/
-    counter-reset: step;
-}
+    .card {
+        z-index: 0;
+        border: none;
+        position: relative
+    }
 
-#progressbar li {
-    list-style-type: none;
-    color: black;
-    text-transform: uppercase;
-    font-size: 9px;
-    width: 33.33%;
-    float: left;
-    position: relative;
-    letter-spacing: 1px;
-}
+    .fs-title {
+        font-size: 25px;
+        color: #673AB7;
+        margin-bottom: 15px;
+        font-weight: normal;
+        text-align: left
+    }
 
-#progressbar li:before {
-    content: counter(step);
-    counter-increment: step;
-    width: 24px;
-    height: 24px;
-    line-height: 26px;
-    display: block;
-    font-size: 12px;
-    color: #333;
-    background: white;
-    border-radius: 25px;
-    margin: 0 auto 10px auto;
-}
+    .purple-text {
+        color: #673AB7;
+        font-weight: normal
+    }
 
-/*progressbar connectors*/
-#progressbar li:after {
-    content: '';
-    width: 100%;
-    height: 2px;
-    background: white;
-    position: absolute;
-    left: -50%;
-    top: 9px;
-    z-index: -1; /*put it behind the numbers*/
-}
+    .steps {
+        font-size: 25px;
+        color: gray;
+        margin-bottom: 10px;
+        font-weight: normal;
+        text-align: right
+    }
 
-#progressbar li:first-child:after {
-    /*connector not needed before the first step*/
-    content: none;
-}
+    .fieldlabels {
+        color: gray;
+        text-align: left
+    }
 
-/*marking active/completed steps green*/
-/*The number of the step and the connector before it = green*/
-#progressbar li.active:before, #progressbar li.active:after {
-    background: #ee0979;
-    color: white;
-}
+    #progressbar {
+        margin-bottom: 30px;
+        overflow: hidden;
+        color: lightgrey
+    }
 
+    #progressbar .active {
+        /* color: #673AB7 */
+        
+        color:{{$advancesetting->button_color}};
+    }
 
-/* Not relevant to this form */
-.dme_link {
-    margin-top: 30px;
-    text-align: center;
-}
-.dme_link a {
-    background: #FFF;
-    font-weight: bold;
-    color: #ee0979;
-    border: 0 none;
-    border-radius: 25px;
-    cursor: pointer;
-    padding: 5px 25px;
-    font-size: 12px;
-}
+    #progressbar li {
+        list-style-type: none;
+        font-size: 15px;
+        width: 25%;
+        float: left;
+        position: relative;
+        font-weight: 400
+    }
 
-.dme_link a:hover, .dme_link a:focus {
-    background: #C5C5F1;
-    text-decoration: none;
-}
+    #progressbar #account:before {
+        font-family: FontAwesome;
+        content: "\f13e"
+    }
+
+    #progressbar #personal:before {
+        font-family: FontAwesome;
+        content: "\f007"
+    }
+
+    #progressbar #payment:before {
+        font-family: FontAwesome;
+        content: "\f030"
+    }
+
+    #progressbar #confirm:before {
+        font-family: FontAwesome;
+        content: "\f00c"
+    }
+
+    #progressbar li:before {
+        width: 50px;
+        height: 50px;
+        line-height: 45px;
+        display: block;
+        font-size: 20px;
+        color: #ffffff;
+        background: lightgray;
+        border-radius: 50%;
+        margin: 0 auto 10px auto;
+        padding: 2px
+    }
+
+    #progressbar li:after {
+        content: '';
+        width: 100%;
+        height: 2px;
+        background: lightgray;
+        position: absolute;
+        left: 0;
+        top: 25px;
+        z-index: -1
+    }
+
+    #progressbar li.active:before,
+    #progressbar li.active:after {
+        background: {{$advancesetting->main_color}};
+    }
+
+    .progress {
+        height: 20px;
+    }
+
+    .progress-bar {
+        background-color: {{$advancesetting->main_color}};
+    }
+
+    .fit-image {
+        width: 100%;
+        object-fit: cover
+    }`
+
 </style>
 @section('content')
 @include('front.inc.journal_hero')
-<!-- MultiStep Form -->
-<div class="row">
-    <div class="col-md-12 col-md-offset-3">
-        <form id="msform">
-            <!-- progressbar -->
-            <ul id="progressbar">
-                <li class="active">Personal Details</li>
-                <li>Social Profiles</li>
-                <li>Account Setup</li>
-            </ul>
-            <!-- fieldsets -->
-            <fieldset>
-                <h2 class="fs-title">Personal Details</h2>
-                <h3 class="fs-subtitle">Tell us something more about you</h3>
-                <input type="text" name="fname" placeholder="First Name"/>
-                <input type="text" name="lname" placeholder="Last Name"/>
-                <input type="number" name="phone" placeholder="Phone"/>
-                <input type="button" name="next" class="next action-button" value="Next"/>
-            </fieldset>
-            <fieldset>
-                <h2 class="fs-title">Social Profiles</h2>
-                <h3 class="fs-subtitle">Your presence on the social network</h3>
-                <input type="text" name="twitter" placeholder="Twitter"/>
-                <input type="text" name="facebook" placeholder="Facebook"/>
-                <input type="text" name="gplus" placeholder="Google Plus"/>
-                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-                <input type="button" name="next" class="next action-button" value="Next"/>
-            </fieldset>
-            <fieldset>
-                <h2 class="fs-title">Create your account</h2>
-                <h3 class="fs-subtitle">Fill in your credentials</h3>
-                <input type="text" name="email" placeholder="Email"/>
-                <input type="password" name="pass" placeholder="Password"/>
-                <input type="password" name="cpass" placeholder="Confirm Password"/>
-                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-                <input type="submit" name="submit" class="submit action-button" value="Submit"/>
-            </fieldset>
-        </form>
-     
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
+            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <h2 id="heading">Sign Up Your User Account</h2>
+                <p>Fill all form field to go to next step</p>
+                <form id="msform">
+                    <!-- progressbar -->
+                    <ul id="progressbar">
+                        <li class="active" id="account"><strong>Introduction</strong></li>
+                        <li id="personal"><strong>Personal Details</strong></li>
+                        <li id="payment"><strong>Information</strong></li>
+                        <li id="confirm"><strong>Interests</strong></li>
+                    </ul>
+                    <div class="progress" >
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div> <br> <!-- fieldsets -->
+                    <fieldset>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Tell us about yourself:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">Step 1 - 4</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                <img
+                            src="{{url('assets/images/avatars/1avatar.jpg')}}" 
+                             id="user_display" onclick="triggerclick()" width="50px" height="50px" alt="User Image"> <br/>
+                            <input type="file" class="form-control" name="user_image" onchange="displayImage(this)" id="user_image" style="display: none;" required>
+                                
+                                </div>
+                            </div>
+                            <div class="row">
+                                
+                                <div class="col-6">
+                                <label class="fieldlabels">First Name: </label> <input type="text" name="first_name" placeholder="First Name" required />
+                                </div>
+                                <div class="col-6">
+                                <label class="fieldlabels">Last Name: </label> <input type="text" name="last_name" placeholder="Last Name" required />
+                                </div>
+                            </div>
+                            <div class="row">
+                               <div class="col-12">
+                               <label class="fieldlabels">Email: *</label> <input type="email" name="email" placeholder="Email Id" required />
+                               </div>
+                            </div>
+                         
+                            <div class="row">
+                                
+                                <div class="col-6">
+                                <label class="fieldlabels">Password: *</label> <input type="password" name="pwd" placeholder="Password" required /> 
+                                </div>
+                                <div class="col-6">
+                                <label class="fieldlabels">Confirm Password: *</label> <input type="password" name="cpwd" placeholder="Confirm Password" required />
+                                </div>
+                            </div>
+                           
+                        </div> <input type="button" name="next" class="next action-button" value="Next" />
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Tell us more about yourself:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">Step 2 - 4</h2>
+                                </div>
+                            </div> <label class="fieldlabels">Highest Qualification: *</label> <input type="text" name="highest_qualification" placeholder="Highest Qualification" /> <label class="fieldlabels">Primary Phone.: *</label> <input type="text" name="phone" placeholder="Contact No." required /> <label class="fieldlabels">Prefered Name.: *</label> <input type="text" name="prefered_name" placeholder="Alternate Contact No." required />
+                        </div> <input type="button" name="next" class="next action-button" value="Next" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" requireds />
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Your current job related information:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">Step 3 - 4</h2>
+                                </div>
+                            </div> 
+                            <div class="row">
+                                
+                                <div class="col-4">
+                                <label class="fieldlabels">Position: </label> <input type="text" name="position" placeholder="Position" required />
+                                </div>
+                                <div class="col-4">
+                                <label class="fieldlabels">Institution: </label> <input type="text" name="institution" placeholder="Institution" required />
+                                </div>
+                                <div class="col-4">
+                                <label class="fieldlabels">Department: </label> <input type="text" name="department" placeholder="Department" required />
+                                </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-12">
+                              <label class="fieldlabels">Complete Address: </label> <input type="text" name="department" placeholder="Department" required />
+                              </div>
+                            </div>
+                            <div class="row">
+                                
+                                <div class="col-4">
+                                <label class="fieldlabels">Country: </label> <input type="text" name="country" placeholder="Country" required />
+                                </div>
+                                <div class="col-4">
+                                <label class="fieldlabels">State/Province: </label> <input type="text" name="state_province" placeholder="State or Province" required />
+                                </div>
+                                <div class="col-4">
+                                <label class="fieldlabels">Zip/Postal Code: </label> <input type="text" name="zip" placeholder="Zip or Postal Code" required />
+                                </div>
+                            </div>
+                        </div> <input type="button" name="next" class="next action-button" value="Submit" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Registered As:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">Step 4 - 4</h2>
+                                </div>
+                            </div> <br><br>
+                            <!-- <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br> -->
+                            <div class="row">
+                                <div class="col-12">
+                                <label class="fieldlabels">If you also want to apply for the reviewer. So please check this box: </label><br> <input type="checkbox" name="reviewerr" style="width:25px; height:25px;" /> 
+                                </div> <input type="submit" class="action-button" value="Submit" />
+                             
+                                </div>
+                            </div>
+                             <br><br>
+                           
+                        </div>
+                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" requireds />
+
+                        
+                    </fieldset>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 <!-- /.MultiStep Form -->
 @endsection
-<script src="{{url('assets/front/dist/js/datatable_net.min.js')}}"></script>
-    <script src="{{url('assets/front/dist/js/datatable.min.js')}}"></script>
+<script type="text/javascript">
+    function triggerclick(){
+      document.querySelector('#user_image').click();
+    }
+    function displayImage(e){
+      if (e.files[0]) {
+        var reader=new FileReader();
+        reader.onload=function(e){
+          document.querySelector('#user_display').setAttribute('src', e.target.result);
+        }
+        reader.readAsDataURL(e.files[0]);
+      }
+    }
+  </script>
 <script>
     
-//jQuery time
+    $(document).ready(function(){
+
 var current_fs, next_fs, previous_fs; //fieldsets
-var left, opacity, scale; //fieldset properties which we will animate
-var animating; //flag to prevent quick multi-click glitches
+var opacity;
+var current = 1;
+var steps = $("fieldset").length;
+
+setProgressBar(current);
 
 $(".next").click(function(){
-	if(animating) return false;
-	animating = true;
-	
-	current_fs = $(this).parent();
-	next_fs = $(this).parent().next();
-	
-	//activate next step on progressbar using the index of next_fs
-	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-	
-	//show the next fieldset
-	next_fs.show(); 
-	//hide the current fieldset with style
-	current_fs.animate({opacity: 0}, {
-		step: function(now, mx) {
-			//as the opacity of current_fs reduces to 0 - stored in "now"
-			//1. scale current_fs down to 80%
-			scale = 1 - (1 - now) * 0.2;
-			//2. bring next_fs from the right(50%)
-			left = (now * 50)+"%";
-			//3. increase opacity of next_fs to 1 as it moves in
-			opacity = 1 - now;
-			current_fs.css({
-        'transform': 'scale('+scale+')',
-        'position': 'absolute'
-      });
-			next_fs.css({'left': left, 'opacity': opacity});
-		}, 
-		duration: 800, 
-		complete: function(){
-			current_fs.hide();
-			animating = false;
-		}, 
-		//this comes from the custom easing plugin
-		easing: 'easeInOutBack'
-	});
+
+current_fs = $(this).parent();
+next_fs = $(this).parent().next();
+
+//Add Class Active
+$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+//show the next fieldset
+next_fs.show();
+//hide the current fieldset with style
+current_fs.animate({opacity: 0}, {
+step: function(now) {
+// for making fielset appear animation
+opacity = 1 - now;
+
+current_fs.css({
+'display': 'none',
+'position': 'relative'
+});
+next_fs.css({'opacity': opacity});
+},
+duration: 500
+});
+setProgressBar(++current);
 });
 
 $(".previous").click(function(){
-	if(animating) return false;
-	animating = true;
-	
-	current_fs = $(this).parent();
-	previous_fs = $(this).parent().prev();
-	
-	//de-activate current step on progressbar
-	$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-	
-	//show the previous fieldset
-	previous_fs.show(); 
-	//hide the current fieldset with style
-	current_fs.animate({opacity: 0}, {
-		step: function(now, mx) {
-			//as the opacity of current_fs reduces to 0 - stored in "now"
-			//1. scale previous_fs from 80% to 100%
-			scale = 0.8 + (1 - now) * 0.2;
-			//2. take current_fs to the right(50%) - from 0%
-			left = ((1-now) * 50)+"%";
-			//3. increase opacity of previous_fs to 1 as it moves in
-			opacity = 1 - now;
-			current_fs.css({'left': left});
-			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
-		}, 
-		duration: 800, 
-		complete: function(){
-			current_fs.hide();
-			animating = false;
-		}, 
-		//this comes from the custom easing plugin
-		easing: 'easeInOutBack'
-	});
+
+current_fs = $(this).parent();
+previous_fs = $(this).parent().prev();
+
+//Remove class active
+$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+//show the previous fieldset
+previous_fs.show();
+
+//hide the current fieldset with style
+current_fs.animate({opacity: 0}, {
+step: function(now) {
+// for making fielset appear animation
+opacity = 1 - now;
+
+current_fs.css({
+'display': 'none',
+'position': 'relative'
+});
+previous_fs.css({'opacity': opacity});
+},
+duration: 500
+});
+setProgressBar(--current);
 });
 
+function setProgressBar(curStep){
+var percent = parseFloat(100 / steps) * curStep;
+percent = percent.toFixed();
+$(".progress-bar")
+.css("width",percent+"%")
+}
+
 $(".submit").click(function(){
-	return false;
+return false;
 })
+
+});
 </script>
