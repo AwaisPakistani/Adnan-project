@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2023 at 02:40 AM
+-- Generation Time: Feb 19, 2023 at 03:18 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -42,7 +42,7 @@ CREATE TABLE `advance_settings` (
 --
 
 INSERT INTO `advance_settings` (`id`, `main_color`, `basic_color`, `button_color`, `footer_copyright`, `created_at`, `updated_at`) VALUES
-(1, '#ff8000', '#fcf7f7', '#1c31ce', '© 2020 Copyright: shukaar.com', '2023-02-06 21:21:51', '2023-02-06 21:35:22');
+(1, '#ff8000', '#fcf7f7', '#ff8000', '© 2020 Copyright: shukaar.com', '2023-02-06 21:21:51', '2023-02-18 00:08:31');
 
 -- --------------------------------------------------------
 
@@ -149,6 +149,7 @@ CREATE TABLE `frontusers` (
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -157,9 +158,42 @@ CREATE TABLE `frontusers` (
 -- Dumping data for table `frontusers`
 --
 
-INSERT INTO `frontusers` (`id`, `first_name`, `last_name`, `image`, `email`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Chief', 'Adnan Khan', 'images/front/chiefs/1iWDNLiTak8JxI1mYP6AFss7HcNBu4uVnUSzrdPa.png', 'adnan@gmail.com', '$2y$10$GQx8v4Lv0NSOxZyEzjYPA.xKAbmiJSUvk88.JH73.y.09iFcat3WW', '2023-02-09 04:50:13', '2023-02-09 06:34:18'),
-(7, 'chief', 'Amir', 'images/front/chiefs/87rUqHR84DbiSxjucDLWJsDuWn4ybGl0WZ6Oeq6Q.png', 'amir@gmail.com', '$2y$10$O4CaiBE3tK2jU5vsftjeAOPJMBpjOiA/I8SwUGEPfgGCbkj9/4iZ.', '2023-02-14 02:41:26', '2023-02-14 02:41:26');
+INSERT INTO `frontusers` (`id`, `first_name`, `last_name`, `image`, `email`, `password`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Chief', 'Adnan Khan', 'images/front/chiefs/1iWDNLiTak8JxI1mYP6AFss7HcNBu4uVnUSzrdPa.png', 'adnan@gmail.com', '$2y$10$GQx8v4Lv0NSOxZyEzjYPA.xKAbmiJSUvk88.JH73.y.09iFcat3WW', 1, '2023-02-09 04:50:13', '2023-02-09 06:34:18'),
+(7, 'chief', 'Amir', 'images/front/chiefs/87rUqHR84DbiSxjucDLWJsDuWn4ybGl0WZ6Oeq6Q.png', 'amir@gmail.com', '$2y$10$O4CaiBE3tK2jU5vsftjeAOPJMBpjOiA/I8SwUGEPfgGCbkj9/4iZ.', 1, '2023-02-14 02:41:26', '2023-02-14 02:41:26'),
+(13, 'Aleem', 'Dar', 'images/front/authors/uC090oBHIsJizvPUOLuAZPqcsadn6Ae54Egpc561.png', 'awaisprojects1@gmail.com', '$2y$10$b6t7t./XGMFs8F0Q0V6Cd.6c3fTdZv3SNnQyRuoiQVy9HzbZYvBp2', 1, '2023-02-18 20:19:14', '2023-02-18 20:25:05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `front_authors`
+--
+
+CREATE TABLE `front_authors` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `frontuser_id` bigint(20) UNSIGNED NOT NULL,
+  `highest_qualification` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prefered_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `position` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `institution` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `department` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state_province` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zip` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reviewer` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `front_authors`
+--
+
+INSERT INTO `front_authors` (`id`, `frontuser_id`, `highest_qualification`, `phone`, `prefered_name`, `position`, `institution`, `department`, `address`, `country`, `state_province`, `zip`, `reviewer`, `status`, `created_at`, `updated_at`) VALUES
+(2, 13, 'PHD', '78787897789', 'Dar', 'student', 'ARID', 'UIIT', 'ADDRESS', 'PAKISTAN', 'Punjab', '45740', 'off', 1, '2023-02-18 20:19:14', '2023-02-18 20:19:14');
 
 -- --------------------------------------------------------
 
@@ -357,7 +391,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (24, '2023_02_13_105255_create_journal_volumes_table', 20),
 (25, '2023_02_14_085945_create_journal_issues_table', 21),
 (26, '2023_02_14_091325_create_journal_issues_table', 22),
-(27, '2023_02_15_063916_create_current_issues_table', 23);
+(27, '2023_02_15_063916_create_current_issues_table', 23),
+(28, '2023_02_18_223404_create_front_authors_table', 24),
+(29, '2023_02_18_225032_create_front_authors_table', 25),
+(30, '2023_02_18_225716_create_front_authors_table', 26);
 
 -- --------------------------------------------------------
 
@@ -402,7 +439,8 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (11, 'App\\Models\\Frontuser', 4),
 (11, 'App\\Models\\Frontuser', 7),
 (12, 'App\\Models\\Frontuser', 5),
-(16, 'App\\Models\\Frontuser', 6);
+(16, 'App\\Models\\Frontuser', 6),
+(16, 'App\\Models\\Frontuser', 13);
 
 -- --------------------------------------------------------
 
@@ -690,6 +728,13 @@ ALTER TABLE `frontusers`
   ADD UNIQUE KEY `frontusers_email_unique` (`email`);
 
 --
+-- Indexes for table `front_authors`
+--
+ALTER TABLE `front_authors`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `front_authors_frontuser_id_foreign` (`frontuser_id`);
+
+--
 -- Indexes for table `images`
 --
 ALTER TABLE `images`
@@ -842,7 +887,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `frontusers`
 --
 ALTER TABLE `frontusers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `front_authors`
+--
+ALTER TABLE `front_authors`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `images`
@@ -872,7 +923,7 @@ ALTER TABLE `journal_volumes`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -934,6 +985,12 @@ ALTER TABLE `current_issues`
   ADD CONSTRAINT `current_issues_issue_id_foreign` FOREIGN KEY (`issue_id`) REFERENCES `journal_issues` (`id`),
   ADD CONSTRAINT `current_issues_journal_id_foreign` FOREIGN KEY (`journal_id`) REFERENCES `journals` (`id`),
   ADD CONSTRAINT `current_issues_journal_volume_id_foreign` FOREIGN KEY (`journal_volume_id`) REFERENCES `journal_volumes` (`id`);
+
+--
+-- Constraints for table `front_authors`
+--
+ALTER TABLE `front_authors`
+  ADD CONSTRAINT `front_authors_frontuser_id_foreign` FOREIGN KEY (`frontuser_id`) REFERENCES `frontusers` (`id`);
 
 --
 -- Constraints for table `journals`

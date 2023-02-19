@@ -3,6 +3,7 @@
 @section('content')
 @include('front.inc.carousell')
 <div class="container text-center mb-5">
+@include('front.inc.alerts')
     <div class="row">
         @foreach($categories as $category)
         <div class="col-lg-4 my-4 mainhome">

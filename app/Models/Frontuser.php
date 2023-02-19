@@ -23,6 +23,10 @@ class Frontuser extends Authenticatable
         'email',
         'image',
         'password',
+        'status',
     ];
+    public function author(){
+        return $this->hasOne(FrontAuthor::class);
+    }
     
 }

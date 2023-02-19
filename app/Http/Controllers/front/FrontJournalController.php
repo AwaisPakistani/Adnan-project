@@ -4,7 +4,10 @@ namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\Models\Category;
 use App\Models\Siteintro;
 use App\Models\Frontuser;
@@ -17,6 +20,7 @@ use App\Models\Journal;
 use App\Models\JournalVolume;
 use App\Models\JournalIssue;
 use App\Models\CurrentIssue;
+use App\Models\FrontAuthor;
 use Session;
 
 class FrontJournalController extends Controller
@@ -56,8 +60,92 @@ class FrontJournalController extends Controller
     public function front_register(Request $request,$journal_id){
         $journal=Journal::with('category')->where('id',$journal_id)->first();
         //dd($journal);
+        if($request->isMethod('post')){
+            $data=$request->all();
+            //dd($data);
+            $frontuser=new Frontuser;
+            $frontuser->first_name=$data['first_name'];
+            $frontuser->last_name=$data['last_name'];
+            // check email existance
+            $email=Frontuser::where('email',$data['email'])->count();
+            if($email > 0){
+                Session::flash('error_message','Email already exists!');
+        	    return redirect()->back();
+            }
+            $frontuser->email=$data['email'];
+            if($data['pwd']!=$data['cpwd']){
+                Session::flash('error_message','Passwords are not matching!');
+        	    return redirect()->back();
+            }
+            $frontuser->password=bcrypt($data['pwd']);
+            if(!empty($data['user_image'])){
+                $image_path = $request->file('user_image')->store('images/front/authors', 'public');
+            }
+            $frontuser->image=$image_path;
+            $frontuser->status=0;
+            $frontuser->save();
+
+            $author=new FrontAuthor;
+            $author->frontuser_id=$frontuser->id;
+            $author->highest_qualification=$data['highest_qualification'];
+            $author->phone=$data['phone'];
+            $author->prefered_name=$data['prefered_name'];
+            $author->position=$data['position'];
+            $author->institution=$data['institution'];
+            $author->department=$data['department'];
+            $author->address=$data['address'];
+            $author->country=$data['country'];
+            $author->state_province=$data['state_province'];
+            $author->zip=$data['zip'];
+            if(!empty($data['reviewer'])){
+                $author->reviewer=$data['reviewer'];
+                $frontuser->assignRole('reviewer');
+            }else{
+                $author->reviewer='off';
+            }
+            $author->status=1;
+            $author->save();
+            $frontuser->assignRole('author');
+            //activation
+            $mail=$data['email'];
+            $name=$data['first_name'].' '.$data['last_name'];
+            $message="Email Verification";
+            $messageData=['email'=>$data['email'],'name'=>$name,'code'=>base64_encode($data['email'])];
+            Mail::send('front.mails.authorMailConfirmation',$messageData, function($message) use($mail){
+                $message->to($mail)->subject('Confirm your Shukar Website registration');
+            });
+            return redirect()->back()->with('success_message','Please confirm your email to activate your account!');
+            // end activation
+        }
         return view('front.pages.journal.register',compact('journal'));
     }
+    public function confirmAccount($email){
+        $email=base64_decode($email);
+        $authorCount=Frontuser::where('email',$email)->count();
+        if ($authorCount > 0) {
+          $FrontAuthorDetails=Frontuser::where('email',$email)->first();
+          if ($FrontAuthorDetails->status==1) {
+              return redirect('/')->with('success_message','Your account is already activated. You can login now');
+          }
+          else{
+            Frontuser::where('email',$email)->update(['status'=>1]);
+               #$pass=mt_rand();
+              #$name=$data['name'];
+              $mail=$email;
+              $name=$FrontAuthorDetails->first_name.' '.$FrontAuthorDetails->last_name;
+              $message="Email Verification";
+              $messageData=['email'=>$mail,'name'=>$name];
+              Mail::send('front.mails.register_front',$messageData, function($message) use($mail){
+                  $message->to($mail)->subject('Registraion on Shukar');
+              });
+              return redirect('/')->with('success_message','Your account is activated. You can login now');
+          }
+         } 
+         else{
+          abort(404);
+         }
+      }
+  
     public function chiefeditor_login(Request $request,$id){
         $journal=Journal::with('category')->where('id',$id)->first();
         if ($request->isMethod('post')) {
@@ -65,6 +153,8 @@ class FrontJournalController extends Controller
     	}
         return view('front.pages.journal.chiefeditor_login',compact('journal'));
     }
+
+   
 
     public function chiefeditor_login_form(Request $request,$id){
        $data=$request->all();
@@ -86,6 +176,57 @@ class FrontJournalController extends Controller
             Session::flash('error_message','Sorry you are not assigned for this journal');
             return redirect()->back();
        }
+    }
+    public function frontuser_forgot_password(Request $request,$journal_id){
+        $journal=Journal::where('id',$journal_id)->first();
+        //dd($journal);
+        if($request->isMethod('post')){
+            $data=$request->all();
+            dd($data);
+        }
+        return view('front.pages.journal.frontuser_forgot_password',compact('journal'));
+    }
+    public function frontuser_forgot_pwd(Request $request,$journal_id){
+            $data=$request->all();
+            //dd($data);
+            if(!empty($data['email'])){
+              $mailid=Frontuser::select('id')->where('email',$data['email'])->value('id');
+              $mailcheck=Frontuser::where('email',$data['email'])->count();
+              //echo Session::get('mailid'); die;
+              if($mailcheck > 0){
+                Session::put('mailid',$mailid);
+                return redirect(route('user.enter_forgot_pwd',$journal_id));
+              }else{
+                Session::flash('error_message',"Entered email does not exist.Please check and try again");
+                return redirect()->back();
+              }
+            }else{
+                Session::flash('error_message',"Please enter email");
+                return redirect()->back();
+            }
+    }
+    public function enter_forgot_pwd(Request $request,$journal_id){
+        $journal=Journal::where('id',$journal_id)->first();
+        return view('front.pages.journal.frontuser_enter_forgotpassword',compact('journal'));
+    }
+    public function frontuser_forgot_pass(Request $request,$journal_id){
+        $data=$request->all();
+        //dd($data);
+        $mailid=Session::get('mailid');
+        //dd('id='.$mailid);
+        if($data['password']!=$data['cpassword']){
+            Session::flash('error_message','Passwords are not matching!');
+            return redirect()->back();
+        }else{
+            Frontuser::where('id',$mailid)->update([
+                'password'=>bcrypt($data['password']),
+            ]);
+            Session::forget('mailid');
+            
+            Session::flash('success_message','Your password has successfully changed');
+            return redirect()->back();    
+            
+        }
     }
     public function chiefeditor_dashboard($journal_id){
         $id=Auth::guard('frontuser')->user()->id;

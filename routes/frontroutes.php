@@ -72,12 +72,21 @@ Route::get('/view-category-detail/{id}', [IndexController::class, 'view_category
 
 // Journals
 Route::get('/view-journal-detail/{id}', [FrontJournalController::class, 'view_journal_detail'])->name('front.journal_detail');
-
+// FrontUsers Login
 Route::match(['get', 'post'], '/chiefeditor-login/{journal}', [FrontJournalController::class, 'chiefeditor_login'])->name('front.chiefeditor.login');
 Route::match(['get', 'post'], '/chiefeditor-signin/{journal}', [FrontJournalController::class, 'chiefeditor_login_form'])->name('front.chiefeditor_login');
+// Forgot Password
+Route::match(['get', 'post'], '/user-forgot-password/{journal}', [FrontJournalController::class, 'frontuser_forgot_password'])->name('front.frontuser_forgot_password');
+
+Route::match(['get', 'post'], '/user-forgot-pwd/{journal}', [FrontJournalController::class, 'frontuser_forgot_pwd'])->name('user.frontuser_forgot_pwd');
+
+Route::match(['get', 'post'], '/user-forgot-pass/{journal}', [FrontJournalController::class, 'frontuser_forgot_pass'])->name('front.frontuser_forgot_pass');
+
+Route::match(['get', 'post'], '/enter-forgot-pwd/{journal}', [FrontJournalController::class, 'enter_forgot_pwd'])->name('user.enter_forgot_pwd');
 
 //front_register
 Route::match(['get', 'post'], '/user-register/{journal}', [FrontJournalController::class, 'front_register'])->name('front_register');
+Route::get('confirm/{code}', [FrontJournalController::class, 'confirmAccount']);
 // front.chiefeditor.dashboard
 Route::group(['middleware'=>['FrontGate']],function(){
 

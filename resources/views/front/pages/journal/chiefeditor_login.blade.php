@@ -60,7 +60,7 @@
                      </div>
                      <button type="submit" class="w-100 btn btn-lg btn-primary" >Sign in</button>
                      <p class="mt-2 mb-3 text-muted">Don't have an account? <a href="{{route('front_register',$journal->id)}}">Register</a></p>
-                     <a href="#">Forgot Password?</a>
+                     <a href="{{route('front.frontuser_forgot_password',$journal->id)}}">Forgot Password?</a>
                  </form>
              </div>
         
