@@ -12,14 +12,14 @@
       </div>
     <div class="row">
         
-        <div class="col-lg-4 mt-2">
+        <!-- <div class="col-lg-4 mt-2">
             <div class="py-3 text-center" style="background-color:{{$advancesetting->main_color}};color:{{$advancesetting->basic_color}}; border-top-left-radius:25px; border-bottom-right-radius:25px;">
                 <img src="{{url('storage/'.$chief->image)}}" alt="Profile" width="150px" heidht="150px" class="img-responsive rounded-circle"><br>
                 <br>
                 <h3>{{$chief->first_name}} {{$chief->last_name}}</h3><br>
             </div>
-        </div>
-        <div class="col-lg-8 mt-2 text-end py-2" style="text-decoration:none;">
+        </div> -->
+        <div class="col-lg-12 mt-2 text-end py-2" style="text-decoration:none;">
        
 
         <div class="content">
@@ -58,7 +58,7 @@
                         </div>
                       </div>
                       <div class="col-lg-6 text-end">
-                      <a href="{{route('front.journal_volume',$journal->id)}}" class="btn" style="background-color:{{$advancesetting->button_color}}; color:white;">View Volumes</a>
+                      <a href="{{route('front.journal_volume',$journal->id)}}" class="btn btn-success">View Volumes</a>
                       </div>
                   </div>
               </div>

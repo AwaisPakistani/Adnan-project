@@ -11,14 +11,14 @@
     </div>
     <div class="row">
     @include('front.inc.alerts')
-        <div class="col-lg-4 mt-2">
+        <!-- <div class="col-lg-4 mt-2">
             <div class="py-3 text-center" style="background-color:{{$advancesetting->main_color}};color:{{$advancesetting->basic_color}}; border-top-left-radius:25px; border-bottom-right-radius:25px;">
                 <img src="{{url('storage/'.$chief->image)}}" alt="Profile" width="150px" heidht="150px" class="img-responsive rounded-circle"><br>
                 <br>
                 <h3>{{$chief->first_name}} {{$chief->last_name}}</h3><br>
             </div>
-        </div>
-        <div class="col-lg-8 mt-2 text-end py-2" style="text-decoration:none;">
+        </div> -->
+        <div class="col-lg-12 mt-2 text-end py-2" style="text-decoration:none;">
        
 
         <div class="content">
@@ -46,7 +46,7 @@
                       <div class="col-lg-12">
                         <span>
                           <h3 class="text-start">Journal Volume</h3>
-                          <a href="{{route('front.add_journal_volume',$journal->id)}}" class="btn text-end" style="background-color:{{$advancesetting->button_color}}; color:white;">Create</a>
+                          <a href="{{route('front.add_journal_volume',$journal->id)}}" class="btn btn-success text-end" >Create</a>
                         </span>
                         <table @if($journal_volumes->count() > 10) id="example" @endif class="table table-striped" style="width:100%">
                 <thead>
