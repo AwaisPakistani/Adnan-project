@@ -19,7 +19,7 @@
 
 						<div class="btn-group">
                             @can('view')
-							<a href="{{route('admin.view_categories')}}" type="button" class="btn btn-primary">Add New</a>
+							<a href="{{route('admin.view_categories')}}" type="button" class="btn btn-primary">View Categories</a>
                             @endcan
 						</div>
 					</div>
@@ -99,6 +99,26 @@
                                      
 									</div>
                           </div>
+
+
+                          
+            <div class="col-12">
+                    <label for="exampleInputEmail1">Slider Image*</label><br>  
+                    @if(!empty($categories_edit->category_image->url))
+                         <img src="{{url('storage/'.$categories_edit->category_image->url)}}" width="150px" heidht="50px">
+                         <input type="hidden" class="form-control" name="image" 
+                         value="{{$categories_edit->category_image->url}}"
+                         ><br><br>
+                         <a href="{{route('admin.delete_category_image',$categories_edit->id)}}" class="btn btn-warning">
+                            Delete
+                         </a>
+                    @else
+
+                    <input type="file" class="form-control" name="image1" 
+                    >
+                    @endif
+                </div>
+        
 
                           
                         <div class="col-12">

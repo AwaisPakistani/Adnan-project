@@ -53,7 +53,7 @@ class FrontJournalController extends Controller
        ]);
     }
     public function view_journal_detail($id){
-        $journal=Journal::with('category')->where('id',$id)->first();
+        $journal=Journal::with('category','Journal_volumes','Journal_issues')->where('id',$id)->first();
         return view('front.pages.journal.journal_detail',compact('journal'));
     }
     
@@ -102,10 +102,11 @@ class FrontJournalController extends Controller
                 $frontuser->assignRole('reviewer');
             }else{
                 $author->reviewer='off';
+                $frontuser->assignRole('author');
             }
             $author->status=1;
             $author->save();
-            $frontuser->assignRole('author');
+            
             //activation
             $mail=$data['email'];
             $name=$data['first_name'].' '.$data['last_name'];
@@ -119,7 +120,8 @@ class FrontJournalController extends Controller
         }
         return view('front.pages.journal.register',compact('journal'));
     }
-    public function confirmAccount($email){
+    public function confirmAccount($email)
+    {
         $email=base64_decode($email);
         $authorCount=Frontuser::where('email',$email)->count();
         if ($authorCount > 0) {
@@ -144,7 +146,7 @@ class FrontJournalController extends Controller
          else{
           abort(404);
          }
-      }
+    }
   
     public function chiefeditor_login(Request $request,$id){
         $journal=Journal::with('category')->where('id',$id)->first();
@@ -265,6 +267,8 @@ class FrontJournalController extends Controller
         return view('front.pages.journal.journal_volume.index',compact('chief','journal','journal_volumes'));
     }
     public function journal_volume_delete($id){
+        CurrentIssue::where('journal_volume_id',$id)->delete();
+        JournalIssue::where('journal_volume_id',$id)->delete();
         JournalVolume::where('id',$id)->delete();
         Session::flash('success_message','Journal volume has been deleted successfully');
         return redirect()->back();
@@ -318,6 +322,7 @@ class FrontJournalController extends Controller
     }
     public function journal_volume_issue_delete($id){
         JournalIssue::where('id',$id)->delete();
+        
         Session::flash('success_message','Journal Issue has been deleted successfully');
         return redirect()->back();
     }

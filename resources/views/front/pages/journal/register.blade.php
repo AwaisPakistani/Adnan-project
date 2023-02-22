@@ -166,43 +166,46 @@
     #progressbar {
         margin-bottom: 30px;
         overflow: hidden;
-        color: lightgrey
+        /* color: lightgrey; */
+        color:#673AB7;
+        width:100%;
     }
 
     #progressbar .active {
-        /* color: #673AB7 */
-        
-        color:{{$advancesetting->button_color}};
+        color: white;
+        background:green;
+        margin:1px;
     }
 
     #progressbar li {
         list-style-type: none;
         font-size: 15px;
-        width: 25%;
+        width: 23%;
         float: left;
         position: relative;
-        font-weight: 400
+        font-weight: 400;
+        padding:8px 4px;
     }
 
     #progressbar #account:before {
         font-family: FontAwesome;
-        content: ""
+        
     }
 
 
     #progressbar #personal:before {
         font-family: FontAwesome;
-        content: ""
+        
     }
 
     #progressbar #payment:before {
         font-family: FontAwesome;
-        content: ""
+        
     }
 
     #progressbar #confirm:before {
         font-family: FontAwesome;
-        content: ""
+        
     }
 
     #progressbar li:before {
@@ -215,14 +218,17 @@
         background: lightgray;
         border-radius: 50%;
         margin: 0 auto 10px auto;
-        padding: 2px
+        padding: 1px;
+        padding-top:10px;
+        padding-bottom:1opx;
     }
 
     #progressbar li:after {
         content: '';
         width: 100%;
-        height: 2px;
-        background: lightgray;
+        height: 5px;
+        /* background: lightgray; */
+        /* backround:#673AB7; */
         position: absolute;
         left: 0;
         top: 25px;
@@ -231,7 +237,8 @@
 
     #progressbar li.active:before,
     #progressbar li.active:after {
-        background: {{$advancesetting->main_color}};
+        color: #673AB7;
+        /* background: {{$advancesetting->main_color}}; */
     }
 
     .progress {
@@ -245,7 +252,7 @@
     }
     
     element.style {
-    width: 25%;
+    width: 35%;
     }
     .progress-bar-animated {
     -webkit-animation: 1s linear infinite progress-bar-stripes;
@@ -275,14 +282,15 @@
                 <form method="post" action="{{route('front_register',$journal->id)}}" enctype="multipart/form-data" id="msform">@csrf
                     <!-- progressbar -->
                     <ul id="progressbar">
-                        <li class="active" id="account"><strong>Introduction</strong></li>
-                        <li id="personal"><strong>Personal Details</strong></li>
+                        <li class="active" id="account"><strong>Intro</strong></li>
+                        <li id="personal"><strong>Personal</strong></li>
                         <li id="payment"><strong>Information</strong></li>
                         <li id="confirm"><strong>Interests</strong></li>
                     </ul>
-                    <div class="progress" >
+                    <!-- <div class="progress" >
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div> <br> <!-- fieldsets -->
+                    </div> -->
+                     <br> <!-- fieldsets -->
                     <fieldset>
                         <div class="form-card">
                             <div class="row">

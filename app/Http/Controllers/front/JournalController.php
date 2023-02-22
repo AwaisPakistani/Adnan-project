@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Frontuser;
 use App\Models\Journal;
+use App\Models\JournalVolume;
+use App\Models\JournalIssue;
+use App\Models\CurrentIssue;
 use Session;
 
 class JournalController extends Controller
@@ -147,6 +150,9 @@ class JournalController extends Controller
         return view('front.journal.update')->with(compact('title','categories','chiefeditor','journal'));
     }
     public function delete_journal($id){
+        CurrentIssue::where('journal_id',$id)->delete();
+        JournalIssue::where('journal_id',$id)->delete();
+        JournalVolume::where('journal_id',$id)->delete();
         $journal=Journal::where('id',$id)->first();
         // delete more info
         $moreinfo=$journal->more_info;

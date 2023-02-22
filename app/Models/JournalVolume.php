@@ -10,7 +10,7 @@ class JournalVolume extends Model
     use HasFactory;
     protected $fillable = [
         'journal_volume_name',
-        'journal_id ',
+        'journal_id',
         'journal_volume_status',
     ];
     public function journal(){

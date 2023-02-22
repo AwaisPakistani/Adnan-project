@@ -72,6 +72,7 @@ class FrontRoleController extends Controller
              'email'=>$data['email'],
              'image'=>$image_path,
              'password'=>bcrypt($data['password']),
+             'status'=>1
            ]);
            $chief->assignRole($data['role']);
            Session::flash('success_message','Chiefeditor has been created successfully');
@@ -80,7 +81,8 @@ class FrontRoleController extends Controller
        return view('front.chiefeditor.create')->with(compact('title'));
     }
 
-    public function edit_chiefeditor(Request $req,$id){
+    public function edit_chiefeditor(Request $req,$id)
+    {
         $title="Update Chiefeditor";
         $chief=Frontuser::where('id',$id)->first();
         //dd('add chiefeditor');

@@ -77,6 +77,10 @@ Route::group(['middleware'=>['AdminGate']],function(){
 
          Route::match(['get', 'post'], '/edit-category/{id}', [CategoryController::class, 'edit_category'])->name('admin.edit_category')->middleware('permission:edit');
 
+         //Delete category image with update
+         Route::get('/delete-category-image/{id}', [CategoryController::class, 'delete_category_image'])->name('admin.delete_category_image')->middleware('permission:edit|delete');
+
+
          Route::get('/view-categories', [CategoryController::class, 'view_categories'])->name('admin.view_categories')->middleware('permission:view');
 
 

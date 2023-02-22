@@ -6,14 +6,14 @@
       </a>
 
       <ul class="nav nav-pills" > 
-        <li class="nav-item"><a href="{{url('/')}}" class="nav-link" aria-current="page" style="color:white;">Home</a></li>
+        <li class="nav-item"><a href="{{url('/')}}" class="nav-link text-uppercase" aria-current="page" style="color:white;">Home</a></li>
         @if(!empty($pages))
         @foreach($pages as $page)
-        <li class="nav-item" ><a href="{{route('front.page.url',$page->id)}}" class="nav-link">{{$page->page_name}}</a></li>
+        <li class="nav-item" ><a href="{{route('front.page.url',$page->id)}}" class="nav-link text-uppercase">{{$page->page_name}}</a></li>
         @endforeach
         @endif
         
-      <li class="nav-item"><a href="{{route('front.contact_page')}}" class="nav-link">Contact</a></li>
+      <li class="nav-item"><a href="{{route('front.contact_page')}}" class="nav-link text-uppercase">Contact</a></li>
       </ul>
      
       &nbsp; &nbsp; &nbsp;
