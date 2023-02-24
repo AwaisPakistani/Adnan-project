@@ -43,4 +43,7 @@ class Journal extends Model
     public function Journal_issues(){
         return $this->hasMany(JournalIssue::class);  
     }
+    public function article_types(){
+        return $this->hasMany(ArticleType::class);  
+    }
 }

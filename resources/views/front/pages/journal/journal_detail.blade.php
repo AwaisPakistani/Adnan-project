@@ -27,15 +27,15 @@ use App\Models\JournalVolume;
         </ul>
         </div>
         <div class="col-lg-4 mt-2 text-start text-decoration-none py-2" style="text-decoration:none;">
-            <h3>Journal Information</h3>
+            <h4 style="background-color:green; padding:15px; color:white;">Journal Information</h4>
          
             <span>{!!$journal->information!!}</span>
             <a href="{{route('front.chiefeditor.login',$journal->id)}}" class="text-decoration-none">Submit New Manuscript</a><br>
             <span><b>Category:</b>&nbsp;&nbsp;
             {{$journal->category->category_name}}</span><br>
             <span><b>ISSN:</b>&nbsp;&nbsp;{{$journal->issn}}</span><br>
-            <span><b>More Information About Journal:</b>&nbsp;&nbsp;<a href="{{url('storage/'.$journal->more_info)}}" target="__blank" class="text-decoration-none">Read >></a></span><br>
-            <span><b>Author Guideline:</b>&nbsp;&nbsp;<a href="{{url('storage/'.$journal->author_guideline)}}" class="text-decoration-none" target="__blank">Read >></a></span><br>
+            <span><b>More Information About Journal:</b>&nbsp;&nbsp;<a href="{{url('storage/'.$journal->more_info)}}" target="__blank" class="text-decoration-none">Click here</a></span><br>
+            <span><b>Author Guideline:</b>&nbsp;&nbsp;<a href="{{url('storage/'.$journal->author_guideline)}}" class="text-decoration-none" target="__blank">Click here</a></span><br>
             <span >
                 <a href="#" class="text-decoration-none">Current Issue</a> | <a href="#" class="text-decoration-none">Available Issues</a>
             </span><br><br>

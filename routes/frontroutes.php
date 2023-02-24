@@ -110,6 +110,24 @@ Route::group(['middleware'=>['FrontGate']],function(){
     // front/getting-issues-of-volums
     Route::post('/jci', [FrontJournalController::class, 'current_volume_issues'])->name('getting_current_issues');
 
+    // Ariticle Types  
+    Route::get('/article-types/{journal}', [FrontJournalController::class, 'article_types'])->name('front.article_types');
+
+    Route::match(['get', 'post'], '/add-article-type/{journal}', [FrontJournalController::class, 'add_article_type'])->name('front.add_article_type');
+
+    Route::get('/delete-article-type/{id}', [FrontJournalController::class, 'delete_article_type'])->name('front.article_type_delete');
+
+    Route::match(['get', 'post'], '/edit-article-type/{journal}/{article_type}', [FrontJournalController::class, 'edit_article_type'])->name('front.edit_article_type');
+
+    // Attachement Items
+    Route::get('/attachment-items/{journal}', [FrontJournalController::class, 'attachment_items'])->name('front.attachment_item');
+
+    Route::match(['get', 'post'], '/add-attachment-item/{journal}', [FrontJournalController::class, 'add_attachment_item'])->name('front.add_attachment_item');
+    
+    Route::get('/delete-attachment-item/{id}', [FrontJournalController::class, 'delete_attachment_item'])->name('front.attachment_item_delete');
+
+    Route::match(['get', 'post'], '/edit-attachment-item/{journal}/{attachment_item}', [FrontJournalController::class, 'edit_attachment_item'])->name('front.edit_attachment_item');
+
 });
 Route::get('front/logout/{journal}',[IndexController::class,'logout']);
 Route::post('/front/getting-issues-of-volume', [FrontJournalController::class, 'current_volume_issues'])->name('getting_current_issues');

@@ -33,10 +33,10 @@
                  <img src="{{url('storage/'.$slide->image)}}"> 
               </text></svg>
              
-              <div class="carousel-caption text-start d-none d-md-block " style="padding-bottom:100px;">
+              <div class="carousel-caption text-start d-none d-md-block " style="padding-bottom:150px;">
                 <h1>{{$slide->title}}</h1>
-                <p>{{$slide->description}}</p>
-                <p><a class="btn btn-lg btn-primary" href="{{$slide->button_url}}">{{$slide->button_title}}</a></p>
+                <p style="color:yellow;">{{$slide->description}}</p>
+                <!-- <p><a class="btn btn-lg btn-primary" href="{{$slide->button_url}}">{{$slide->button_title}}</a></p> -->
               </div>
             </div>
             @php

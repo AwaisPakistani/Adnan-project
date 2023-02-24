@@ -17,7 +17,19 @@
           <div class="mt-4">
             <!-- Social -->
             @foreach($social as $social_icon)
-            <a href="{{$social_icon->social_url}}" class="btn btn-floating social-icons btn-lg" style="background-color:{{$advancesetting->main_color}};color:{{$advancesetting->basic_color}};"><i class="{{$social_icon->social_class}}"></i></a>
+            <a href="{{$social_icon->social_url}}" class="btn btn-floating social-icons btn-lg" style="
+            @if($social_icon->social_class=='facebook-f')
+            background-color:#3b679e;color:white;
+            @elseif($social_icon->social_class=='twitter')
+            background-color:#2bc0db;color:white;
+            @elseif($social_icon->social_class=='linkedin')
+            background-color:#5458ce;color:white;
+            @elseif($social_icon->social_class=='instagram')
+            background-color:#FF709C;color:white;
+            @else
+            background-color:#011adda;color:white;
+            @endif
+            height:50px;width:50px;padding:12px;"><i class="fab fa-{{$social_icon->social_class}}"></i></a>
             @endforeach
            
             <!-- Social -->

@@ -20,6 +20,8 @@ use App\Models\Journal;
 use App\Models\JournalVolume;
 use App\Models\JournalIssue;
 use App\Models\CurrentIssue;
+use App\Models\ArticleType;
+use App\Models\AttachmentItem;
 use App\Models\FrontAuthor;
 use Session;
 
@@ -405,5 +407,121 @@ class FrontJournalController extends Controller
             ]);
          }
     }
+    // Article Types
+    public function article_types($journal_id)
+    {
+        $id=Auth::guard('frontuser')->user()->id;
+        $chief=Frontuser::where('id',$id)->first();
+        $journal=Journal::where('id',$journal_id)->first();
+        $article_types=ArticleType::where('journal_id',$journal_id)->get();
+        return view('front.pages.journal.article_types.index',compact('chief','journal','article_types'));
+    }
+    public function add_article_type(Request $request,$journal_id){
+        $id=Auth::guard('frontuser')->user()->id;
+        $chief=Frontuser::where('id',$id)->first();
+        $journal=Journal::where('id',$journal_id)->first();
+        if($request->isMethod('post')){
+            $data=$request->all();
+            $at=new ArticleType;
+            $at->name=$data['article_type'];
+            $at->frontuser_id=$id;
+            $at->journal_id =$journal->id;
+            $at->status=1;
+            $at->save();
+            Session::flash('success_message','Article Type has been created');
+            return redirect()->back();
+
+        }
+        return view('front.pages.journal.article_types.create',compact('chief','journal'));
+    }
+
+    public function delete_article_type($id){
+        ArticleType::where('id',$id)->delete();
+        Session::flash('success_message','Article Type has been deleted successfully');
+        return redirect()->back();
+    }
+    
+    public function edit_article_type(Request $request,$journal_id,$article){
+        $id=Auth::guard('frontuser')->user()->id;
+        $chief=Frontuser::where('id',$id)->first();
+        $journal=Journal::where('id',$journal_id)->first();
+        $article_type=ArticleType::where([
+            'journal_id'=>$journal_id,
+            'id'=>$article
+        ])->first();
+        if($request->isMethod('post')){
+            $data=$request->all();
+            $art=ArticleType::find($article);
+            $art->name=$data['article_type'];
+            $art->frontuser_id=$id;
+            $art->journal_id =$journal->id;
+            $art->status=1;
+            $art->save();
+            Session::flash('success_message','Article Type has been updated');
+            return redirect()->back();
+
+        }
+        return view('front.pages.journal.article_types.update',compact('chief','journal','article_type'));
+    }
+
+    // attachment_items
+    public function attachment_items($journal_id)
+    {
+        $id=Auth::guard('frontuser')->user()->id;
+        $chief=Frontuser::where('id',$id)->first();
+        $journal=Journal::where('id',$journal_id)->first();
+        $attachment_items=AttachmentItem::where('journal_id',$journal_id)->get();
+        return view('front.pages.journal.attachment_items.index',compact('chief','journal','attachment_items'));
+    }
+    public function add_attachment_item(Request $request,$journal_id){
+        $id=Auth::guard('frontuser')->user()->id;
+        $chief=Frontuser::where('id',$id)->first();
+        $journal=Journal::where('id',$journal_id)->first();
+        if($request->isMethod('post')){
+            $data=$request->all();
+            $ai=new AttachmentItem;
+            $ai->name=$data['name'];
+            $ai->description=$data['description'];
+            $ai->frontuser_id=$id;
+            $ai->journal_id =$journal->id;
+            $ai->status=1;
+            $ai->save();
+            Session::flash('success_message','Attachment Item has been created');
+            return redirect()->back();
+
+        }
+        return view('front.pages.journal.attachment_items.create',compact('chief','journal'));
+    }
+    public function delete_attachment_item($id){
+        AttachmentItem::where('id',$id)->delete();
+        Session::flash('success_message','Attachment Item has been deleted successfully');
+        return redirect()->back();
+    }
+
+    public function edit_attachment_item(Request $request,$journal_id,$aitem){
+        $id=Auth::guard('frontuser')->user()->id;
+        $chief=Frontuser::where('id',$id)->first();
+        $journal=Journal::where('id',$journal_id)->first();
+        $attach_item=AttachmentItem::where([
+            'journal_id'=>$journal_id,
+            'id'=>$aitem
+        ])->first();
+        if($request->isMethod('post')){
+            $data=$request->all();
+            $ai=AttachmentItem::find($aitem);
+            $ai->name=$data['name'];
+            $ai->description=$data['description'];
+            $ai->frontuser_id=$id;
+            $ai->journal_id =$journal->id;
+            $ai->status=1;
+            $ai->save();
+            Session::flash('success_message','Attachment Item has been updated');
+            return redirect()->back();
+
+        }
+        return view('front.pages.journal.attachment_items.update',compact('chief','journal','attach_item'));
+    }
+
+
 
 }
