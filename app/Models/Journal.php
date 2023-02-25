@@ -46,4 +46,7 @@ class Journal extends Model
     public function article_types(){
         return $this->hasMany(ArticleType::class);  
     }
+    public function attachment_items(){
+        return $this->hasMany(AttachmentItem::class);  
+    }
 }
