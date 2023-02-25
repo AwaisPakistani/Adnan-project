@@ -89,7 +89,7 @@ Route::match(['get', 'post'], '/user-register/{journal}', [FrontJournalControlle
 Route::get('confirm/{code}', [FrontJournalController::class, 'confirmAccount']);
 // front.chiefeditor.dashboard
 Route::group(['middleware'=>['FrontGate']],function(){
-
+ // Route::group(['middleware'=>['role:chiefeditor']],function(){
     Route::get('/chiefeditor-dashboard/{journal}', [FrontJournalController::class, 'chiefeditor_dashboard'])->name('front.chiefeditor.dashboard');
     
     // Journal Volumes
@@ -127,7 +127,12 @@ Route::group(['middleware'=>['FrontGate']],function(){
     Route::get('/delete-attachment-item/{id}', [FrontJournalController::class, 'delete_attachment_item'])->name('front.attachment_item_delete');
 
     Route::match(['get', 'post'], '/edit-attachment-item/{journal}/{attachment_item}', [FrontJournalController::class, 'edit_attachment_item'])->name('front.edit_attachment_item');
-
+  
+    // Author routes
+    Route::get('/author-dashboard/{journal}', [FrontJournalController::class, 'author_dashboard'])->name('front.author.dashboard');
+    
+    Route::match(['get', 'post'], '/paper-submission/{journal}', [FrontJournalController::class, 'paper_submit_new'])->name('front.paper_submit_new');
+  
 });
 Route::get('front/logout/{journal}',[IndexController::class,'logout']);
 Route::post('/front/getting-issues-of-volume', [FrontJournalController::class, 'current_volume_issues'])->name('getting_current_issues');

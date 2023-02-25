@@ -53,9 +53,9 @@ class FrontRoleController extends Controller
         return redirect()->back();
     }
     
-    // Chiefeditors
+    // Chiefeditors, Editors and publisher
     public function add_chiefeditor(Request $req){
-       $title="Add Chiefeditor";
+       $title="Register User";
        //dd('add chiefeditor');
        if($req->isMethod('post')){
            $data=$req->all();
@@ -83,7 +83,7 @@ class FrontRoleController extends Controller
 
     public function edit_chiefeditor(Request $req,$id)
     {
-        $title="Update Chiefeditor";
+        $title="Update User";
         $chief=Frontuser::where('id',$id)->first();
         //dd('add chiefeditor');
         if($req->isMethod('post')){
@@ -96,14 +96,13 @@ class FrontRoleController extends Controller
                 $image_path=$chief->image;
             }
             
-            $chief=Frontuser::where('id',$id)->update([
-              'first_name'=>$data['first_name'],
-              'last_name'=>$data['last_name'],
-              'email'=>$data['email'],
-              'image'=>$image_path,
-            ]);
-            //$chief->assignRole($data['role']);
-            Session::flash('success_message','Chiefeditor has been created successfully');
+            $chief=Frontuser::find($id);
+            $chief->first_name=$data['first_name'];
+            $chief->last_name=$data['last_name'];
+            $chief->email=$data['email'];
+            $chief->image=$image_path;
+            $chief->syncRoles($data['role']);
+            Session::flash('success_message','Chiefeditor has been updated successfully');
             return redirect()->route('front.view_chiefeditors');
         }
         return view('front.chiefeditor.update')->with(compact('title','chief'));

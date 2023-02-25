@@ -66,7 +66,7 @@ class FrontJournalController extends Controller
             $data=$request->all();
             //dd($data);
             $frontuser=new Frontuser;
-            $frontuser->first_name=$data['first_name'];
+            $frontuser->first_name=$data['title_name'].' '.$data['first_name'];
             $frontuser->last_name=$data['last_name'];
             // check email existance
             $email=Frontuser::where('email',$data['email'])->count();
@@ -157,20 +157,33 @@ class FrontJournalController extends Controller
     	}
         return view('front.pages.journal.chiefeditor_login',compact('journal'));
     }
-
-   
-
     public function chiefeditor_login_form(Request $request,$id){
        $data=$request->all();
        $journal=Journal::where('id',$id)->first();
        $chief=$journal->assign_chiefeditor;
        $frontchief=Frontuser::where('id',$chief)->first();
-       //dd($frontchief->last_name);
+       //$user=Frontuser::where('id',$id)->first();
+       $user=Frontuser::where('email',$data['email'])->first();
+       if($user->status==0){
+        Session::flash('error_message','Your account is not verified. Please check your email to verify account.');
+        return redirect()->back();
+       }
        if(!empty($chief)){
           // dd('entered');
            if (Auth::guard('frontuser')->attempt(['email'=>$data['email'],'password'=>$data['password']])) {
-
-            return redirect()->route('front.chiefeditor.dashboard',$id);
+                if($user->hasRole('chiefeditor')){
+                    return redirect()->route('front.chiefeditor.dashboard',$id);
+                }elseif($user->hasRole('paper_editor')){
+                dd('Editor'); 
+               
+                }elseif($user->hasRole('reviewer')){
+                dd('reviewer');
+                }elseif($user->hasRole('author')){
+                    return redirect()->route('front.author.dashboard',$id);
+                }else{
+                dd('publisher');
+                }
+            
            }else{
                 Session::flash('error_message','Invalid email or password.Try again');
                 return redirect()->back();
@@ -520,6 +533,29 @@ class FrontJournalController extends Controller
 
         }
         return view('front.pages.journal.attachment_items.update',compact('chief','journal','attach_item'));
+    }
+
+
+    ///////////////////////////
+    ////////Author////////////
+    //////////////////////////
+    public function author_dashboard($journal_id){
+        $id=Auth::guard('frontuser')->user()->id;
+        //dd($chief);
+        $author=Frontuser::where('id',$id)->first();
+        //$journal=Journal::where('assign_chiefeditor',$chief)->get();
+        //dd($journal);
+        $journal=Journal::where('id',$journal_id)->first();
+        Session::flash('success_message','You have logged in successfully');
+        return view('front.pages.journal.author.author_dashboard',compact('journal','author'));
+    }
+
+    public function paper_submit_new($journal_id){
+        $id=Auth::guard('frontuser')->user()->id;
+        $author=Frontuser::where('id',$id)->first();
+        $journal=Journal::where('id',$journal_id)->first();
+        $article_types=ArticleType::where('journal_id',$journal_id)->get();
+        return view('front.pages.journal.author.paper_submit_new',compact('journal','author','article_types'));
     }
 
 

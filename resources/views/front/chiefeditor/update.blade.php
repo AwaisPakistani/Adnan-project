@@ -11,14 +11,14 @@
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">Chiefeditor</li>
+								<li class="breadcrumb-item active" aria-current="page">Registration</li>
 							</ol>
 						</nav>
 					</div>
 					<div class="ms-auto">
 						<div class="btn-group">
               @can('view')
-							<a href="{{route('front.view_chiefeditors')}}" class="btn btn-primary">View Chiefeditors</a>
+							<a href="{{route('front.view_chiefeditors')}}" class="btn btn-primary">View Registered Users</a>
               @endcan
 						</div>
 					</div>
@@ -94,10 +94,28 @@
                             label">Role</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-person-circle"></i></div>
-                              <input type="text" class="form-control radius-30 ps-5" id="inputName" 
+                              <!-- <input type="text" class="form-control radius-30 ps-5" id="inputName" 
                               value="chiefeditor"
                               disabled>
-                              <input type="hidden" name="role" value="chiefeditor">
+                              <input type="hidden" name="role" value="chiefeditor"> -->
+
+                              <select class="form-control radius-30 ps-5"  name="role">
+                                <option value="chiefeditor"
+                                @if($chief->hasRole('chiefeditor'))
+                                selected
+                                @endif 
+                                >Chiefeditor</option>
+                                <option value="paper_editor"
+                                @if($chief->hasRole('paper_editor'))
+                                selected
+                                @endif
+                                >Editor</option>
+                                <option value="publisher"
+                                @if($chief->hasRole('publisher'))
+                                selected
+                                @endif
+                                >Publisher</option>
+                              </select>
                             </div>
                           </div>
                           <div class="col-6 ">

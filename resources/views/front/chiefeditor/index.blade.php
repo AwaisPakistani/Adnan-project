@@ -5,7 +5,7 @@
     <main class="page-content">
 				<!--breadcrumb-->
 				<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-					<div class="breadcrumb-title pe-3">Site Portal</div>
+					<div class="breadcrumb-title pe-3">Registration</div>
 					<div class="ps-3">
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb mb-0 p-0">
@@ -27,7 +27,7 @@
 				<!--end breadcrumb--> 
 				
 				
-				<h6 class="mb-0 text-uppercase">Front  Users</h6>
+				<h6 class="mb-0 text-uppercase">Users</h6>
 				<hr/>
 				      <!--alerts-->
 					  @if(Session::has('success_message'))
@@ -73,7 +73,7 @@
 								</thead>
 								<tbody>
                                     @foreach($chiefs as $chief)
-									@if($chief->hasRole('chiefeditor'))
+									@if($chief->hasRole('chiefeditor') || $chief->hasRole('paper_editor') || $chief->hasRole('publisher'))
 									<tr>
 										<td>{{$chief->id}}</td>
 										<td>{{$chief->first_name}} {{$chief->last_name}}</td>
@@ -83,7 +83,13 @@
     @if($chief->roles)
 	  
       @foreach($chief->roles as $role)
-        {{$role->name}}
+	    @if($role->name=='paper_editor')
+		Editor 
+      @else 
+       <p style="text-transform:capitalize;">
+	   {{$role->name}}
+	   </p> 
+	  @endif
       @endforeach
 	  
     @endif

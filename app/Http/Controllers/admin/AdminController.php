@@ -49,54 +49,7 @@ class AdminController extends Controller
            // Add Image
           
            
-        //echo 'image'; die;
-
-        // if($request->hasFile('admin_profile')) {
-        //     $image = Image::make($request->file('admin_profile'));
-            
-        //     /**
-        //      * Main Image Upload on Folder Code
-        //      */
-        //     $imageName = time().'-'.$request->file('image')->getClientOriginalName();
-        //     $destinationPath = public_path('assets/images/admin/admin_profile/medium');
-        //     $image->save($destinationPath.$imageName);
-  
-        //     /**
-        //      * Generate Thumbnail Image Upload on Folder Code
-        //      */
-        //     $destinationPathThumbnail = public_path('assets/images/admin/admin_profile/small');
-        //     $image->resize(100,100);
-        //     $image->save($destinationPathThumbnail.$imageName);
-  
-        //     /**
-        //      * Write Code for Image Upload Here,
-        //      *
-        //      * $upload = new Images();
-        //      * $upload->file = $imageName;
-        //      * $upload->save();            
-        //     */
-  
-        //     // return back()
-        //     //     ->with('success','Image Upload successful')
-        //     //     ->with('imageName',$imageName);
-        // }
-        //    if($request->hasFile('admin_profile')){
-            
-        //      $image_tmp = $data['admin_profile'];
-             
-                 
-        //          $extension = $image_tmp->getClientOriginalExtension();
-        //          $fileName = rand(111,99999).'.'.$extension;
-        //          $large_image_path = 'assets/images/admin/admin_profile/small'.'/'.$fileName;
-        //          $medium_image_path = 'assets/images/admin/admin_profile/medium'.'/'.$fileName;  
-        //          echo $small_image_path = 'assets/images/admin/admin_profile/large'.'/'.$fileName; die;
-                 
-        //          $image = Image::make($request->file('image'));
-                 
-        //          Image::make($image_tmp)->save($large_image_path);
-        //          Image::make($image_tmp)->resize(600, 600)->save($medium_image_path);
-        //          Image::make($image_tmp)->resize(300, 300)->save($small_image_path); 
-        //  }
+       
         $image_path = $request->file('admin_profile')->store('images/admin/admin_profile', 'public');
            $image=Picture::create([
             'url'=>$image_path,
@@ -126,14 +79,6 @@ class AdminController extends Controller
             $admin->name=$data['name'];
             $admin->email=$data['email'];
             
-            // Start Image uploading portion
-            // $image_path = $request->file('profile_image')->store('images/admin/admin_profile', 'public');
-            // $image=Picture::create([
-            //  'url'=>$image_path,
-            //  'imageable_type'=>'App\Models\User',
-            //  'imageable_id'=>$admin->id
-            // ]);
-            // End Image uploading portion
             $admin->save();
             // All current roles will be removed from the user and replaced by the array given
             $admin->syncRoles($data['role']);

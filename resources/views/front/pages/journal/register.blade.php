@@ -311,15 +311,29 @@
                                 </div>
                             </div><br><br>
                             <div class="row">
-                                
-                                <div class="col-6">
+                            <div class="col-4">
+                                <label class="fieldlabels">Title: </label><br>
+                                <select style="background-color:#ECEFF1;width:100%;height:50%;" id="title" name="title_name" required>
+                                    <option value="Dr.">Dr.</option>
+                                    <option value="Professor">Professor</option>
+                                    <option value="Mr.">Mr.</option>
+                                    <option value="Miss.">Miss.</option>
+                                    <option value="Ms.">Ms.</option>
+                                    <option value="Mrs.">Mrs.</option>
+                                </select>
+                                <span id="required_fname">
+                                  Please enter your first name.
+                                </span>
+                                   
+                            </div>
+                            <div class="col-4">
                                 <label class="fieldlabels">First Name: </label> <input
                                 id="fname" type="text" name="first_name" placeholder="First Name" required /><span id="required_fname">
                                   Please enter your first name.
                                 </span>
                                    
                             </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                 <label class="fieldlabels">Last Name: </label> <input type="text" name="last_name" placeholder="Last Name" id="lname" required /><span id="required_lname">
                                   Please enter your last name.
                                 </span>

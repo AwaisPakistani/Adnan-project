@@ -178,15 +178,15 @@ $myid=Auth::user()->id;
               <a class="has-arrow" href="#">
                 <div class="parent-icon"><i class="bi bi-person-fill"></i>
                 </div>
-                <div class="menu-title">Chief Editor</div>
+                <div class="menu-title">Registrations</div>
               </a>
               <ul>
                 @can('add')
-                <li> <a href="{{route('front.add_chiefeditor')}}"><i class="bi bi-circle"></i>Add Chiefeditor</a>
+                <li> <a href="{{route('front.add_chiefeditor')}}"><i class="bi bi-circle"></i>Register User</a>
                 </li>
                 @endcan
                 @can('view')
-                <li> <a href="{{route('front.view_chiefeditors')}}"><i class="bi bi-circle"></i>View Chiefeditor</a>
+                <li> <a href="{{route('front.view_chiefeditors')}}"><i class="bi bi-circle"></i>View Registered Users</a>
                 </li>
                 @endcan
                 
