@@ -229,8 +229,8 @@
     <div class="row">
         <div class="col-12 text-center p-0 mt-3 mb-2">
             <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
-                <h2 id="heading">Journal Front Development</h2>
-               
+                <h3 id="heading">Front Journal Development</h3>
+                
                 <form id="msform">
                     <!-- progressbar -->
                     <ul id="progressbar">
@@ -241,9 +241,7 @@
                         <li id="payment"><strong>Comments</strong></li>
                         <li id="confirm"><strong>Manuscript Data</strong></li>
                     </ul>
-                    <!-- <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div> <br> fieldsets -->
+                   
                     <fieldset class="text-center">
                         <div class="form-card">
                             <div class="row">
@@ -251,19 +249,19 @@
                                     <h2 class="fs-title text-center">Select Article Type:</h2><hr>
                                 </div>
                             </div> 
-                            <div class="row">
-                                <div class="col-12 text-center">
-                            <label class="fieldlabels">Choose article type of your submission from the dropdown menu</label> <br>
-                            <select name="article_type" style="width:50%; height:30px;">
-                                @foreach($article_types as $at)
-                                <option value="{{$at->name}}">{{$at->name}}</option>
-                                @endforeach
-                            </select><br>
-                            
-                            <input type="button" name="next" class="next action-button" value="Next" /> 
-                            </div> 
-                          </div>
+                            <div class="text-center">
+                                <label class="fieldlabels">Choose article type of your submission from the dropdown menu</label> <br>
+                                <select name="article_type" style="width:50%; height:40px;">
+                                    @foreach($article_types as $at)
+                                    <option value="{{$at->name}}">{{$at->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
+                        
+
+                            <input type="button" name="next" class="next action-button" value="Proceed" />
+                        
                     </fieldset>
                     <fieldset>
                         <div class="form-card">
@@ -318,7 +316,7 @@
                                     <h2 class="fs-title">Finish:</h2>
                                 </div>
                                 <div class="col-5">
-                                    <h2 class="steps">Step 4 - 4</h2>
+                                    <h2 class="steps">Step 5 - 6</h2>
                                 </div>
                             </div> <br><br>
                             <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
@@ -340,7 +338,7 @@
                                     <h2 class="fs-title">Finish:</h2>
                                 </div>
                                 <div class="col-5">
-                                    <h2 class="steps">Step 4 - 4</h2>
+                                    <h2 class="steps">Step 6 - 6</h2>
                                 </div>
                             </div> <br><br>
                             <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
