@@ -1,13 +1,14 @@
 @extends('front.layout.main')
+<!-- Editor -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-<link href="{{url('assets/front/dist/css/datatable.min.css')}}" rel="stylesheet">
-<link href="{{url('assets/plugins/input-tags/css/tagsinput.css')}}" rel="stylesheet" />
-<link href="{{url('assets/front/dist/css/cdn.css')}}" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
-<link href="https://www.transparenttextures.com/patterns/lyonnette.png" rel="stylesheet">
 
 <link rel="stylesheet" href=
 "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+<link href="{{url('assets/front/dist/css/datatable.min.css')}}" rel="stylesheet">
+<link href="{{url('assets/plugins/input-tags/css/tagsinput.css')}}" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 <style>
     
         .author-links a{
@@ -25,7 +26,7 @@
         }
 
         #msform {
-            text-align: center;
+            /* text-align: center; */
             position: relative;
             margin-top: 20px
         }
@@ -52,7 +53,7 @@
         #msform input,
         #msform textarea {
             padding: 8px 15px 8px 15px;
-            border: 1px solid #ccc;
+            border: 0px solid #ccc;
             border-radius: 0px;
             margin-bottom: 25px;
             margin-top: 2px;
@@ -64,13 +65,16 @@
             font-size: 16px;
             letter-spacing: 1px
         }
+        #msform input[type='checkbox']{
+            width:auto;
+        }
 
         #msform input:focus,
         #msform textarea:focus {
             -moz-box-shadow: none !important;
             -webkit-box-shadow: none !important;
             box-shadow: none !important;
-            border: 1px solid #673AB7;
+            border: 0px solid #673AB7;
             outline-width: 0
         }
 
@@ -156,7 +160,7 @@
         #progressbar li {
             list-style-type: none;
             font-size: 15px;
-            width: 16%;
+            width: 20%;
             float: left;
             position: relative;
             font-weight: 400
@@ -222,95 +226,93 @@
         /* Drag and drop */
         /* url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'); */
 
-/* .form-container {
-	width: 100vw;
-	height: 100vh;
-	background-color: #7b2cbf;
-	display: flex;
-   	justify-content: center;
-	align-items: center;
-} */
+    /* .form-container {
+        width: 100vw;
+        height: 100vh;
+        background-color: #7b2cbf;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+            } */
 
-/* === Wrapper Styles === */
-url("https://www.transparenttextures.com/patterns/lyonnette.png");
-#FileUpload {
-  display: flex;
-  justify-content: center;
-}
-.wrapper {
-  margin: 30px;
-  padding: 10px;
-  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-  border-radius: 10px;
-  background-color: white;
-  width: 415px;
-}
+        /* === Wrapper Styles === */
+        url("https://www.transparenttextures.com/patterns/lyonnette.png");
+        #FileUpload {
+        display: flex;
+        justify-content: center;
+        }
+        .wrapper {
+        margin: 30px;
+        padding: 10px;
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+        border-radius: 10px;
+        background-color: white;
+        width: 415px;
+        }
 
-/* === Upload Box === */
-.upload {
-  margin: 10px;
-  height: 85px;
-  border: 8px dashed #e6f5e9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-}
-.upload p {
-  margin-top: 12px;
-  line-height: 0;
-  font-size: 22px;
-  color: #0c3214;
-  letter-spacing: 1.5px;
-}
-.upload__button {
-  background-color: #e6f5e9;
-  border-radius: 10px;
-  padding: 0px 8px 0px 10px;
-}
-.upload__button:hover {
-  cursor: pointer;
-  opacity: 0.8;
-}
+        /* === Upload Box === */
+        .upload {
+        margin: 10px;
+        height: 85px;
+        border: 8px dashed #e6f5e9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        }
+        .upload p {
+        margin-top: 12px;
+        line-height: 0;
+        font-size: 22px;
+        color: #0c3214;
+        letter-spacing: 1.5px;
+        }
+        .upload__button {
+        background-color: #e6f5e9;
+        border-radius: 10px;
+        padding: 0px 8px 0px 10px;
+        }
+        .upload__button:hover {
+        cursor: pointer;
+        opacity: 0.8;
+        }
 
-/* === Uploaded Files === */
-.uploaded {
-  width: 375px;
-  margin: 10px;
-  background-color: #e6f5e9;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-}
-.file {
-  display: flex;
-  flex-direction: column;
-}
-.file__name {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: baseline;
-  width: 300px;
-  line-height: 0;
-  color: #0c3214;
-  font-size: 18px;
-  letter-spacing: 1.5px;
-}
-.fa-times:hover {
-  cursor: pointer;
-  opacity: 0.8;
-}
-.fa-file-pdf {
-  padding: 15px;
-  font-size: 40px;
-  color: #0c3214;
-}
+        /* === Uploaded Files === */
+        .uploaded {
+        width: 375px;
+        margin: 10px;
+        background-color: #e6f5e9;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        }
+        .file {
+        display: flex;
+        flex-direction: column;
+        }
+        .file__name {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+        width: 300px;
+        line-height: 0;
+        color: #0c3214;
+        font-size: 18px;
+        letter-spacing: 1.5px;
+        }
+        .fa-times:hover {
+        cursor: pointer;
+        opacity: 0.8;
+        }
+        .fa-file-pdf {
+        padding: 15px;
+        font-size: 40px;
+        color: #0c3214;
+        }
 </style>
-
-
 @section('content')
 @include('front.inc.journal_content_hero')
 <div class="container mb-3 mt-3">
@@ -331,7 +333,7 @@ url("https://www.transparenttextures.com/patterns/lyonnette.png");
         <div class="container-fluid">
     <div class="row">
         <div class="col-12 text-center p-0 mt-3 mb-2">
-            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+            <div class="px-0 pt-1 pb-1 mt-1 mb-1">
                 <h3 id="heading">Front Journal Development</h3>
                 
                 <form id="msform">
@@ -342,24 +344,83 @@ url("https://www.transparenttextures.com/patterns/lyonnette.png");
                         <li id="info"><strong>Gerenral Information</strong></li>
                         <li id="review"><strong>Review Preferences</strong></li>
                         <li id="comments"><strong>Comments</strong></li>
-                        <li id="manuscript"><strong>Manuscript Data</strong></li>
+                       
                     </ul>
                    
-                    <fieldset class="text-center">
+                    <fieldset class="text-start">
+                    <div class="form-card">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="fs-title text-start"><b>Submission Language:</b></h2>
+                                   
+                                </div>
+                            </div> 
+                            <div class="text-start">
+                                <!-- <label class="fieldlabels">Choose article type of your submission from the dropdown menu</label> <br> -->
+                                <select name="article_type" style="width:50%; height:40px;">
+                                    
+                                    <option value="العربية">العربية</option>
+                                    <option value="english">English</option>
+                                    
+                                </select><br>
+                                <span>
+                                    We accept submissions in multiple languages. Please select the main language of your submission from the drop-down menu above.*
+                                </span>
+                            </div>
+                        </div>
                         <div class="form-card">
                             <div class="row">
                                 <div class="col-12">
-                                    <h2 class="fs-title text-center">Select Article Type:</h2><hr>
+                                    <h2 class="fs-title text-start text-bold"><b>Select Article Type:</b></h2>
                                 </div>
                             </div> 
-                            <div class="text-center">
-                                <label class="fieldlabels">Choose article type of your submission from the dropdown menu</label> <br>
+                            <div class="text-start">
+                                <!-- <label class="fieldlabels">Choose article type of your submission from the dropdown menu</label> <br> -->
                                 <select name="article_type" style="width:50%; height:40px;">
                                     @foreach($article_types as $at)
                                     <option value="{{$at->name}}">{{$at->name}}</option>
                                     @endforeach
-                                </select>
+                                </select><br>
+                                <span>
+                                It is required that articles be submitted to one of the sections of the journal.
+                                </span>
                             </div>
+                        </div>
+                        <div>
+                            <div class="row mt-0 mb-0">
+                                <div class="col-12">
+                                    <h2 class="fs-title text-bold"><b>Submission Requirements:</b></h2>
+                                <span>
+                                Before proceeding, you are required to confirm that you have fulfilled the following requirements:<br><br>
+                                <input  type="checkbox" name="check1" id="check1" required>&nbsp;The submission has not been published previously, and it is not currently under consideration by another journal (or if it is, an explanation has been provided in the comments section to the editor).<br><br>
+                                <input  type="checkbox" name="check2" id="check2" required>&nbsp;submission file is in one of the following formats: OpenOffice, Microsoft Word, or RTF document.<br>
+                                <input  type="checkbox" name="check3" id="check3" required>&nbsp;References have been provided with URLs, where available.<br>
+                                <input  type="checkbox" name="check4" id="check4" required>&nbsp;The text follows specific guidelines such as being single-spaced, using a 12-point font, italicizing rather than underlining (except for URLs), and placing all illustrations, figures, and tables within the text at the appropriate positions.<br><br>
+                                <input  type="checkbox" name="check5" id="check5" required>&nbsp;The text follows specific guidelines such as being single-spaced, using a 12-point font, italicizing rather than underlining (except for URLs), and placing all illustrations, figures, and tables within the text at the appropriate positions.<br><br>
+                                <input  type="checkbox" name="check6" id="check6">&nbsp;
+                                The text adheres to the stylistic and bibliographic requirements set out in the Author Guidelines<br>
+                               </span>
+                               <h2 class="fs-title text-bold"><b>Comments for the Editor:</b></h2>
+                               
+                               <textarea name="comments" id="comment" placeholder="Comments..."></textarea>
+                               <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#comment' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                                </script>
+                                <br>
+                               <input  type="checkbox" name="check7" id="check7" required>&nbsp;
+                               Consent to the collection and storage of my data in accordance with the privacy statement.<br>
+                                </div>
+                            </div> 
+                            
+                            
+                              
+                               
+                                
+                            
                         </div>
                         
 
@@ -367,17 +428,18 @@ url("https://www.transparenttextures.com/patterns/lyonnette.png");
                         
                     </fieldset>
                     <fieldset>
-                        <div class="form-card">
+                    <div class="form-card">
+                        <!-- <div class="predata">
                              <p>
                                 Please provide a single file for containing your manuscript now. Data included in your manuscript may be used to populate information for you later in the submission process.
-                            </p>
-                            <p>
+                             </p>
+                             <p>
                                 We encourage you to submit all the relavant source files  to not cause unnecessary delays in the review and and production process in case of issues,please use the Contact Us link.
-                            </p>
-                            <p>
+                             </p>
+                             <p>
                                 Read further for tips with LaTex submissions.
-                            </p>
-                            <ul>
+                             </p>
+                             <ul>
                                 <li>
                                     Don't use subfolders.
                                 </li>
@@ -402,53 +464,72 @@ url("https://www.transparenttextures.com/patterns/lyonnette.png");
                                 <li>
                                     Any errors will be shown in the later generated PDF.
                                 </li>
-                            </ul>
+                             </ul>
+                        </div> -->
                           
                         
-<div id="FileUpload">
-  <div class="wrapper">
-    <div class="upload">
-      <p>Drag files here or <span class="upload__button">Browse</span></p>
-    </div>
-    <div class="uploaded uploaded--one">
-      <i class="far fa-file-pdf"></i>
-      <div class="file">
-        <div class="file__name">
-          <p>lorem_ipsum.pdf</p>
-          <i class="fas fa-times"></i>
+                            <div class="container">
+            <div class="row">
+                <div class="col-7 mx-auto">
+                    <h1 class="h2 mt-3 mb-3 text-center">Upload Multiple Files with Progress Bar</h1>
+                    <div class="card text-center bg-light text-dark mb-4">
+                        <div class="card-header">
+                            <h3>Select File</h3>
+                        </div>
+                        <div class="card-body">
+                            <input type="file" id="select_file" multiple />
+                        </div>
+                    </div>
+                    <div class="progress" id="progress_bar" style="display:none; ">
+                        <div class="progress-bar" id="progress_bar_process" role="progressbar" style="width:0%">0%</div>
+                    </div>
+                    <div id="uploaded_image" class="row mt-5"></div>
+                </div>
+            </div>
         </div>
-        <div class="progress">
-          <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:100%"></div>
-        </div>
-      </div>
-    </div>
-    <div class="uploaded uploaded--two">
-      <i class="far fa-file-pdf"></i>
-      <div class="file">
-        <div class="file__name">
-          <p>dolor_sit.pdf</p>
-          <i class="fas fa-times"></i>
-        </div>
-        <div class="progress">
-          <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:80%"></div>
-        </div>
-      </div>
-    </div>
-    <div class="uploaded uploaded--three">
-      <i class="far fa-file-pdf"></i>
-      <div class="file">
-        <div class="file__name">
-          <p>amet_consectetur.pdf</p>
-          <i class="fas fa-times"></i>
-        </div>
-        <div class="progress">
-          <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:60%"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+   
 
+<script>
+function _(element){
+    return document.getElementById(element);
+}
+_('select_file').onchange = function(event){
+
+    var form_data = new FormData();
+
+    var image_number = 1;
+
+    var error = '';
+
+    for(var count = 0; count < _('select_file').files.length; count++)  {
+        if(!['image/jpeg', 'image/png', 'video/mp4'].includes(_('select_file').files[count].type)){
+            error += '<div class="alert alert-danger"><b>'+image_number+'</b> Selected File must be .jpg or .png Only.</div>';
+        } else {
+            form_data.append("images[]", _('select_file').files[count]);
+        }
+        image_number++;
+    }
+
+    if(error != ''){
+        _('uploaded_image').innerHTML = error;
+        _('select_file').value = '';
+    } else {
+        _('progress_bar').style.display = 'block';
+        var ajax_request = new XMLHttpRequest();
+        ajax_request.open("POST", "upload.php");
+        ajax_request.upload.addEventListener('progress', function(event){
+            var percent_completed = Math.round((event.loaded / event.total) * 100);
+            _('progress_bar_process').style.width = percent_completed + '%';
+            _('progress_bar_process').innerHTML = percent_completed + '% completed';
+        });
+        ajax_request.addEventListener('load', function(event){
+            _('uploaded_image').innerHTML = '<div class="alert alert-success">Files Uploaded Successfully</div>';
+            _('select_file').value = '';
+        });
+        ajax_request.send(form_data);
+    }
+};
+</script> 
                            
                                 
                                 
@@ -531,6 +612,11 @@ url("https://www.transparenttextures.com/patterns/lyonnette.png");
 </div>
 
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js" integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA==" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="{{url('assets/front/dist/js/jquery.min.js')}}"></script>
 <script>
     $(document).ready(function(){
