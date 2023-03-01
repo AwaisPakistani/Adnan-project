@@ -24,7 +24,7 @@
       opacity: 0.7;
       background-color: grey;
      }
-     #required_user_image,#required_fname,#required_lname,#required_email,#required_password,#required_cpassword,#pmatch,
+     #required_fname,#required_lname,#required_email,#required_password,#required_cpassword,#pmatch,
      #required_hq,#required_phone,#required_pn,
      #required_position,#required_institution,#required_department,
      #required_address,#required_country,#required_state,#required_zip,#required_email_val
@@ -301,7 +301,7 @@
                                     <h2 class="steps">Step 1 - 4</h2>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-12 text-center">
                                 <img
                             src="{{url('assets/images/avatars/1avatar.jpg')}}" 
@@ -309,7 +309,7 @@
                             <input type="file" class="form-control" name="user_image" onchange="displayImage(this)" id="user_image" style="display: none;" required ><span  id="required_user_image">Please Select Image</span>
                                 
                                 </div>
-                            </div><br><br>
+                            </div><br><br> --><br><br>
                             <div class="row">
                             <div class="col-4">
                                 <label class="fieldlabels">Title: </label><br>
@@ -505,7 +505,7 @@
 
     $(".next").click(function(){
         if(current==1){
-            var user_image=$('#user_image').val();
+            //var user_image=$('#user_image').val();
             var fname=$('#fname').val();
             var lname=$('#lname').val();
             var email=$('#email').val();
@@ -513,12 +513,12 @@
             var cpassword=$('#cpassword').val();
             var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
             
-            if(user_image==''){
-                $("#required_user_image").show();
-                return false;
-            }else{
-                $("#required_user_image").hide();
-            }
+            // if(user_image==''){
+            //     $("#required_user_image").show();
+            //     return false;
+            // }else{
+            //     $("#required_user_image").hide();
+            // }
             if(fname==''){
                 $("#required_fname").show();
                 return false;

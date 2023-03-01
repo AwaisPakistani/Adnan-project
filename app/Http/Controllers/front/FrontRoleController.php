@@ -59,7 +59,11 @@ class FrontRoleController extends Controller
        //dd('add chiefeditor');
        if($req->isMethod('post')){
            $data=$req->all();
-           
+           $email=Frontuser::where('email',$data['email'])->count();
+            if($email > 0){
+                Session::flash('error_message','Email already exists!');
+        	    return redirect()->back();
+            }
            if($data['password']!=$data['retype_password']){
             Session::flash('error_message','Passwords are not matching');
             return redirect()->back();

@@ -36,6 +36,11 @@ class AdminController extends Controller
                 Session::flash('error_message','Passwords are not matching!');
         	return redirect()->back();
             }
+            $email=User::where('email',$data['email'])->count();
+            if($email > 0){
+                Session::flash('error_message','Email already exists!');
+        	    return redirect()->back();
+            }
             if($data['role']=='notselected'){
                 Session::flash('warning_message','Please Select Role!');
         	    return redirect()->back();

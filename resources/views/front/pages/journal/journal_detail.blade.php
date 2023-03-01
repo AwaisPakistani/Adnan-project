@@ -18,7 +18,7 @@ use App\Models\JournalVolume;
                     $issues=JournalVolume::with('journal_volume_issues')->where('id',$vol->id)->first();
                     @endphp
                     @foreach($issues->journal_volume_issues as $issue)
-                   <li>{{$issue->journal_issue_name}}</li>
+                   <li>{{$issue->journal_issue_name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{date('d-m-Y',strtotime($issue->created_at))}}</li>
                    @endforeach
                    
                 </ul>
@@ -30,7 +30,13 @@ use App\Models\JournalVolume;
             <h4 style="background-color:green; padding:15px; color:white;">Journal Information</h4>
          
             <span>{!!$journal->information!!}</span>
-            <a href="{{route('front.chiefeditor.login',$journal->id)}}" class="text-decoration-none">Submit New Manuscript</a><br>
+            <a href="{{route('front.chiefeditor.login',$journal->id)}}" style="color:red;" class="text-decoration-none ">
+            <strong>
+                <b>
+                    Submit New Manuscript
+                </b>
+            </strong>
+            </a><br>
             <span><b>Category:</b>&nbsp;&nbsp;
             {{$journal->category->category_name}}</span><br>
             <span><b>ISSN:</b>&nbsp;&nbsp;{{$journal->issn}}</span><br>

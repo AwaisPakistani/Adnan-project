@@ -1,9 +1,15 @@
 @extends('front.layout.main')
+
 <link href="{{url('assets/front/dist/css/datatable.min.css')}}" rel="stylesheet">
+<link href="{{url('assets/plugins/input-tags/css/tagsinput.css')}}" rel="stylesheet" />
 <link href="{{url('assets/front/dist/css/cdn.css')}}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+<link href="https://www.transparenttextures.com/patterns/lyonnette.png" rel="stylesheet">
+
+<link rel="stylesheet" href=
+"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
 <style>
-    /* // Font family link */
-        @import url('https://fonts.googleapis.com/css?family=Roboto:300i,400,400i,500,700,900');
+    
         .author-links a{
             text-decoration:none;
         }
@@ -156,24 +162,31 @@
             font-weight: 400
         }
 
-        #progressbar #account:before {
+        #progressbar #article:before {
             font-family: FontAwesome;
-            content: "\f003"
+            content: "\F378"
+        }
+        
+        #progressbar #attfile:before {
+            font-family: FontAwesome;
+            content: "\F24A"
+        }
+        #progressbar #info:before {
+            font-family: FontAwesome;
+            content: "\f129"
+        }
+        #progressbar #review:before {
+            font-family: FontAwesome;
+            content: "\f085"
         }
 
-        #progressbar #personal:before {
+        #progressbar #comments:before {
             font-family: FontAwesome;
-            content: "\f007"
-        }
-
-        #progressbar #payment:before {
+            content: "\f27a"
+        }    
+        #progressbar #manuscript:before {
             font-family: FontAwesome;
-            content: "\f030"
-        }
-
-        #progressbar #confirm:before {
-            font-family: FontAwesome;
-            content: "\f00c"
+            content: "\274F"
         }
 
         #progressbar li:before {
@@ -205,9 +218,99 @@
             background: green;
         }
 
-      
- 
+        
+        /* Drag and drop */
+        /* url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'); */
+
+/* .form-container {
+	width: 100vw;
+	height: 100vh;
+	background-color: #7b2cbf;
+	display: flex;
+   	justify-content: center;
+	align-items: center;
+} */
+
+/* === Wrapper Styles === */
+url("https://www.transparenttextures.com/patterns/lyonnette.png");
+#FileUpload {
+  display: flex;
+  justify-content: center;
+}
+.wrapper {
+  margin: 30px;
+  padding: 10px;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  border-radius: 10px;
+  background-color: white;
+  width: 415px;
+}
+
+/* === Upload Box === */
+.upload {
+  margin: 10px;
+  height: 85px;
+  border: 8px dashed #e6f5e9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+.upload p {
+  margin-top: 12px;
+  line-height: 0;
+  font-size: 22px;
+  color: #0c3214;
+  letter-spacing: 1.5px;
+}
+.upload__button {
+  background-color: #e6f5e9;
+  border-radius: 10px;
+  padding: 0px 8px 0px 10px;
+}
+.upload__button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+/* === Uploaded Files === */
+.uploaded {
+  width: 375px;
+  margin: 10px;
+  background-color: #e6f5e9;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.file {
+  display: flex;
+  flex-direction: column;
+}
+.file__name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 300px;
+  line-height: 0;
+  color: #0c3214;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+}
+.fa-times:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.fa-file-pdf {
+  padding: 15px;
+  font-size: 40px;
+  color: #0c3214;
+}
 </style>
+
+
 @section('content')
 @include('front.inc.journal_content_hero')
 <div class="container mb-3 mt-3">
@@ -234,12 +337,12 @@
                 <form id="msform">
                     <!-- progressbar -->
                     <ul id="progressbar">
-                        <li class="active" id="account"><strong>Article Type Selection</strong></li>
-                        <li id="personal"><strong>Attach File</strong></li>
-                        <li id="payment"><strong>Gerenral Information</strong></li>
-                        <li id="confirm"><strong>Review Preferences</strong></li>
-                        <li id="payment"><strong>Comments</strong></li>
-                        <li id="confirm"><strong>Manuscript Data</strong></li>
+                        <li class="active" id="article"><strong>Article Type Selection</strong></li>
+                        <li id="attfile"><strong>Attach File</strong></li>
+                        <li id="info"><strong>Gerenral Information</strong></li>
+                        <li id="review"><strong>Review Preferences</strong></li>
+                        <li id="comments"><strong>Comments</strong></li>
+                        <li id="manuscript"><strong>Manuscript Data</strong></li>
                     </ul>
                    
                     <fieldset class="text-center">
@@ -265,72 +368,107 @@
                     </fieldset>
                     <fieldset>
                         <div class="form-card">
-                            <div class="row">
-                                <div class="col-7">
-                                    <h2 class="fs-title">Personal Information:</h2>
-                                </div>
-                                <div class="col-5">
-                                    <h2 class="steps">Step 2 - 4</h2>
-                                </div>
-                            </div> <label class="fieldlabels">First Name: *</label> <input type="text" name="fname" placeholder="First Name" /> <label class="fieldlabels">Last Name: *</label> <input type="text" name="lname" placeholder="Last Name" /> <label class="fieldlabels">Contact No.: *</label> <input type="text" name="phno" placeholder="Contact No." /> <label class="fieldlabels">Alternate Contact No.: *</label> <input type="text" name="phno_2" placeholder="Alternate Contact No." />
-                        </div> <input type="button" name="next" class="next action-button" value="Next" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                    </fieldset>
-                    <fieldset>
-                        <div class="form-card">
-                            <div class="row">
-                                <div class="col-7">
-                                    <h2 class="fs-title">Image Upload:</h2>
-                                </div>
-                                <div class="col-5">
-                                    <h2 class="steps">Step 3 - 4</h2>
-                                </div>
-                            </div> <label class="fieldlabels">Upload Your Photo:</label> <input type="file" name="pic" accept="image/*"> <label class="fieldlabels">Upload Signature Photo:</label> <input type="file" name="pic" accept="image/*">
+                             <p>
+                                Please provide a single file for containing your manuscript now. Data included in your manuscript may be used to populate information for you later in the submission process.
+                            </p>
+                            <p>
+                                We encourage you to submit all the relavant source files  to not cause unnecessary delays in the review and and production process in case of issues,please use the Contact Us link.
+                            </p>
+                            <p>
+                                Read further for tips with LaTex submissions.
+                            </p>
+                            <ul>
+                                <li>
+                                    Don't use subfolders.
+                                </li>
+                                <li>
+                                    Upload and declare the main TeX file as type Manuscript
+                                </li>
+                                <li>
+                                    The main manuscript Tex file must be the first item.
+                                </li>
+                                <li>
+                                    If applicable, upload TEx supporting files as supplementary material
+                                </li>
+                                <li>
+                                    Upload any style files that are not part of the Tex Live distribution
+                                </li>
+                                <li>
+                                    Upload a PDF reference of your Tex file as supplementary material.
+                                </li>
+                                <li>
+                                    Convert special characters into appropriate TeX code.
+                                </li>
+                                <li>
+                                    Any errors will be shown in the later generated PDF.
+                                </li>
+                            </ul>
+                          
+                        
+<div id="FileUpload">
+  <div class="wrapper">
+    <div class="upload">
+      <p>Drag files here or <span class="upload__button">Browse</span></p>
+    </div>
+    <div class="uploaded uploaded--one">
+      <i class="far fa-file-pdf"></i>
+      <div class="file">
+        <div class="file__name">
+          <p>lorem_ipsum.pdf</p>
+          <i class="fas fa-times"></i>
+        </div>
+        <div class="progress">
+          <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:100%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="uploaded uploaded--two">
+      <i class="far fa-file-pdf"></i>
+      <div class="file">
+        <div class="file__name">
+          <p>dolor_sit.pdf</p>
+          <i class="fas fa-times"></i>
+        </div>
+        <div class="progress">
+          <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:80%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="uploaded uploaded--three">
+      <i class="far fa-file-pdf"></i>
+      <div class="file">
+        <div class="file__name">
+          <p>amet_consectetur.pdf</p>
+          <i class="fas fa-times"></i>
+        </div>
+        <div class="progress">
+          <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:60%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+                           
+                                
+                                
                         </div> <input type="button" name="next" class="next action-button" value="Submit" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                     </fieldset>
                     <fieldset>
                         <div class="form-card">
-                            <div class="row">
-                                <div class="col-7">
-                                    <h2 class="fs-title">Finish:</h2>
-                                </div>
-                                <div class="col-5">
-                                    <h2 class="steps">Step 4 - 4</h2>
-                                </div>
-                            </div> <br><br>
-                            <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
-                            <div class="row justify-content-center">
-                                <div class="col-3"> <img src="https://i.imgur.com/GwStPmg.png" class="fit-image"> </div>
-                            </div> <br><br>
-                            <div class="row justify-content-center">
-                                <div class="col-7 text-center">
-                                    <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
-                                </div>
+                          
+                            <h2 class="fs-title text-center"><strong>Enter Keywords</strong></h2> <br>
+                            <div class="form-group">
+                                <input type="text"name="keywords" data-role="tagsinput"placeholder="Enter Meta Keywords" required><br>
+                                 <span style="color:green;">Note: Enter Comma(,) to save and switch to enter for more keyword</span>
                             </div>
+                            
+                           <br><br>
+                           
                         </div>
                         <input type="button" name="next" class="next action-button" value="Submit" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                     </fieldset>
-                    <fieldset>
-                        <div class="form-card">
-                            <div class="row">
-                                <div class="col-7">
-                                    <h2 class="fs-title">Finish:</h2>
-                                </div>
-                                <div class="col-5">
-                                    <h2 class="steps">Step 5 - 6</h2>
-                                </div>
-                            </div> <br><br>
-                            <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
-                            <div class="row justify-content-center">
-                                <div class="col-3"> <img src="https://i.imgur.com/GwStPmg.png" class="fit-image"> </div>
-                            </div> <br><br>
-                            <div class="row justify-content-center">
-                                <div class="col-7 text-center">
-                                    <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="button" name="next" class="next action-button" value="Submit" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                    </fieldset>
+                    
                     <fieldset>
                         <div class="form-card">
                             <div class="row">
@@ -341,6 +479,29 @@
                                     <h2 class="steps">Step 6 - 6</h2>
                                 </div>
                             </div> <br><br>
+                            <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
+                            <div class="row justify-content-center">
+                                <div class="col-3"> <img src="https://i.imgur.com/GwStPmg.png" class="fit-image"> </div>
+                            </div> <br><br>
+                            <div class="row justify-content-center">
+                                <div class="col-7 text-center">
+                                    <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="button" name="next" class="next action-button" value="Submit" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                    </fieldset>
+                    <fieldset>
+                   
+                    
+                    @include('front.inc.paper.comments')
+                    
+                   
+                        <input type="button" name="next" class="next action-button" value="Submit" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-card">
+                             <br><br>
                             <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
                             <div class="row justify-content-center">
                                 <div class="col-3"> <img src="https://i.imgur.com/GwStPmg.png" class="fit-image"> </div>
@@ -439,7 +600,7 @@
         function setProgressBar(curStep){
         var percent = parseFloat(100 / steps) * curStep;
         percent = percent.toFixed();
-        $(".progress-bar")
+        $(".progress-bbar")
         .css("width",percent+"%")
         }
 
@@ -449,4 +610,11 @@
 
     });
 </script>
+<script>
+  
+</script>
+<script src="{{url('assets/plugins/input-tags/js/tagsinput.js')}}"></script>
+
+         
+
 

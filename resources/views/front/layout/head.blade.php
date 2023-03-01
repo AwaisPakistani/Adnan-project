@@ -9,10 +9,15 @@
     <meta name="generator" content="Hugo 0.84.0">
     <title>{{$site_identity->site_name}}</title>
     <link rel="icon" href="{{url('storage/'.$site_icon->site_icon->url)}}" type="image/png" />
+      <!-- summernote -->
+<link rel="stylesheet" href="{{url('assets/plugins/summernote/summernote-bs4.css')}}">
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+ 
+<script>tinymce.init({selector:'textarea'});</script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css">
     <!-- Bootstrap core CSS -->
 <link href="{{url('assets/front/dist/css/bootstrap.min.css')}}" rel="stylesheet">
 <link href="{{url('assets/front/dist/css/datatable.min.css')}}" rel="stylesheet">

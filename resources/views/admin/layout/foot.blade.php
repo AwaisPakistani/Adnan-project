@@ -49,7 +49,8 @@
   <script src="{{url('assets/plugins/input-tags/js/tagsinput.js')}}"></script>
   <!-- Sweet Alert 2 -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
+  <!-- Summernote -->
+<script src="{{url('assets/plugins/summernote/summernote-bs4.min.js')}}"></script>
   
 
 

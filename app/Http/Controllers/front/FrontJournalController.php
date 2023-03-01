@@ -82,8 +82,11 @@ class FrontJournalController extends Controller
             $frontuser->password=bcrypt($data['pwd']);
             if(!empty($data['user_image'])){
                 $image_path = $request->file('user_image')->store('images/front/authors', 'public');
+                $frontuser->image=$image_path;
+            }else{
+                $frontuser->image='';
             }
-            $frontuser->image=$image_path;
+            
             $frontuser->status=0;
             $frontuser->save();
 
