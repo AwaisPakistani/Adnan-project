@@ -30,6 +30,11 @@
             position: relative;
             margin-top: 20px
         }
+        #check7_req,#comment_req,#checks,#docs
+        {
+            color:red;
+            display:none;
+        }
 
         #msform fieldset {
             background: white;
@@ -336,7 +341,7 @@
             <div class="px-0 pt-1 pb-1 mt-1 mb-1">
                 <h3 id="heading">Front Journal Development</h3>
                 
-                <form id="msform">
+                <form id="msform">@csrf
                     <!-- progressbar -->
                     <ul id="progressbar">
                         <li class="active" id="article"><strong>Article Type Selection</strong></li>
@@ -389,41 +394,44 @@
                         <div>
                             <div class="row mt-0 mb-0">
                                 <div class="col-12">
-                                    <h2 class="fs-title text-bold"><b>Submission Requirements:</b></h2>
+                                    <h2 class="fs-title text-bold"><b>Submission Requirements:</b></h2><span id="checks"><strong>Please check all checkboxes below*</strong><br></span>
                                 <span>
                                 Before proceeding, you are required to confirm that you have fulfilled the following requirements:<br><br>
-                                <input  type="checkbox" name="check1" id="check1" required>&nbsp;The submission has not been published previously, and it is not currently under consideration by another journal (or if it is, an explanation has been provided in the comments section to the editor).<br><br>
+                                <input  type="checkbox" name="check1" id="check1" required>&nbsp;The submission has not been published previously, and it is not currently under consideration by another journal (or if it is, an explanation has been provided in the comments section to the editor).<br>
+                                
+                                <br>
                                 <input  type="checkbox" name="check2" id="check2" required>&nbsp;submission file is in one of the following formats: OpenOffice, Microsoft Word, or RTF document.<br>
+                               
                                 <input  type="checkbox" name="check3" id="check3" required>&nbsp;References have been provided with URLs, where available.<br>
-                                <input  type="checkbox" name="check4" id="check4" required>&nbsp;The text follows specific guidelines such as being single-spaced, using a 12-point font, italicizing rather than underlining (except for URLs), and placing all illustrations, figures, and tables within the text at the appropriate positions.<br><br>
-                                <input  type="checkbox" name="check5" id="check5" required>&nbsp;The text follows specific guidelines such as being single-spaced, using a 12-point font, italicizing rather than underlining (except for URLs), and placing all illustrations, figures, and tables within the text at the appropriate positions.<br><br>
+                               
+                                <input  type="checkbox" name="check4" id="check4" required>&nbsp;The text follows specific guidelines such as being single-spaced, using a 12-point font, italicizing rather than underlining (except for URLs), and placing all illustrations, figures, and tables within the text at the appropriate positions.<br>
+                                
+                                <br>
+                                <input  type="checkbox" name="check5" id="check5" required>&nbsp;The text follows specific guidelines such as being single-spaced, using a 12-point font, italicizing rather than underlining (except for URLs), and placing all illustrations, figures, and tables within the text at the appropriate positions.<br>
+                                
+                                <br>
                                 <input  type="checkbox" name="check6" id="check6">&nbsp;
                                 The text adheres to the stylistic and bibliographic requirements set out in the Author Guidelines<br>
+                                
                                </span>
                                <h2 class="fs-title text-bold"><b>Comments for the Editor:</b></h2>
                                
                                <textarea name="comments" id="comment" placeholder="Comments..."></textarea>
+                               <span id="comment_req">This field is required</span>
                                <script>
                                     ClassicEditor
                                         .create( document.querySelector( '#comment' ) )
                                         .catch( error => {
                                             console.error( error );
                                         } );
-                                </script>
+                               </script>
                                 <br>
                                <input  type="checkbox" name="check7" id="check7" required>&nbsp;
                                Consent to the collection and storage of my data in accordance with the privacy statement.<br>
+                               <span id="check7_req">This field is required</span>
                                 </div>
                             </div> 
-                            
-                            
-                              
-                               
-                                
-                            
                         </div>
-                        
-
                             <input type="button" name="next" class="next action-button" value="Proceed" />
                         
                     </fieldset>
@@ -478,7 +486,8 @@
                         </div>
                         <div class="card-body">
                             <input type="file" id="select_file" multiple />
-                        </div>
+                        </div><br>
+                        <span id="docs">Please choose any one file to move forward</span>
                     </div>
                     <div class="progress" id="progress_bar" style="display:none; ">
                         <div class="progress-bar" id="progress_bar_process" role="progressbar" style="width:0%">0%</div>
@@ -487,49 +496,6 @@
                 </div>
             </div>
         </div>
-   
-
-<script>
-function _(element){
-    return document.getElementById(element);
-}
-_('select_file').onchange = function(event){
-
-    var form_data = new FormData();
-
-    var image_number = 1;
-
-    var error = '';
-
-    for(var count = 0; count < _('select_file').files.length; count++)  {
-        if(!['image/jpeg', 'image/png', 'video/mp4'].includes(_('select_file').files[count].type)){
-            error += '<div class="alert alert-danger"><b>'+image_number+'</b> Selected File must be .jpg or .png Only.</div>';
-        } else {
-            form_data.append("images[]", _('select_file').files[count]);
-        }
-        image_number++;
-    }
-
-    if(error != ''){
-        _('uploaded_image').innerHTML = error;
-        _('select_file').value = '';
-    } else {
-        _('progress_bar').style.display = 'block';
-        var ajax_request = new XMLHttpRequest();
-        ajax_request.open("POST", "upload.php");
-        ajax_request.upload.addEventListener('progress', function(event){
-            var percent_completed = Math.round((event.loaded / event.total) * 100);
-            _('progress_bar_process').style.width = percent_completed + '%';
-            _('progress_bar_process').innerHTML = percent_completed + '% completed';
-        });
-        ajax_request.addEventListener('load', function(event){
-            _('uploaded_image').innerHTML = '<div class="alert alert-success">Files Uploaded Successfully</div>';
-            _('select_file').value = '';
-        });
-        ajax_request.send(form_data);
-    }
-};
-</script> 
                            
                                 
                                 
@@ -572,9 +538,7 @@ _('select_file').onchange = function(event){
                         </div>
                         <input type="button" name="next" class="next action-button" value="Submit" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                     </fieldset>
-                    <fieldset>
-                   
-                    
+                    <fieldset>             
                     @include('front.inc.paper.comments')
                     
                    
@@ -629,7 +593,32 @@ _('select_file').onchange = function(event){
         setProgressBar(current);
 
         $(".next").click(function(){
-
+            if(current==1){
+           
+                // alert(check1); return false;
+                    if($('#check1').is(":not(:checked)") || $('#check2').is(":not(:checked)") || $('#check3').is(":not(:checked)") || $('#check4').is(":not(:checked)") || $('#check5').is(":not(:checked)") || $('#check6').is(":not(:checked)")){
+                        $("#checks").show();
+                        return false;
+                    }else {
+                        $("#checks").hide();
+                    }
+                    if($('#check7').is(":not(:checked)")){
+                        $("#check7_req").show();
+                        return false;
+                    }else{
+                        $("#check7_req").hide();
+                    }
+         
+            }
+            if(current==2){
+                if($('#select_file').val()==''){
+                    $("#docs").show();
+                    return false;
+                }else{
+                    $("#docs").hide();
+                }
+                
+            }
         current_fs = $(this).parent();
         next_fs = $(this).parent().next();
 
@@ -700,6 +689,47 @@ _('select_file').onchange = function(event){
   
 </script>
 <script src="{{url('assets/plugins/input-tags/js/tagsinput.js')}}"></script>
+<script>
+        function _(element){
+            return document.getElementById(element);
+        }
+    _   ('select_file').onchange = function(event){
+
+        var form_data = new FormData();
+
+        var image_number = 1;
+
+        var error = '';
+
+        for(var count = 0; count < _('select_file').files.length; count++)  {
+        if(!['image/jpeg', 'image/png', 'video/mp4'].includes(_('select_file').files[count].type)){
+            error += '<div class="alert alert-danger"><b>'+image_number+'</b> Selected File must be .jpg or .png Only.</div>';
+        } else {
+            form_data.append("images[]", _('select_file').files[count]);
+        }
+        image_number++;
+    }
+
+    if(error != ''){
+        _('uploaded_image').innerHTML = error;
+        _('select_file').value = '';
+    } else {
+        _('progress_bar').style.display = 'block';
+        var ajax_request = new XMLHttpRequest();
+        ajax_request.open("POST", "upload.php");
+        ajax_request.upload.addEventListener('progress', function(event){
+            var percent_completed = Math.round((event.loaded / event.total) * 100);
+            _('progress_bar_process').style.width = percent_completed + '%';
+            _('progress_bar_process').innerHTML = percent_completed + '% completed';
+        });
+        ajax_request.addEventListener('load', function(event){
+            _('uploaded_image').innerHTML = '<div class="alert alert-success">Files Uploaded Successfully</div>';
+            _('select_file').value = '';
+        });
+        ajax_request.send(form_data);
+    }
+ };
+</script> 
 
          
 
