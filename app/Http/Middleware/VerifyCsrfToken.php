@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        "/admin/update-roles-permission",'/front/getting-issues-of-volume'
+        "/admin/update-roles-permission",'/front/getting-issues-of-volume','/front/contributor-modal'
     ];
 }

@@ -166,6 +166,11 @@ class FrontJournalController extends Controller
        $chief=$journal->assign_chiefeditor;
        $frontchief=Frontuser::where('id',$chief)->first();
        //$user=Frontuser::where('id',$id)->first();
+       $usercount=Frontuser::where('email',$data['email'])->count();
+       if($usercount < 1){
+        Session::flash('error_message','Email does not exist.');
+        return redirect()->back();
+       }
        $user=Frontuser::where('email',$data['email'])->first();
        if($user->status==0){
         Session::flash('error_message','Your account is not verified. Please check your email to verify account.');
@@ -560,6 +565,22 @@ class FrontJournalController extends Controller
         $article_types=ArticleType::where('journal_id',$journal_id)->get();
         return view('front.pages.journal.author.paper_submit_new',compact('journal','author','article_types'));
     }
+    
+    public function contributor_modal(Request $request){
+        if($request->ajax()){
+           $data=$request->all();
+           $journal_id=$data['journal_id'];
+           $author_id=$data['author_id'];
+           
+           $view=view('front.inc.modal_contributor')->render();
+           
+           return response()->json([
+               'data'=>$view,
+               'journal_id'=>$journal_id,
+               'author_id'=>$author_id
+           ]);
+        }
+   }
 
 
 

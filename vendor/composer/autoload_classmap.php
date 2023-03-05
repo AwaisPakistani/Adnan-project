@@ -39,6 +39,7 @@ return array(
     'App\\Models\\AttachmentItem' => $baseDir . '/app/Models/AttachmentItem.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\Contact' => $baseDir . '/app/Models/Contact.php',
+    'App\\Models\\Contributor' => $baseDir . '/app/Models/Contributor.php',
     'App\\Models\\CurrentIssue' => $baseDir . '/app/Models/CurrentIssue.php',
     'App\\Models\\FrontAuthor' => $baseDir . '/app/Models/FrontAuthor.php',
     'App\\Models\\Frontuser' => $baseDir . '/app/Models/Frontuser.php',

@@ -1,3 +1,4 @@
+
 @extends('front.layout.main')
 <!-- Editor -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -126,8 +127,8 @@
         }
 
         .fs-title {
-            font-size: 25px;
-            color: #673AB7;
+            font-size: 20px;
+            color: black;
             margin-bottom: 15px;
             font-weight: normal;
             text-align: left
@@ -404,9 +405,6 @@
                                
                                 <input  type="checkbox" name="check3" id="check3" required>&nbsp;References have been provided with URLs, where available.<br>
                                
-                                <input  type="checkbox" name="check4" id="check4" required>&nbsp;The text follows specific guidelines such as being single-spaced, using a 12-point font, italicizing rather than underlining (except for URLs), and placing all illustrations, figures, and tables within the text at the appropriate positions.<br>
-                                
-                                <br>
                                 <input  type="checkbox" name="check5" id="check5" required>&nbsp;The text follows specific guidelines such as being single-spaced, using a 12-point font, italicizing rather than underlining (except for URLs), and placing all illustrations, figures, and tables within the text at the appropriate positions.<br>
                                 
                                 <br>
@@ -477,38 +475,113 @@
                           
                         
                             <div class="container">
-            <div class="row">
-                <div class="col-7 mx-auto">
-                    <h1 class="h2 mt-3 mb-3 text-center">Upload Multiple Files with Progress Bar</h1>
-                    <div class="card text-center bg-light text-dark mb-4">
-                        <div class="card-header">
-                            <h3>Select File</h3>
-                        </div>
-                        <div class="card-body">
-                            <input type="file" id="select_file" multiple />
-                        </div><br>
-                        <span id="docs">Please choose any one file to move forward</span>
-                    </div>
-                    <div class="progress" id="progress_bar" style="display:none; ">
-                        <div class="progress-bar" id="progress_bar_process" role="progressbar" style="width:0%">0%</div>
-                    </div>
-                    <div id="uploaded_image" class="row mt-5"></div>
-                </div>
-            </div>
-        </div>
+                                    <div class="row">
+                                        <div class="col-7 mx-auto">
+                                            <h1 class="h2 mt-3 mb-3 text-center">Upload Multiple Files with Progress Bar</h1>
+                                            <div class="card text-center bg-light text-dark mb-4">
+                                                <div class="card-header">
+                                                    <h3>Select File</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <input type="file" id="select_file" multiple />
+                                                </div><br>
+                                                <span id="docs">Please choose any one file to move forward</span>
+                                            </div>
+                                            <div class="progress" id="progress_bar" style="display:none; ">
+                                                <div class="progress-bar" id="progress_bar_process" role="progressbar" style="width:0%">0%</div>
+                                            </div>
+                                            <div id="uploaded_image" class="row mt-5"></div>
+                                        </div>
+                                    </div>
+                                </div>
                            
                                 
                                 
                         </div> <input type="button" name="next" class="next action-button" value="Submit" /> <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                     </fieldset>
                     <fieldset>
-                        <div class="form-card">
+                        <div class="form-card text-start">
                           
-                            <h2 class="fs-title text-center"><strong>Enter Keywords</strong></h2> <br>
                             <div class="form-group">
-                                <input type="text"name="keywords" data-role="tagsinput"placeholder="Enter Meta Keywords" required><br>
-                                 <span style="color:green;">Note: Enter Comma(,) to save and switch to enter for more keyword</span>
+                                <h2 class="fs-title">Title</h2>
+                                <input type="text" name="title" placeholder="Enter Title" required><br>
                             </div>
+                            <div class="form-group">
+                                <h2 class="fs-title">Abstract</h2>
+                                <textarea id="abstract" name="abstract" placeholder="Abstract" required></textarea>
+                                <script>
+                                    ClassicEditor
+                                        .create( document.querySelector( '#abstract' ) )
+                                        .catch( error => {
+                                            console.error( error );
+                                        } );
+                               </script>
+                            </div><br><br>
+                            <h2 class="fs-title text-start"><strong>List of Contributors</strong>
+                             <a href="javascript:void(0)" class="text-center" style="background:white; border-radius:5px; padding:5px; border:1px solid black; color black;" id="contributor">
+                                Add Contributor
+                                <br>
+                            </a><br>
+                            <input type="hidden" id="journal_id" value="{{$journal->id}}">
+                            <input type="hidden" id="author_id" value="{{$author->id}}">
+                            <div id="show_contributor">
+                              
+                            </div>
+                            </h2>
+                           
+                            <div class="form-group">
+                            <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                   
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                @php
+                $sr=1;
+                @endphp
+                
+                    <tr>
+                        <td>1</td>
+                        
+                        <td>
+                        <a href="{{route('front.journal_detail',$journal->id)}}" style="text-decoration:none; color:;#ff8000">
+                            {{$author->first_name}} &nbsp;{{$author->last_name}}
+                        </a>
+                        </td>
+                       
+
+                        <td>{{$author->email}}</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>name</td>
+                        <td>email</td>
+                    </tr>
+                    
+                
+                </tbody>
+                <tfoot>
+                
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                
+                </tfoot>
+            </table>
+                            </div>
+                            <h2 class="fs-title"><strong>Refinements Keywords</strong></h2> <br>
+                            
+                            <input type="text"name="keywords" data-role="tagsinput"placeholder="Enter Meta Keywords" required><br>
+                            <span style="color:green;">Note: Enter Comma(,) to save and switch to enter for more keyword</span>
+                            
                             
                            <br><br>
                            
@@ -596,7 +669,7 @@
             if(current==1){
            
                 // alert(check1); return false;
-                    if($('#check1').is(":not(:checked)") || $('#check2').is(":not(:checked)") || $('#check3').is(":not(:checked)") || $('#check4').is(":not(:checked)") || $('#check5').is(":not(:checked)") || $('#check6').is(":not(:checked)")){
+                    if($('#check1').is(":not(:checked)") || $('#check2').is(":not(:checked)") || $('#check3').is(":not(:checked)") || $('#check5').is(":not(:checked)") || $('#check6').is(":not(:checked)")){
                         $("#checks").show();
                         return false;
                     }else {
@@ -608,6 +681,36 @@
                     }else{
                         $("#check7_req").hide();
                     }
+                    $('#contributor').click(function(){
+                        var journal_id=$('#journal_id').val();
+                        var author_id=$('#author_id').val();
+                        $.ajax({
+                            type:'post',
+                            url:'/front/contributor-modal',
+                            data:{journal_id:journal_id,author_id:author_id},
+                            success:function(resp){
+                            //alert(resp);
+                                $("#show_contributor").html(resp['data']);
+                                $('#show_author').text(resp['author_id']);
+                            
+                            },error:function(){
+                            alert("error");
+                            }
+                        });
+                        
+                        return false;
+                    })
+                    
+                    $('#add_cont').click(function(){
+                        $("#add_contForm").submit();
+                        //alert('submission');return false;
+                    if($('#first_name').val()==''){
+                        $('#show_first_name').show();
+                        return false;
+                    }
+                       
+                    });
+
          
             }
             if(current==2){

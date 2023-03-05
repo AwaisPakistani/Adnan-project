@@ -132,8 +132,12 @@ Route::group(['middleware'=>['FrontGate']],function(){
     Route::get('/author-dashboard/{journal}', [FrontJournalController::class, 'author_dashboard'])->name('front.author.dashboard');
     
     Route::match(['get', 'post'], '/paper-submission/{journal}', [FrontJournalController::class, 'paper_submit_new'])->name('front.paper_submit_new');
+
+    
   
 });
+Route::post('/front/contributor-modal', [FrontJournalController::class, 'contributor_modal'])->name('contributor_modal');
+
 Route::get('front/logout/{journal}',[IndexController::class,'logout']);
 Route::post('/front/getting-issues-of-volume', [FrontJournalController::class, 'current_volume_issues'])->name('getting_current_issues');
 
